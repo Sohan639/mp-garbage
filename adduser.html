@@ -1,0 +1,343 @@
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta20
+* @link https://tabler.io
+* Copyright 2018-2023 The Tabler Authors
+* Copyright 2018-2023 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Mauxi Panchayat</title>
+  <!-- CSS files -->
+  <link href="./dist/css/tabler.min.css?1692870487" rel="stylesheet" />
+  <link href="./dist/css/tabler-flags.min.css?1692870487" rel="stylesheet" />
+  <link href="./dist/css/tabler-payments.min.css?1692870487" rel="stylesheet" />
+  <link href="./dist/css/tabler-vendors.min.css?1692870487" rel="stylesheet" />
+  <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet" />
+
+  <link href="./dist/css/datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+  <style>
+    @import url('https://rsms.me/inter/inter.css');
+
+    :root {
+      --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+    }
+
+    body {
+      font-feature-settings: "cv03", "cv04", "cv11";
+    }
+  </style>
+</head>
+
+<body>
+  <script src="./dist/js/demo-theme.min.js?1692870487"></script>
+  <div class="page">
+    <!-- Navbar -->
+    <div id="horizontal-menu-placeholder"></div>
+    <div class="page-wrapper">
+      <!-- Page header -->
+      <!-- <div class="page-header d-print-none">
+        </div> -->
+      <!-- Page body -->
+      <div class="page-body">
+        <div class="container">
+          <div class="row row-deck row-cards">
+            <div class="col-12">
+              <form class="card" autocomplete="off" >
+                <div class="card-body">
+                  <h3 class="card-title text-decoration-underline">User Details:</h3>
+                  <div class="row row-cards">
+
+                        <div class="col-md-6">
+                          <div class="mb-3">
+                            <label class="form-label required">Name</label>
+                            <input id="name" type="text" class="form-control" placeholder="Name"
+									          value="">
+                            <div id="name-Val" class="invalid-feedback d-none">Name is required</div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="mb-3">
+                            <label class="form-label required">Email</label>
+                            <input id="email" type="email" class="form-control" placeholder="Email"
+									          value="" autocomplete="new-password">
+                            <div id="email-Val" class="invalid-feedback d-none">Email is required</div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="mb-3">
+                            <label class="form-label required">Password</label>
+                            <input id="password" type="password" class="form-control" placeholder="Password"
+									          value="" autocomplete="new-password">
+                            <div id="password-Val" class="invalid-feedback d-none">Password is required</div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="mb-3">
+                            <label class="form-label required">Confirm password</label>
+                            <input id="confirmPassword" type="password" class="form-control" placeholder="Confirm password"
+									          value="" autocomplete="new-password">
+                            <div id="confirmPassword-Val" class="invalid-feedback d-none"></div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="mb-3">
+                            <label class="form-label required">Role</label>
+                            <select id="role" class="form-control form-select">
+                              <option value="" selected>Select Role</option>
+                              <option value="admin">Admin</option>
+                              <option value="officer">Officer</option>
+                              <option value="citizen">Citizen</option>
+                            </select>
+                            <div id="role-Val" class="invalid-feedback d-none">Role is required</div>
+                          </div>
+                        </div>
+
+                          <div class="col-md-6">
+                            <div class="mb-3">
+                              <label class="form-label">User profile</label>
+                              <input id="userProfile" type="file"  accept="image/*" multiple class="form-control" placeholder="Upload Image">
+                              <img id="userProfilePreview" src="" class="rounded mt-3" style="display: none;" />
+                            </div>
+                          </div>
+                      </div>
+
+                </div>
+                <div class="card-footer text-end">
+                  <a href="users.html" class="btn btn-primary">Cancel</a>
+                  <button onclick="saveBtn()" type="button" class="btn btn-primary">
+                    <div class="spinner-border text-light d-none" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    &nbsp;</div>
+                    Save</button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="footer-placeholder"></div>
+    </div>
+  </div>
+  <!-- Toast Notification -->
+  <div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="successToast" class="toast align-items-center border-0" role="alert" aria-live="assertive"
+      aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body">
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+          aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Libs JS -->
+  <script src="./dist/libs/apexcharts/dist/apexcharts.min.js?1692870487" defer></script>
+  <script src="./dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1692870487" defer></script>
+  <script src="./dist/libs/jsvectormap/dist/maps/world.js?1692870487" defer></script>
+  <script src="./dist/libs/jsvectormap/dist/maps/world-merc.js?1692870487" defer></script>
+  <script src="./dist/libs/litepicker/dist/litepicker.js?1692870487" defer></script>
+  <script src="./dist/libs/tom-select/dist/js/tom-select.base.min.js?1692870487" defer></script>
+  <!-- Tabler Core -->
+  <script src="./dist/js/tabler.min.js?1692870487" defer></script>
+  <script src="./dist/js/demo.min.js?1692870487" defer></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+  <script type="text/javascript" src="./commonFunction/commonFunction.js"></script>
+  <script src="./dist/js/configUrl.js"></script>
+  <script src="./dist/js/menu-footer.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+                window.location = config_url.frontendBaseURL;
+            }
+        });
+  </script>
+  <script>
+    $(document).ready(function () {
+
+      // User preview on change
+      $("#userProfile").on('change', function () {
+
+          const fileInput = this;
+          const previewImage = $("#userProfilePreview");
+          const allowedExtensions = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
+          const errorMessage = $(`<div class="text-danger mt-1" id="error">Invalid file type. Only PNG, JPG, JPEG, and WEBP are allowed.</div>`);
+
+          // Clear previous error message if any
+          $(`#error`).remove();
+
+          if (fileInput.files && fileInput.files[0]) {
+            const file = fileInput.files[0];
+            const fileType = file.type;
+
+            if (!allowedExtensions.includes(fileType)) {
+              // If the file type is not allowed, show error and reset the input
+              $(fileInput).after(errorMessage);
+              fileInput.value = ""; // Clear the selected file
+              previewImage.attr('src', '').css('display', 'none'); // Hide preview
+              return;
+            }
+
+            // If valid, preview the image
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+              previewImage.attr('src', e.target.result).css({
+                display: 'block',
+                maxWidth: '200px',
+                maxHeight: '200px',
+                border: '1px solid #ccc',
+                borderRadius: '5px'
+              });
+            };
+
+            reader.readAsDataURL(file);
+          } else {
+            // If no file is selected, hide the preview
+            previewImage.attr('src', '').css('display', 'none');
+          }
+        });
+
+        function showToastMessage(message, type) {
+          const toast = new bootstrap.Toast(document.getElementById('successToast'));
+          $('.toast-body').text(message);
+          if (type == "success") {
+            $('#successToast').removeClass('text-bg-danger');
+            $('#successToast').addClass('text-bg-success');
+          } else {
+            $('#successToast').removeClass('text-bg-success');
+            $('#successToast').addClass('text-bg-danger');
+          }
+          toast.show();
+        }
+
+        async function addUser(data) {
+        try {
+          const response = await addData('addUser', data);
+          console.log(response);
+          if (response.code == 200 || response.code == 201) {
+            showToastMessage(response.message, 'success');
+            await setTimeout(()=>{
+              window.location.href="users.html";
+            },3000);
+          } else {
+            showToastMessage(response.message ? response.message : response.error, 'error');
+          }
+        } catch (error) {
+          console.error(error);
+          showToastMessage('Error adding user details!', 'error');
+        }
+      }
+
+        window.saveBtn = function () {
+          let isValid = true; 
+          const $name = $('#name');
+          const $nameVal = $('#name-Val');
+          if (!$name.val().trim()) {
+            $name.addClass('is-invalid');
+            $nameVal.removeClass('d-none');
+            isValid = false;
+          } else {
+            $name.removeClass('is-invalid');
+            $nameVal.addClass('d-none');
+          }
+          
+          const $email = $('#email');
+          const $emailVal = $('#email-Val');
+          if (!$email.val().trim()) {
+            $email.addClass('is-invalid');
+            $emailVal.removeClass('d-none');
+            isValid = false;
+          } else {
+            $email.removeClass('is-invalid');
+            $emailVal.addClass('d-none');
+          }
+
+          const $password = $('#password');
+          const $passwordVal = $('#password-Val');
+          if (!$password.val().trim()) {
+            $password.addClass('is-invalid');
+            $passwordVal.removeClass('d-none');
+            isValid = false;
+          } else {
+            $password.removeClass('is-invalid');
+            $passwordVal.addClass('d-none');
+          }
+
+          const $confirmPassword = $('#confirmPassword');
+          const $confirmPasswordVal = $('#confirmPassword-Val');
+          if (!$confirmPassword.val().trim()) {
+            $confirmPassword.addClass('is-invalid');
+            $confirmPasswordVal.text('Confirm password is required');
+            $confirmPasswordVal.removeClass('d-none');
+            isValid = false;
+          } else {
+            if($confirmPassword.val().trim()  != $password.val().trim()){
+              $confirmPassword.addClass('is-invalid');
+              $confirmPasswordVal.text('Password does not match');
+              $confirmPasswordVal.removeClass('d-none');
+              isValid = false;
+            } else{
+              $confirmPassword.removeClass('is-invalid');
+              $confirmPasswordVal.text('');
+              $confirmPasswordVal.addClass('d-none');
+            }
+          }
+
+          const $role = $('#role');
+          const $roleVal = $('#role-Val');
+          if (!$role.val().trim()) {
+            $role.addClass('is-invalid');
+            $roleVal.removeClass('d-none');
+            isValid = false;
+          } else {
+            $role.removeClass('is-invalid');
+            $roleVal.addClass('d-none');
+          }
+
+
+          if (!isValid) {
+            return;
+          }
+
+          const formData = new FormData();
+          formData.append('name', document.getElementById('name').value);
+          formData.append('email', document.getElementById('email').value);
+          formData.append('password', document.getElementById('password').value);
+          formData.append('confirmPassword', document.getElementById('confirmPassword').value);
+          formData.append('role', document.getElementById('role').value);
+          const userProfile = document.getElementById('userProfile');
+          if (userProfile && userProfile.files && userProfile.files[0]) {
+            console.log("profile image")
+            formData.append('profile', userProfile.files[0]);
+          } else {
+            formData.append('profile', "");
+          }
+
+          // for (var pair of formData.entries()) {
+          //   console.log(pair[0]+ ', ' + pair[1]); 
+          // }
+
+          addUser(formData);
+        }
+
+    });
+  </script>
+</body>
+
+</html>

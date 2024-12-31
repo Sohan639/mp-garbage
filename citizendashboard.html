@@ -1,0 +1,462 @@
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta20
+* @link https://tabler.io
+* Copyright 2018-2023 The Tabler Authors
+* Copyright 2018-2023 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Mauxi Panchayat</title>
+    <!-- CSS files -->
+    <link href="./dist/css/tabler.min.css?1692870487" rel="stylesheet"/>
+    <link href="./dist/css/tabler-flags.min.css?1692870487" rel="stylesheet"/>
+    <link href="./dist/css/tabler-payments.min.css?1692870487" rel="stylesheet"/>
+    <link href="./dist/css/tabler-vendors.min.css?1692870487" rel="stylesheet"/>
+    <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet"/>
+    <link href="./dist/css/datatable/dataTables.css" rel="stylesheet"/>
+    <style>
+      @import url('https://rsms.me/inter/inter.css');
+      :root {
+      	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+      }
+      body {
+      	font-feature-settings: "cv03", "cv04", "cv11";
+      }
+    </style>
+  </head>
+  <body >
+    <script src="./dist/js/demo-theme.min.js?1692870487"></script>
+    <div class="page">
+      <!-- Navbar -->
+      <div id="horizontal-menu-placeholder"></div>
+      <div class="page-wrapper">
+        <!-- Page header -->
+        <div class="page-header d-print-none">
+          <div class="container">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <!-- Page pre-title -->
+                <div class="page-pretitle">
+                  Overview
+                </div>
+                <h2 class="page-title">
+                  Dashboard
+                </h2>
+              </div>
+              <!-- Page title actions -->
+              <!-- <div class="col-auto ms-auto d-print-none">
+                <div class="btn-list">
+                  <span class="d-none d-sm-inline">
+                    <a href="#" class="btn">
+                      New view
+                    </a>
+
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+        <!-- Page body -->
+        <div class="page-body" style="flex-grow: 1;">
+          <div class="container">
+            <div class="row row-deck row-cards">
+              <!-- <div class="col-lg-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h3 class="card-title">Male vs Female</h3>
+                    <div id="chart-demo-pie"></div>
+                  </div>
+                </div>
+              </div> -->
+              <!-- <div class="col-lg-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h3 class="card-title">Age group</h3>
+                    <div id="chart-tasks-overview"></div>
+                  </div>
+                </div>
+              </div> -->
+              <!-- <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Education level</h3>
+                  </div>
+                  <div class="card-body border-bottom py-3">
+                    <div class="d-flex">
+                      <div class="ms-auto text-secondary">
+                        Search:
+                        <div class="ms-2 d-inline-block">
+                          <input id="customSearch" type="text" class="form-control form-control-sm" aria-label="Search invoice">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="table-responsive">
+                    <table id="educationTable" class="table card-table table-vcenter text-nowrap datatable">
+                      <thead>
+                        <tr>
+                          <th class="w-1">No.
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-sm icon-thick" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 15l6 -6l6 6" /></svg>
+                          </th>
+                          <th>Citizen name</th>
+                          <th>Education</th>
+                          <th>Institution name</th>
+                          <th>Year of passing</th>
+                          <th>Grade</th>
+                          <th>Degree</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="card-footer d-flex align-items-center">
+                    <p class="m-0 text-secondary">Showing <span>1</span> to <span>8</span> of <span>16</span> entries</p>
+                    <ul class="pagination m-0 ms-auto">
+                      <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>
+                          prev
+                        </a>
+                      </li>
+                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item"><a class="page-link" href="#">4</a></li>
+                      <li class="page-item"><a class="page-link" href="#">5</a></li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">
+                          next 
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+        <div id="footer-placeholder"></div>
+      </div>
+    </div>
+  
+    <!-- Libs JS -->
+    <script src="./dist/libs/apexcharts/dist/apexcharts.min.js?1692870487" defer></script>
+    <script src="./dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1692870487" defer></script>
+    <script src="./dist/libs/jsvectormap/dist/maps/world.js?1692870487" defer></script>
+    <script src="./dist/libs/jsvectormap/dist/maps/world-merc.js?1692870487" defer></script>
+    <!-- Tabler Core -->
+    <script src="./dist/js/tabler.min.js?1692870487" defer></script>
+    <script src="./dist/js/demo.min.js?1692870487" defer></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+    <script type="text/javascript" src="./commonFunction/commonFunction.js"></script>
+    <script src="./dist/js/configUrl.js"></script>
+    <script src="./dist/js/menu-footer.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+          const userId = localStorage.getItem('userId');
+          if (!userId) {
+                  window.location = config_url.frontendBaseURL;
+              }
+          });
+    </script>
+    <script>
+      $(document).ready(function () {
+
+        async function getQualificationResidentCount(){
+          try {
+            const listing = await getAllListing('getQualificationResidentCount');
+            const tableBody = $("#educationTable tbody");
+            // Clear the table before populating
+            tableBody.empty();
+
+            // Loop through each record and append a table row
+            $.each(listing.data, function(index, record) {
+              const row = `
+                <tr>
+                  <td><span class="text-secondary">${index+1}</span></td>
+                  <td><a href="#" class="text-reset" tabindex="-1">${record.name}</a></td>
+                  <td>${record.qualification}</td>
+                  <td>${record.institutionName}</td>
+                  <td>${record.yop}</td>
+                  <td>${record.grade}</td>
+                  <td>${record.degreeType}</td>
+                </tr>
+              `;
+              tableBody.append(row);
+            });
+
+            // Initialize DataTables with pagination, sorting, and search functionality
+            const dataTable = $(".datatable").DataTable({
+              paging: true,
+              pageLength: 10, // Show 10 entries per page
+              lengthChange: false, // Hide "entries per page" dropdown
+              searching: true, // Enable search
+              ordering: true, // Enable sorting
+              info: true, // Show "Showing x to y of z entries"
+              autoWidth: false, // Keep the layout intact
+              language: {
+                search: "_INPUT_", // Customize the search input
+                searchPlaceholder: "Search...",
+                paginate: {
+                  previous: "< prev", // Change 'Previous' text
+                  next: "next >",    // Change 'Next' text
+                },
+              },
+            });
+
+            $('#customSearch').keyup(function(){
+              dataTable.search($(this).val()).draw();
+            })
+          } catch (error) {
+            console.error(error)
+          }
+          
+        }
+
+        // getQualificationResidentCount();
+
+        async function getMaleVFemaleList(){
+          try {
+            const listing = await getAllListing('getMaleVFemaleList');
+
+            const chartData = {
+              series: listing.data.map(item => item.count), // Example: percentages
+              labels: listing.data.map(item => item.gender), // Categories
+            };
+
+            renderPieChart('chart-demo-pie', chartData);
+            
+          } catch (error) {
+            console.error(error)
+          }
+          
+        }
+
+        // getMaleVFemaleList();
+
+        async function getAgeGroupResident(){
+          try {
+            const listing = await getAllListing('getAgeGroupResident');
+
+            const barGraphData = {
+              seriesName: "Count", // Series Name
+              seriesData: listing.data.map(item => item.count), // Data for bars
+              categories: listing.data.map(item => item.age_group) // x-axis categories
+            };
+
+            renderBarGraph('chart-tasks-overview', barGraphData);
+            
+          } catch (error) {
+            console.error(error)
+          }
+          
+        }
+
+        // getAgeGroupResident();
+
+        function renderPieChart(chartElementId, chartData) {
+          if (window.ApexCharts) {
+            const chart = new ApexCharts(document.getElementById(chartElementId), {
+              chart: {
+                type: "donut",
+                fontFamily: 'inherit',
+                height: 320,
+                sparkline: {
+                  enabled: true
+                },
+                animations: {
+                  enabled: false
+                },
+              },
+              fill: {
+                opacity: 1,
+              },
+              series: chartData.series, // Data for the chart
+              labels: chartData.labels, // Labels for the chart
+              tooltip: {
+                theme: 'dark'
+              },
+              grid: {
+                strokeDashArray: 4,
+              },
+              colors: [tabler.getColor("primary"), tabler.getColor("gray-300")],
+              legend: {
+                show: true,
+                position: 'bottom',
+                offsetY: 12,
+                markers: {
+                  width: 10,
+                  height: 10,
+                  radius: 100,
+                },
+                itemMargin: {
+                  horizontal: 8,
+                  vertical: 8
+                },
+              },
+              tooltip: {
+                fillSeriesColor: false
+              },
+            });
+            chart.render(); // Renders the chart
+          } else {
+            console.error("ApexCharts library is not loaded.");
+          }
+        }
+
+        function renderBarGraph(chartElementId, chartData) {
+          if (window.ApexCharts) {
+            const chart = new ApexCharts(document.getElementById(chartElementId), {
+              chart: {
+                type: "bar",
+                fontFamily: 'inherit',
+                height: 320,
+                parentHeightOffset: 0,
+                toolbar: {
+                  show: false,
+                },
+                animations: {
+                  enabled: false
+                },
+              },
+              plotOptions: {
+                bar: {
+                  columnWidth: '50%',
+                }
+              },
+              dataLabels: {
+                enabled: false,
+              },
+              fill: {
+                opacity: 1,
+              },
+              series: [{
+                name: chartData.seriesName, // Series Name (e.g., "Count")
+                data: chartData.seriesData // Data for the bars
+              }],
+              tooltip: {
+                theme: 'dark'
+              },
+              grid: {
+                padding: {
+                  top: -20,
+                  right: 0,
+                  left: -4,
+                  bottom: -4
+                },
+                strokeDashArray: 4,
+              },
+              xaxis: {
+                labels: {
+                  padding: 0,
+                },
+                tooltip: {
+                  enabled: false
+                },
+                axisBorder: {
+                  show: false,
+                },
+                categories: chartData.categories, // Categories for the x-axis
+              },
+              yaxis: {
+                labels: {
+                  padding: 4
+                },
+                min: 0, // Minimum value
+                max: Math.max(...chartData.seriesData), // Maximum value
+                forceNiceScale: true,
+              },
+              colors: [tabler.getColor("primary")],
+              legend: {
+                show: false,
+              },
+            });
+            chart.render();
+          } else {
+            console.error("ApexCharts library is not loaded.");
+          }
+        }
+
+      });
+    </script>
+     <script>
+      // @formatter:off
+      // document.addEventListener("DOMContentLoaded", function () {
+      // 	window.ApexCharts && (new ApexCharts(document.getElementById('chart-tasks-overview'), {
+      // 		chart: {
+      // 			type: "bar",
+      // 			fontFamily: 'inherit',
+      // 			height: 320,
+      // 			parentHeightOffset: 0,
+      // 			toolbar: {
+      // 				show: false,
+      // 			},
+      // 			animations: {
+      // 				enabled: false
+      // 			},
+      // 		},
+      // 		plotOptions: {
+      // 			bar: {
+      // 				columnWidth: '50%',
+      // 			}
+      // 		},
+      // 		dataLabels: {
+      // 			enabled: false,
+      // 		},
+      // 		fill: {
+      // 			opacity: 1,
+      // 		},
+      // 		series: [{
+      // 			name: "Count",
+      // 			data: [7, 15, 48, 72, 60, 16, 44]
+      // 		}],
+      // 		tooltip: {
+      // 			theme: 'dark'
+      // 		},
+      // 		grid: {
+      // 			padding: {
+      // 				top: -20,
+      // 				right: 0,
+      // 				left: -4,
+      // 				bottom: -4
+      // 			},
+      // 			strokeDashArray: 4,
+      // 		},
+      // 		xaxis: {
+      // 			labels: {
+      // 				padding: 0,
+      // 			},
+      // 			tooltip: {
+      // 				enabled: false
+      // 			},
+      // 			axisBorder: {
+      // 				show: false,
+      // 			},
+      // 			categories: ['0-10', '11-20', '21-30', '31-40', '41-50', '51-60', '61+'],
+      // 		},
+      // 		yaxis: {
+      // 			labels: {
+      // 				padding: 4
+      // 			},
+      // 		},
+      // 		colors: [tabler.getColor("primary")],
+      // 		legend: {
+      // 			show: false,
+      // 		},
+      // 	})).render();
+      // });
+      // @formatter:on
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1295 @@
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta20
+* @link https://tabler.io
+* Copyright 2018-2023 The Tabler Authors
+* Copyright 2018-2023 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Mauxi Panchayat</title>
+    <!-- CSS files -->
+    <link href="./dist/css/tabler.min.css?1692870487" rel="stylesheet"/>
+    <link href="./dist/css/tabler-flags.min.css?1692870487" rel="stylesheet"/>
+    <link href="./dist/css/tabler-payments.min.css?1692870487" rel="stylesheet"/>
+    <link href="./dist/css/tabler-vendors.min.css?1692870487" rel="stylesheet"/>
+    <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet"/>
+    <link href="./dist/css/datatable/dataTables.css" rel="stylesheet"/>
+
+    <link href="./dist/css/datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <style>
+      @import url('https://rsms.me/inter/inter.css');
+      :root {
+      	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+      }
+      body {
+      	font-feature-settings: "cv03", "cv04", "cv11";
+      }
+    </style>
+  </head>
+  <body >
+    <script src="./dist/js/demo-theme.min.js?1692870487"></script>
+    <div class="page">
+      <!-- Navbar -->
+      <div id="horizontal-menu-placeholder"></div>
+      <div class="page-wrapper">
+        <!-- Page header -->
+        <!-- <div class="page-header d-print-none">
+        </div> -->
+        <!-- Page body -->
+        <div class="page-body">
+          <div class="container">
+            <div class="row row-deck row-cards">
+              <div class="col-12">
+                <form class="card">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-4">
+                          <h3 class="card-title text-decoration-underline">House details</h3>
+                        </div>
+                        <div class="col-6">
+                          <div class="mb-3 row">
+                            <label class="col-3 col-form-label">Select House no</label>
+                            <div class="col-3">
+                              <select id="houseNoSelect" class="form-select">
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row row-cards">
+
+                        <input id="houseId" type="hidden">
+                        <input id="citizenId" type="hidden">
+                        <div class="col-md-4">
+                          <div class="row">
+                              <div class="col-12">
+                                  <div class="mb-3">
+                                    <!-- <label class="form-label">House Image</label> -->
+                                    <!-- <input id="houseImage" type="file"  accept="image/*" class="form-control" placeholder="Upload Image"> -->
+                                    <img id="imagePreview" src="" alt="House Image Preview" class="mt-2 rounded d-none" style="max-width: 100%; max-height: 200px; border: 1px solid #ccc; border-radius: 5px;">
+                                  </div>
+                                </div>
+                          </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3 row">
+                                      <label class="col-3 col-form-label">House no</label>
+                                      <div id="houseNo" class="col col-form-label fw-normal"></div>
+                                    </div>
+                                  </div>
+          
+                                  <div class="col-md-6">
+                                    <div class="mb-3 row">
+                                      <label class="col-3 col-form-label">Income level</label>
+                                    <div id="incomeLevel" class="col col-form-label fw-normal"></div>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-12">
+                                    <div class="mb-3 row">
+                                      <label class="col-3 col-form-label">Address</label>
+                                      <!-- <input id="address" type="text" class="form-control" placeholder="Address"
+                                                     value=""> -->
+                                    <div id="address" class="col col-form-label fw-normal"></div>
+        
+                                    </div>
+                                  </div>
+        
+                                <div class="col-md-12">
+                                  <div class="mb-3 row">
+                                    <label class="col-3 col-form-label">Members count</label>
+                                    <div id="memberCount" class="col col-form-label fw-normal"></div>
+                                  </div>
+                                </div>
+          
+                            </div>
+                        </div>
+
+                      </div>
+
+                      <div class="row row-cards">
+                        <div class="col">
+                          <div class="table-responsive">
+                            <table id="houseTax" class="table table-vcenter card-table">
+                              <thead>
+                                <tr>
+                                  <th>Type</th>
+                                  <th>Amount</th>
+                                  <th>Payment date</th>
+                                  <th>Receipt no</th>
+                                  <th >Tax year</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="hr-text"></div>
+
+                      <h3 class="card-title text-decoration-underline">Resident details</h3>
+                      <div class="row row-cards">
+                        <div class="accordion" id="accordion-example">
+
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="card-footer text-end">
+                      <a href="housesurvey.html" class="btn btn-primary">Back</a>
+                    </div>
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="footer-placeholder"></div>
+      </div>
+    </div>
+
+     <!-- Toast Notification -->
+  <div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="successToast" class="toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body">
+          
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="errorToast" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body">
+          Unsuccessful saving house survey!
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+    <!-- Libs JS -->
+    <script src="./dist/libs/apexcharts/dist/apexcharts.min.js?1692870487" defer></script>
+    <script src="./dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1692870487" defer></script>
+    <script src="./dist/libs/jsvectormap/dist/maps/world.js?1692870487" defer></script>
+    <script src="./dist/libs/jsvectormap/dist/maps/world-merc.js?1692870487" defer></script>
+    <script src="./dist/libs/litepicker/dist/litepicker.js?1692870487" defer></script>
+    <!-- Tabler Core -->
+    <script src="./dist/js/tabler.min.js?1692870487" defer></script>
+    <script src="./dist/js/demo.min.js?1692870487" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+    <script type="text/javascript" src="./commonFunction/commonFunction.js"></script>
+    <script src="./dist/js/configUrl.js"></script>
+    <script src="./dist/js/menu-footer.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+          const userId = localStorage.getItem('userId');
+          if (!userId) {
+                  window.location = config_url.frontendBaseURL;
+              }
+          });
+    </script>
+    <script>
+        // @formatter:off
+        // document.addEventListener("DOMContentLoaded", function () {
+        //     window.Litepicker && (new Litepicker({
+        //         element: document.getElementById('dob'),
+        //         buttonText: {
+        //             previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+        // <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>`,
+        //             nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+        // <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>`,
+        //         },
+        //     }));
+        // });
+        // @formatter:on
+      </script>
+
+    <script>
+      $(document).ready(function () {
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('value');
+
+        function getQaulificationAccordions(qualificationDetails) {
+        if (!qualificationDetails || qualificationDetails.length === 0) {
+            return '<p>No qualifications available.</p>';
+        }
+
+        return qualificationDetails
+            .map((qualification, index) => {
+            return `
+                <div class="accordion-item">
+                <h2 class="accordion-header" id="heading-${index}">
+                    <button class="accordion-button ${index !== 0 ? 'collapsed' : ''}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${index}" aria-expanded="${index === 0}" aria-controls="collapse-${index}">
+                    ${qualification.qualificationName}
+                    </button>
+                </h2>
+                <div id="collapse-${index}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" aria-labelledby="heading-${index}" data-bs-parent="#accordion-qualification">
+                    <div class="accordion-body">
+                        <div class="row row-cards">
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-3 col-form-label">Qualification Name</label>
+                                  <div class="col col-form-label fw-normal">${qualification.qualificationName}</div>
+                                </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-3 col-form-label">Institution Name</label>
+                                  <div class="col col-form-label fw-normal">${qualification.institutionName}</div>
+                                </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-3 col-form-label">Year of passing</label>
+                                  <div class="col col-form-label fw-normal">${qualification.yop}</div>
+                                </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-3 col-form-label">Grade</label>
+                                  <div class="col col-form-label fw-normal">${qualification.grade}</div>
+                                </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-3 col-form-label">Degree type</label>
+                                  <div class="col col-form-label fw-normal">${qualification.degreeType}</div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                </div>
+                </div>
+            `;
+            })
+            .join('');
+        }
+
+        function getMedicalAccordions(medicalDetails) {
+        if (!medicalDetails || medicalDetails.length === 0) {
+            return '<p>No Medical details available.</p>';
+        }
+
+        return medicalDetails
+            .map((medical, index) => {
+            return `
+                <div class="accordion-item">
+                <h2 class="accordion-header" id="heading-${index}">
+                    <button class="accordion-button ${index !== 0 ? 'collapsed' : ''}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${index}" aria-expanded="${index === 0}" aria-controls="collapse-${index}">
+                        Medical detail ${index + 1}
+                    </button>
+                </h2>
+                <div id="collapse-${index}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" aria-labelledby="heading-${index}" data-bs-parent="#accordion-medical">
+                    <div class="accordion-body">
+                        <div class="row row-cards">
+                               <div class="col-md-6">
+                                  <div class="mb-3 row">
+                                    <label class="col-3 col-form-label">Blood group</label>
+                                    <div class="col col-form-label fw-normal">${medical.bloodGroup}</div>
+                                  </div>
+                                </div>
+
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-3 col-form-label">Weight</label>
+                                    <div class="col col-form-label fw-normal">${medical.weight}</div>
+                                </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-3 col-form-label">Height</label>
+                                    <div class="col col-form-label fw-normal">${medical.height}</div>
+                                </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                  <div class="mb-3 row">
+                                    <label class="col-3 col-form-label">Health status</label>
+                                    <div class="col col-form-label fw-normal">${medical.healthStatus}</div>
+
+                                  </div>
+                                </div>
+
+                            </div>
+                        </div>
+                </div>
+                </div>
+            `;
+            })
+            .join('');
+        }
+
+        function getEmploymentAccordions(employmentDetails) {
+        if (!employmentDetails || employmentDetails.length === 0) {
+            return '<p>No Employment details available.</p>';
+        }
+
+        return employmentDetails
+            .map((employment, index) => {
+            return `
+                <div class="accordion-item">
+                <h2 class="accordion-header" id="heading-${index}">
+                    <button class="accordion-button ${index !== 0 ? 'collapsed' : ''}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${index}" aria-expanded="${index === 0}" aria-controls="collapse-${index}">
+                        Employment detail ${index + 1}
+                    </button>
+                </h2>
+                <div id="collapse-${index}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" aria-labelledby="heading-${index}" data-bs-parent="#accordion-employment">
+                    <div class="accordion-body">
+                        <div class="row row-cards">
+                               <div class="col-md-6">
+                                  <div class="mb-3 row">
+                                    <label class="col-3 col-form-label">Service Type</label>
+                                                                        <div class="col col-form-label fw-normal">${employment.serviceType}</div>
+                                  </div>
+                                </div>
+
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-3 col-form-label">Employer name</label>
+                                                                        <div class="col col-form-label fw-normal">${employment.employerName}</div>
+                                </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-3 col-form-label">Position</label>
+                                  <div class="col col-form-label fw-normal">${employment.position}</div>
+                                </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-3 col-form-label">Salary</label>
+                                  <div class="col col-form-label fw-normal">${employment.salary}</div>
+                                </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                    <label class="col-3 col-form-label">Retirement date</label>
+                                  <div class="col col-form-label fw-normal">${employment.retirementDate}</div>
+                                  </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                    <label class="col-3 col-form-label">Joining date</label>
+                                                                      <div class="col col-form-label fw-normal">${employment.joiningDate}</div>
+                                  </div>
+                              </div>
+
+                            </div>
+                        </div>
+                </div>
+                </div>
+            `;
+            })
+            .join('');
+        }
+
+        function getSchemeAccordions(schemeDetails) {
+        if (!schemeDetails || schemeDetails.length === 0) {
+            return '<p>No Scheme details available.</p>';
+        }
+
+        return schemeDetails
+            .map((scheme, index) => {
+            return `
+                <div class="accordion-item">
+                <h2 class="accordion-header" id="heading-${index}">
+                    <button class="accordion-button ${index !== 0 ? 'collapsed' : ''}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${index}" aria-expanded="${index === 0}" aria-controls="collapse-${index}">
+                        Scheme detail ${index + 1}
+                    </button>
+                </h2>
+                <div id="collapse-${index}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" aria-labelledby="heading-${index}" data-bs-parent="#accordion-scheme">
+                    <div class="accordion-body">
+                        <div class="row row-cards">
+                                <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-3 col-form-label">Scheme</label>
+                                                                    <div class="col col-form-label fw-normal">${scheme.schemeName || ""}</div>
+                                </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                    <label class="col-3 col-form-label">Enrollment date</label>
+                                    <div class="col col-form-label fw-normal">${scheme.enrollmentDate || ""}</div>
+                                  </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                  <div class="mb-3 row">
+                                    <label class="col-3 col-form-label">Status</label>
+                                    <div class="col col-form-label fw-normal">${scheme.status || ""}</div>
+                                  </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                </div>
+                </div>
+            `;
+            })
+            .join('');
+        }
+
+        function getTaxAccordions(taxDetails) {
+        if (!taxDetails || taxDetails.length === 0) {
+            return '<p>No tax details available.</p>';
+        }
+
+        return taxDetails
+            .map((tax, index) => {
+            return `
+                <div class="accordion-item">
+                <h2 class="accordion-header" id="heading-${index}">
+                    <button class="accordion-button ${index !== 0 ? 'collapsed' : ''}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${index}" aria-expanded="${index === 0}" aria-controls="collapse-${index}">
+                        Tax detail ${index + 1}
+                    </button>
+                </h2>
+                <div id="collapse-${index}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" aria-labelledby="heading-${index}" data-bs-parent="#accordion-tax">
+                    <div class="accordion-body">
+                        <div class="row row-cards">
+                                 <div class="col-md-6">
+                                  <div class="mb-3 row">
+                                    <label class="col-3 col-form-label">Type</label>
+                                    <div class="col col-form-label fw-normal">${tax.type || ""}</div>
+                                  </div>
+                                </div>
+
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-3 col-form-label">Amount</label>
+                                  <div class="col col-form-label fw-normal">${tax.amount || ""}</div>
+                                </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                    <label class="col-3 col-form-label">Payment date</label>
+                                     <div class="col col-form-label fw-normal">${tax.paymentDate || ""}</div>
+                                  </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-3 col-form-label">Receipt number</label>
+                                   <div class="col col-form-label fw-normal">${tax.receiptNumber || ""}</div>
+                                </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-3 col-form-label">Tax year</label>
+                                   <div class="col col-form-label fw-normal">${tax.taxYear || ""}</div>
+                                </div>
+                              </div>                           
+
+                            
+
+
+                            </div>
+                        </div>
+                </div>
+                </div>
+            `;
+            })
+            .join('');
+        }
+
+        function getAssetAccordions(assetDetails) {
+        if (!assetDetails || assetDetails.length === 0) {
+            return '<p>No asset details available.</p>';
+        }
+
+        return assetDetails
+            .map((asset, index) => {
+            return `
+                <div class="accordion-item">
+                <h2 class="accordion-header" id="heading-${index}">
+                    <button class="accordion-button ${index !== 0 ? 'collapsed' : ''}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${index}" aria-expanded="${index === 0}" aria-controls="collapse-${index}">
+                        Asset detail ${index + 1}
+                    </button>
+                </h2>
+                <div id="collapse-${index}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" aria-labelledby="heading-${index}" data-bs-parent="#accordion-asset">
+                    <div class="accordion-body">
+                        <div class="row row-cards">
+                                <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-3 col-form-label">Name</label>
+                                   <div class="col col-form-label fw-normal">${asset.assetName || ""}</div>
+                                </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                  <div class="mb-3 row">
+                                    <label class="col-3 col-form-label">Type</label>
+                                   <div class="col col-form-label fw-normal">${asset.type || ""}</div>
+
+                                   
+                                  </div>
+                                </div>
+
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-3 col-form-label">Location</label>
+                                                                     <div class="col col-form-label fw-normal">${asset.location || ""}</div>
+
+                                </div>
+                              </div>
+
+                                                  
+
+                            
+
+
+                            </div>
+                        </div>
+                </div>
+                </div>
+            `;
+            })
+            .join('');
+        }
+
+        function qualificationTable() {
+        return new DataTable("#qualificationTable", {
+              paging: true,
+              retrieve: true,
+              pageLength: 5, // Show 10 entries per page
+              lengthChange: false, // Hide "entries per page" dropdown
+              searching: false, // Enable search
+              ordering: true, // Enable sorting
+              info: false, // Show "Showing x to y of z entries"
+              autoWidth: false, // Keep the layout intact
+              language: {
+                search: "_INPUT_", // Customize the search input
+                searchPlaceholder: "Search...",
+                paginate: {
+                  previous: "< prev", // Change 'Previous' text
+                  next: "next >",    // Change 'Next' text
+                },
+              },
+            });
+        }
+
+        function employmentTable() {
+        return new DataTable("#employmentTable", {
+              paging: true,
+              retrieve: true,
+              pageLength: 5, // Show 10 entries per page
+              lengthChange: false, // Hide "entries per page" dropdown
+              searching: false, // Enable search
+              ordering: true, // Enable sorting
+              info: false, // Show "Showing x to y of z entries"
+              autoWidth: false, // Keep the layout intact
+              language: {
+                search: "_INPUT_", // Customize the search input
+                searchPlaceholder: "Search...",
+                paginate: {
+                  previous: "< prev", // Change 'Previous' text
+                  next: "next >",    // Change 'Next' text
+                },
+              },
+            });
+        }
+
+        function schemeTable() {
+        return new DataTable("#schemeTable", {
+              paging: true,
+              retrieve: true,
+              pageLength: 5, // Show 10 entries per page
+              lengthChange: false, // Hide "entries per page" dropdown
+              searching: false, // Enable search
+              ordering: true, // Enable sorting
+              info: false, // Show "Showing x to y of z entries"
+              autoWidth: false, // Keep the layout intact
+              language: {
+                search: "_INPUT_", // Customize the search input
+                searchPlaceholder: "Search...",
+                paginate: {
+                  previous: "< prev", // Change 'Previous' text
+                  next: "next >",    // Change 'Next' text
+                },
+              },
+            });
+        }
+
+        function taxTable() {
+        return new DataTable("#taxTable", {
+              paging: true,
+              retrieve: true,
+              pageLength: 5, // Show 10 entries per page
+              lengthChange: false, // Hide "entries per page" dropdown
+              searching: false, // Enable search
+              ordering: true, // Enable sorting
+              info: false, // Show "Showing x to y of z entries"
+              autoWidth: false, // Keep the layout intact
+              language: {
+                search: "_INPUT_", // Customize the search input
+                searchPlaceholder: "Search...",
+                paginate: {
+                  previous: "< prev", // Change 'Previous' text
+                  next: "next >",    // Change 'Next' text
+                },
+              },
+            });
+        }
+
+        function assetTable() {
+        return new DataTable("#assetTable", {
+              paging: true,
+              retrieve: true,
+              pageLength: 5, // Show 10 entries per page
+              lengthChange: false, // Hide "entries per page" dropdown
+              searching: false, // Enable search
+              ordering: true, // Enable sorting
+              info: false, // Show "Showing x to y of z entries"
+              autoWidth: false, // Keep the layout intact
+              language: {
+                search: "_INPUT_", // Customize the search input
+                searchPlaceholder: "Search...",
+                paginate: {
+                  previous: "< prev", // Change 'Previous' text
+                  next: "next >",    // Change 'Next' text
+                },
+              },
+            });
+        }
+
+        $("#houseNoSelect").on("change", function () {
+            const selectedHouseId = $(this).val(); // Get the selected value (houseId)
+            if (selectedHouseId) {
+                getHouseDetails(selectedHouseId); // Call getHouseDetails with the selected value
+            }
+        });
+
+        async function viewHouseListByCitizenId(){
+          try {
+            const response = await getAllListing('viewHouseListByCitizenId');
+            const details = response.data;
+
+            const $houseNoSelect = $("#houseNoSelect");
+
+            // Clear existing options
+            $houseNoSelect.empty();
+
+            details.forEach((detail, index) => {
+                const option = `<option ${index == 0 ? "selected" : ""} value="${detail.houseId}">${detail.houseNo}</option>`;
+                $houseNoSelect.append(option);
+
+                // Call getHouseDetails for the first index
+                if (index == 0) {
+                    getHouseDetails(detail.houseId);
+                }
+            });
+
+          } catch (error) {
+            console.error(error);
+          }
+        }
+
+        let houseStatus, hof;
+        let newIndex = 1;
+        async function getHouseDetails(id){
+          try {
+          // const response = await getDetailsById('getResidentDetailsByHNo', id);
+          // const details = response.data;
+
+          $('#houseId').val(details.houseId); 
+          $('#houseNo').text(details.houseNo);
+          $('#incomeLevel').text(details.incomeLevel == "low" ? "Low" : details.incomeLevel == "middle" ? "Middle" : details.incomeLevel == "high" ? "High" :  "-");
+          $('#address').text(details.address);
+          houseStatus = details.status;
+          hof = details.hof;
+          $('#memberCount').text(details.membersCount);
+          if(details.houseImage){
+          $('#imagePreview').removeClass('d-none')
+          $('#imagePreview').attr('src', details.houseImage);
+          }
+
+          if(details.tax.length > 0){
+            const tableBody = $("#houseTax tbody");
+            // Clear the table before populating
+            tableBody.empty();
+
+            // Loop through each record and append a table row
+            $.each(details.tax, function(index, record) {
+              const row = `
+                <tr>
+                  <td>${record.taxType}</td>
+                  <td>${record.taxAmount}</td>
+                  <td>${record.paymentDate}</td>
+                  <td>${record.receiptNumber}</td>
+                  <td>${record.taxYear}</td>
+                </tr>
+              `;
+              tableBody.append(row);
+            });
+
+            // Initialize DataTables with pagination, sorting, and search functionality
+            const dataTable = $("#houseTax").DataTable({
+              paging: true,
+              pageLength: 5, // Show 10 entries per page
+              lengthChange: false, // Hide "entries per page" dropdown
+              searching: false, // Enable search
+              ordering: true, // Enable sorting
+              info: false, // Show "Showing x to y of z entries"
+              autoWidth: false, // Keep the layout intact
+              language: {
+                search: "_INPUT_", // Customize the search input
+                searchPlaceholder: "Search...",
+                paginate: {
+                  previous: "< prev", // Change 'Previous' text
+                  next: "next >",    // Change 'Next' text
+                },
+              },
+            });
+          }
+
+          if(details.citizenDetails.length > 0){
+            const $accordionContainer = $("#accordion-example");
+            details.citizenDetails.forEach(item=>{
+              const newAccordionItem = `
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="heading-${newIndex}" data-citizenid=${item.citizenId}>
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${newIndex}" aria-expanded="true">
+                    ${item.isHof == 1 ? `Head of family/House owner: ${item.name}` : `Resident ${newIndex}: ${item.name}`}
+                  </button>
+                </h2>
+                <div id="collapse-${newIndex}" class="accordion-collapse collapse" data-bs-parent="#accordion-example">
+                  <div class="accordion-body pt-0">
+                    <div class="card">
+                      <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs nav-fill" data-bs-toggle="tabs">
+                          <li class="nav-item">
+                            <a href="#tabs-general-${newIndex}" class="nav-link active" data-bs-toggle="tab">General</a>
+                          </li>
+                          <li class="nav-item">
+                            <a id="#tabs-qualification-tab-${newIndex}" href="#tabs-qualification-${newIndex}" class="nav-link" data-bs-toggle="tab">Qualification</a>
+                          </li>
+                          <li class="nav-item">
+                            <a id="#tabs-medical-tab-${newIndex}" href="#tabs-medical-${newIndex}" class="nav-link" data-bs-toggle="tab">Medical</a>
+                          </li>
+                          <li class="nav-item">
+                            <a id="#tabs-employment-tab-${newIndex}" href="#tabs-employment-${newIndex}" class="nav-link" data-bs-toggle="tab">Employment</a>
+                          </li>
+                          <li class="nav-item">
+                            <a id="#tabs-schemes-tab-${newIndex}" href="#tabs-schemes-${newIndex}" class="nav-link" data-bs-toggle="tab">Schemes</a>
+                          </li>
+                          <li class="nav-item">
+                            <a id="#tabs-taxes-tab-${newIndex}" href="#tabs-taxes-${newIndex}" class="nav-link" data-bs-toggle="tab">Taxes</a>
+                          </li>
+                          <li class="nav-item">
+                            <a id="#tabs-assets-tab-${newIndex}" href="#tabs-assets-${newIndex}" class="nav-link" data-bs-toggle="tab">Assets</a>
+                          </li>
+                          <li class="nav-item">
+                            <a id="#tabs-documents-tab-${newIndex}" href="#tabs-documents-${newIndex}" class="nav-link" data-bs-toggle="tab">Documents</a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="card-body">
+                        <div class="tab-content">
+                          <div class="tab-pane active show" id="tabs-general-${newIndex}">
+                            <!-- General Form Content -->
+                            <div class="row row-cards">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                         <div class="col-12">
+                                            <div class="mb-3 row">
+                                            <label class="col-3 col-form-label">Name</label>
+                                            <div class="col col-form-label fw-normal">${item.name}</div>
+                                            </div>
+                                        </div>
+
+                                          <div class="col-12">
+                                            <div class="mb-3 row">
+                                            <div class="col-3 col-form-label">Gender</div>
+                                            <div class="col col-form-label fw-normal">${item.gender}</div>
+                                            </div>
+                                        </div>
+
+                                         <div class="col-12">
+                                            <div class="mb-3 row">
+                                                <label class="col-3 col-form-label">Date of birth</label>
+                                                <div class="col col-form-label fw-normal">${item.dob}</div>
+                                            </div>
+                                        </div>
+
+                                         <div class="col-12">
+                                            <div class="mb-3 row">
+                                            <label class="col-3 col-form-label">Aadhar no</label>
+                                                <div class="col col-form-label fw-normal">${item.aadharNo}</div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                         <div class="col-12">
+                                  <div class="mb-3">
+                                    <label class="form-label">Citizen Image</label>
+                                    <img  src="${item?.citizenImage}" alt="Citizen Image Preview" class="mt-2 rounded" style="max-width: 100%; max-height: 200px; border: 1px solid #ccc; border-radius: 5px;">
+                                  </div>
+                                </div>
+                                    </div>
+                                </div>
+                             
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-3 col-form-label">Pan card no</label>
+                                    <div class="col col-form-label fw-normal">${item.panCard}</div>
+                                </div>
+                              </div>
+    
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-3 col-form-label">Driving license</label>
+                                                                      <div class="col col-form-label fw-normal">${item.drivingLicense}</div>
+
+                                </div>
+                              </div>
+    
+                              
+
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-3 col-form-label">Mobile no</label>
+                                                                      <div class="col col-form-label fw-normal">${item.contact}</div>
+
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-3 col-form-label">Alternate Mobile no</label>
+                                                                      <div class="col col-form-label fw-normal">${item.altContact}</div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="mb-3 row">
+                                    <label class="col-3 col-form-label">Email</label>
+                                                                        <div class="col col-form-label fw-normal">${item.email}</div>
+                                  </div>
+                                </div>
+      
+                                <div class="col-md-6">
+                                  <div class="mb-3 row">
+                                    <label class="col-3 col-form-label">Password</label>
+                                                                        <div class="col col-form-label fw-normal">${item.password}</div>
+
+                                  </div>
+                                </div>
+      
+                                <div class="col-md-6">
+                                  <div class="mb-3 row">
+                                  <div class="col-3 col-form-label">Are you the head of family?</div>
+                                                                        <div class="col col-form-label fw-normal">${item.isHof == 1 ? "Yes" : "No"}</div>
+
+                                </div>
+                                </div>
+      
+                                <div class="col-md-6">
+                                  <div class="mb-3 row">
+                                    <label class="col-3 col-form-label">Relation with head of family</label>
+                                                                       <div class="col col-form-label fw-normal">${item.relationWithHof == 1 ? "Son" : item.relationWithHof == 2 ? "Daughter" : item.relationWithHof == 3 ? "Wife" : item.relationWithHof == 4 ? "Husband" : item.relationWithHof == 5 ? "Father" : item.relationWithHof == 6 ? "Mother" : "-"}</div>
+
+                                
+                                  </div>
+                                </div>
+      
+                                <div class="col-md-6">
+                                  <div class="mb-3 row">
+                                    <label class="col-3 col-form-label">Annual income</label>
+                                                                                                            <div class="col col-form-label fw-normal">${item.annualIncome}</div>
+
+                                  </div>
+                                </div>
+
+                                   <div class="col-md-6">
+                               <div class="mb-3 row">
+                                  <label class="col-3 col-form-label">Address</label>
+                                    <div class="col col-form-label fw-normal">${item.address}</div>
+                                </div>
+                               
+                              </div>
+
+                               
+                                
+                            </div>
+                          </div>
+                          <div class="tab-pane" id="tabs-qualification-${newIndex}">
+                            <!-- Qualification Content -->
+                            <div class="row row-cards">
+
+                                <div class="col">
+                                  <div class="table-responsive">
+                                    <table id="qualificationTable" class="table table-vcenter card-table">
+                                      <thead>
+                                        <tr>
+                                          <th>Qualification name</th>
+                                          <th>Institution name</th>
+                                          <th>Year of passing</th>
+                                          <th>Grade</th>
+                                          <th>Degree type</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+
+                            </div>
+                          </div>
+                          <div class="tab-pane" id="tabs-medical-${newIndex}">
+                            <!-- Medical Content -->
+
+                              <div class="row row-cards">
+                               <div class="col-md-6">
+                                  <div class="mb-3 row">
+                                    <label class="col-3 col-form-label">Blood group</label>
+                                    <div class="col col-form-label fw-normal">${item.medicalDetails && item.medicalDetails[0].bloodGroup || "-"}</div>
+                                  </div>
+                                </div>
+
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-3 col-form-label">Weight</label>
+                                    <div class="col col-form-label fw-normal">${item.medicalDetails && item.medicalDetails[0].weight || "-"}</div>
+                                </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-3 col-form-label">Height</label>
+                                    <div class="col col-form-label fw-normal">${item.medicalDetails && item.medicalDetails[0].height || "-"}</div>
+                                </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                  <div class="mb-3 row">
+                                    <label class="col-3 col-form-label">Health status</label>
+                                    <div class="col col-form-label fw-normal">${item.medicalDetails && item.medicalDetails[0].healthStatus || "-"}</div>
+
+                                  </div>
+                                </div>
+
+                            </div>
+
+                             
+                          </div>
+                          <div class="tab-pane" id="tabs-employment-${newIndex}">
+                            <!-- Employment Content -->
+                            <div class="row row-cards">
+
+                                  <div class="col">
+                                  <div class="table-responsive">
+                                    <table id="employmentTable" class="table table-vcenter card-table">
+                                      <thead>
+                                        <tr>
+                                          <th>Service type</th>
+                                          <th>Employer name</th>
+                                          <th>Position</th>
+                                          <th>Salary</th>
+                                          <th>Joining date</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+
+                             
+                            </div>
+                          </div>
+                          <div class="tab-pane" id="tabs-schemes-${newIndex}">
+                            <!-- Schemes Content -->
+                            <div class="row row-cards">
+
+                                 <div class="col">
+                                  <div class="table-responsive">
+                                    <table id="schemeTable" class="table table-vcenter card-table">
+                                      <thead>
+                                        <tr>
+                                          <th>Scheme</th>
+                                          <th>Enrollment date</th>
+                                          <th>Status</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+
+
+                             
+                            </div>
+                          </div>
+                          <div class="tab-pane" id="tabs-taxes-${newIndex}">
+                            <!-- Taxes Content -->
+                            <div class="row row-cards">
+
+                                <div class="col">
+                                  <div class="table-responsive">
+                                    <table id="taxTable" class="table table-vcenter card-table">
+                                      <thead>
+                                        <tr>
+                                          <th>Type</th>
+                                          <th>Amount</th>
+                                          <th>Payment date</th>
+                                          <th>Receipt number</th>
+                                          <th>Tax year</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+
+                             
+                            </div>
+                          </div>
+                          <div class="tab-pane" id="tabs-assets-${newIndex}">
+                            <!-- Assets Content -->
+                            <div class="row row-cards">
+
+                               <div class="col">
+                                  <div class="table-responsive">
+                                    <table id="assetTable" class="table table-vcenter card-table">
+                                      <thead>
+                                        <tr>
+                                          <th>Name</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+
+                              
+                            </div>
+                          </div>
+                          <div class="tab-pane" id="tabs-documents-${newIndex}">
+                            <!-- Documents Content -->
+                            <div class="row row-cards">
+
+                               <div class="col">
+                                  <div class="table-responsive">
+                                    <table id="documentTable" class="table table-vcenter card-table">
+                                      <thead>
+                                        <tr>
+                                          <th>Document Type</th>
+                                          <th>Document</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+
+                              
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+            $accordionContainer.append(newAccordionItem);
+
+            if(item.qualificationDetails.length > 0){
+              const tableBody = $("#qualificationTable tbody");
+              // Clear the table before populating
+              tableBody.empty();
+
+              // Loop through each record and append a table row
+              $.each(item.qualificationDetails, function(index, record) {
+                const row = `
+                  <tr>
+                    <td>${record.qualificationName || "-"}</td>
+                    <td>${record.institutionName || "-"}</td>
+                    <td>${record.yop || "-"}</td>
+                    <td>${record.grade || "-"}</td>
+                    <td>${record.degreeType || "-"}</td>
+                  </tr>
+                `;
+                tableBody.append(row);
+              });
+
+              // Initialize DataTables with pagination, sorting, and search functionality
+              qualificationTable();
+
+          }
+
+            if(item.employmentDetails.length > 0){
+              const tableBody = $("#employmentTable tbody");
+              // Clear the table before populating
+              tableBody.empty();
+
+              // Loop through each record and append a table row
+              $.each(item.employmentDetails, function(index, record) {
+                const row = `
+                  <tr>
+                    <td>${record.serviceType || "-"}</td>
+                    <td>${record.employerName || "-"}</td>
+                    <td>${record.position || "-"}</td>
+                    <td>${record.salary || "-"}</td>
+                    <td>${record.joiningDate || "-"}</td>
+                  </tr>
+                `;
+                tableBody.append(row);
+              });
+
+              // Initialize DataTables with pagination, sorting, and search functionality
+              employmentTable();
+            }
+
+            if(item.schemeDetails.length > 0){
+              const tableBody = $("#schemeTable tbody");
+              // Clear the table before populating
+              tableBody.empty();
+
+              // Loop through each record and append a table row
+              $.each(item.schemeDetails, function(index, record) {
+                const row = `
+                  <tr>
+                    <td>${record.schemeName || "-"}</td>
+                    <td>${record.enrollmentDate || "-"}</td>
+                    <td>${record.status || "-"}</td>
+                  </tr>
+                `;
+                tableBody.append(row);
+              });
+
+              // Initialize DataTables with pagination, sorting, and search functionality
+              schemeTable();
+            }
+
+            if(item.taxDetails.length > 0){
+              const tableBody = $("#taxTable tbody");
+              // Clear the table before populating
+              tableBody.empty();
+
+              // Loop through each record and append a table row
+              $.each(item.taxDetails, function(index, record) {
+                const row = `
+                  <tr>
+                    <td>${record.type || "-"}</td>
+                    <td>${record.amount || "-"}</td>
+                    <td>${record.paymentDate || "-"}</td>
+                    <td>${record.receiptNumber || "-"}</td>
+                    <td>${record.taxYear || "-"}</td>
+                  </tr>
+                `;
+                tableBody.append(row);
+              });
+
+              // Initialize DataTables with pagination, sorting, and search functionality
+              taxTable();
+            }
+
+            if(item.assetDetails.length > 0){
+              const tableBody = $("#assetTable tbody");
+              // Clear the table before populating
+              tableBody.empty();
+
+              // Loop through each record and append a table row
+              $.each(item.assetDetails, function(index, record) {
+                const row = `
+                  <tr>
+                    <td>${record.assetName || "-"}</td>
+                  </tr>
+                `;
+                tableBody.append(row);
+              });
+
+              // Initialize DataTables with pagination, sorting, and search functionality
+              assetTable();
+            }
+                newIndex++;
+            });
+          }
+        } catch (error) {
+            console.error(error)
+          }
+        }
+
+        viewHouseListByCitizenId();
+        if(id){
+          getHouseDetails(id);
+        }
+
+        $(document).on('change', '#houseImage', function () {
+          const fileInput = this;
+          const previewImage = $('#imagePreview');
+
+          // Ensure a file is selected
+          if (fileInput.files && fileInput.files[0]) {
+              const file = fileInput.files[0];
+
+              // Validate if the uploaded file is an image
+              if (!file.type.startsWith('image/')) {
+                  alert('Please upload a valid image file.');
+                  previewImage.hide(); // Hide the preview if not an image
+                  return;
+              }
+
+              // Use FileReader to read the image
+              const reader = new FileReader();
+              reader.onload = function (e) {
+                  // Set the image source and make it visible
+                  previewImage.attr('src', e.target.result).show();
+              };
+
+              // Read the file as a data URL
+              reader.readAsDataURL(file);
+          } else {
+              // Hide the preview if no file is selected
+              previewImage.hide();
+          }
+        });
+
+
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Mauxi Panchayat</title>
+  <!-- CSS files -->
+  <link href="./dist/css/tabler.min.css?1692870487" rel="stylesheet" />
+  <link href="./dist/css/tabler-flags.min.css?1692870487" rel="stylesheet" />
+  <link href="./dist/css/tabler-payments.min.css?1692870487" rel="stylesheet" />
+  <link href="./dist/css/tabler-vendors.min.css?1692870487" rel="stylesheet" />
+  <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet" />
+
+  <link href="./dist/css/datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+  <style>
+    @import url('https://rsms.me/inter/inter.css');
+
+    :root {
+      --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+    }
+
+    body {
+      font-feature-settings: "cv03", "cv04", "cv11";
+    }
+  </style>
+</head>
+
+<body>
+  <script src="./dist/js/demo-theme.min.js?1692870487"></script>
+  <div class="page">
+    <!-- Navbar -->
+    <div id="horizontal-menu-placeholder"></div>
+    <div class="page-wrapper">
+      <!-- Page header -->
+      <!-- Page body -->
+      <div class="page-body">
+        <div class="container">
+          <div class="row row-deck row-cards">
+            <div class="col-12">
+              <form class="card" autocomplete="off" >
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                    <div class="col-md-4">
+                        <select type="text" id="houseNoSelect" class="form-control form-select" value="">
+                            <option value="" selected>Select House Number</option>
+                        </select>
+                        <div id="houseNoSelectVal" class="text-danger d-none"></div>
+                    </div>
+
+                        <div class="col-auto">
+                            <button onclick="createQR()" type="button" class="btn btn-primary">
+                              <div class="spinner-border text-light d-none" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                              </div>&nbsp;
+                              Create QR code</button>
+                        </div>
+                    </div>
+
+                  <div id="tableLoader" class="container container-slim py-4 d-none">
+                    <div class="text-center">
+                      <div class="text-secondary mb-3">Loading...</div>
+                      <div class="progress progress-sm">
+                        <div class="progress-bar progress-bar-indeterminate"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="QRContainer" class="d-flex flex-column align-items-center justify-content-center mt-5 mb-3 d-none">
+                    <!-- <div class="mb-3" id="qrcode"></div> -->
+                    <div class="mb-3" id="qrcodeimagesection">
+                      <img id="qrcodeimg" src="" alt="">
+                    </div>
+                    <button id="" onclick="downloadBtn()" type="button" class="btn btn-primary">
+                        Download as PDF
+                    </button>
+                  </div>
+
+
+                </div>
+                <div class="card-footer text-end d-none">
+                  <a href="dashboard.html" class="btn btn-primary">Cancel</a>
+                  <!-- <button onclick="savePassword()" type="button" class="btn btn-primary">
+                    <div id="savePassSpinner" class="spinner-border text-light d-none" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>&nbsp;
+                    Save</button> -->
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="footer-placeholder"></div>
+    </div>
+  </div>
+  <!-- Toast Notification -->
+  <div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="successToast" class="toast align-items-center border-0" role="alert" aria-live="assertive"
+      aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body">
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+          aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Libs JS -->
+  <script src="./dist/libs/apexcharts/dist/apexcharts.min.js?1692870487" defer></script>
+  <script src="./dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1692870487" defer></script>
+  <script src="./dist/libs/jsvectormap/dist/maps/world.js?1692870487" defer></script>
+  <script src="./dist/libs/jsvectormap/dist/maps/world-merc.js?1692870487" defer></script>
+  <script src="./dist/libs/litepicker/dist/litepicker.js?1692870487" defer></script>
+  <script src="./dist/libs/tom-select/dist/js/tom-select.base.min.js?1692870487" defer></script>
+  <!-- Tabler Core -->
+  <script src="./dist/js/tabler.min.js?1692870487" defer></script>
+  <script src="./dist/js/demo.min.js?1692870487" defer></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+  <script type="text/javascript" src="./commonFunction/commonFunction.js"></script>
+  <script src="./dist/js/configUrl.js"></script>
+  <script src="./dist/js/menu-footer.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+                window.location = config_url.frontendBaseURL;
+            }
+        });
+  </script>
+  <script>
+
+    const houseNoSelect = $('#houseNoSelect');
+
+    function showToastMessage(message, type) {
+        const toast = new bootstrap.Toast(document.getElementById('successToast'));
+        $('.toast-body').text(message);
+        if (type == "success") {
+            $('#successToast').removeClass('text-bg-danger');
+            $('#successToast').addClass('text-bg-success');
+        } else {
+            $('#successToast').removeClass('text-bg-success');
+            $('#successToast').addClass('text-bg-danger');
+        }
+        toast.show();
+    }
+
+    async function getHouseNumberList() {
+        try {
+        const response = await getAllListing('getHouseNumberList');
+        const details = response.data;
+        if (response && response.code === 200) {
+            houseNoSelect.empty()
+            houseNoSelect.append('<option value="" selected>Select House Number</option>');
+            details.forEach(function(vendor) {
+                houseNoSelect.append(`<option value="${vendor}" selected>${vendor}</option>`);
+            });
+            houseNoSelect.val('');
+        }
+        } catch (error) {
+        console.error(error);
+        }
+    }
+
+    // const response = {
+    //     code: 200,
+    //     data: "",
+    // }
+
+    async function getQRCodebyHouseNo(data) {
+        try {
+        const response = await addData('getQRCodebyHouseNo', data);
+        if (response.status == true) {
+            const details = response.data;
+            $('#qrcodeimg').attr('src', details.qr_code_url);
+            // showToastMessage(response.message, 'success');
+            $('#QRContainer').removeClass('d-none');
+            $('.card-footer').removeClass('d-none');
+        } else {
+            // showToastMessage(response.message ? response.message : response.error, 'error');
+            $('#QRContainer').addClass('d-none');
+            $('.card-footer').addClass('d-none');
+        }
+        $('#tableLoader').addClass('d-none');
+        } catch (error) {
+        console.error(error);
+        showToastMessage('Error generating QR code!', 'error');
+        $('#tableLoader').addClass('d-none');
+        $('#QRContainer').addClass('d-none');
+        $('.card-footer').addClass('d-none');
+        }
+    }
+
+    function createQR() {
+        let isValid = true; 
+        const $houseNoSelect = $(`#houseNoSelect`);
+        const $houseNoSelectVal = $(`#houseNoSelectVal`);
+        if (!$houseNoSelect.val().trim()) {
+        $houseNoSelectVal.removeClass('d-none');
+        $houseNoSelectVal.text('Select house no');
+        isValid = false;
+        }  else {
+            $houseNoSelectVal.addClass('d-none');
+        }
+
+        if (!isValid) {
+            return;
+        }
+
+        const data = {
+            houseNo: $houseNoSelect.val().trim()
+        }
+
+        $('#tableLoader').removeClass('d-none');
+        getQRCodebyHouseNo(data);
+    }
+
+    // async function downloadBtn() {
+    //     const qrCodeImg = document.getElementById('qrcodeimg'); // Select the <img> element
+    //     const imgSrc = qrCodeImg.src; // Get the image source URL
+
+    //     if (!imgSrc) {
+    //         alert('No QR Code image found!');
+    //         return;
+    //     }
+
+    //     // Create a new PDF document
+    //     const { jsPDF } = window.jspdf;
+    //     const pdf = new jsPDF();
+
+    //     // Add the image to the PDF
+    //     const imgWidth = 100; // Desired width in the PDF (in mm)
+    //     const imgHeight = 100; // Desired height in the PDF (you can dynamically calculate this if needed)
+    //     pdf.addImage(imgSrc, 'PNG', 55, 40, imgWidth, imgHeight);
+
+    //     // Add optional text or customization
+    //     pdf.text('House QR Code', 105, 30, { align: 'center' });
+
+    //     // Save the PDF
+    //     pdf.save('qrcode.pdf');
+    // }
+
+    async function downloadBtn() {
+      const qrCodeImg = document.getElementById('qrcodeimg'); // Select the <img> or <svg> element
+      const imgSrc = qrCodeImg.src; // Get the image source URL
+
+      if (!imgSrc) {
+          alert('No QR Code image found!');
+          return;
+      }
+
+      // Check if the image source is SVG
+      if (imgSrc.endsWith('.svg')) {
+          // Fetch the SVG content
+          const response = await fetch(imgSrc);
+          const svgText = await response.text();
+
+          // Create a canvas to render the SVG as PNG
+          const canvas = document.createElement('canvas');
+          const context = canvas.getContext('2d');
+
+          const svg = new Blob([svgText], { type: 'image/svg+xml;charset=utf-8' });
+          const url = URL.createObjectURL(svg);
+
+          // Create an image element for conversion
+          const img = new Image();
+          img.onload = () => {
+              // Set canvas dimensions to match the SVG dimensions
+              canvas.width = img.width;
+              canvas.height = img.height;
+
+              // Draw the SVG on the canvas
+              context.drawImage(img, 0, 0);
+
+              // Convert canvas content to PNG base64
+              const pngBase64 = canvas.toDataURL('image/png');
+
+              // Proceed with jsPDF
+              generatePDF(pngBase64);
+
+              // Clean up
+              URL.revokeObjectURL(url);
+          };
+          img.src = url;
+      } else {
+          // If the image is not SVG, proceed directly
+          generatePDF(imgSrc);
+      }
+    }
+
+    // Generate PDF with jsPDF
+    function generatePDF(imageBase64) {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF();
+
+        // Add the image to the PDF
+        const imgWidth = 100; // Desired width in the PDF (in mm)
+        const imgHeight = 100; // Desired height in the PDF
+        pdf.addImage(imageBase64, 'PNG', 55, 40, imgWidth, imgHeight);
+
+        // Add optional text or customization
+        pdf.text('House QR Code', 105, 30, { align: 'center' });
+
+        // Save the PDF
+        pdf.save('qrcode.pdf');
+    }
+
+    $(document).ready(function () {
+
+        getHouseNumberList(); 
+
+        // const qrcode = new QRCode(document.getElementById('qrcode'), {
+        //   text: '58',
+        //   width: 200,
+        //   height: 200,
+        //   colorDark : '#000',
+        //   colorLight : '#fff',
+        //   correctLevel : QRCode.CorrectLevel.H
+        // });
+
+    });
+  </script>
+</body>
+
+</html>

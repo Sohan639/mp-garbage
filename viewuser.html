@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Mauxi Panchayat</title>
+  <!-- CSS files -->
+  <link href="./dist/css/tabler.min.css?1692870487" rel="stylesheet" />
+  <link href="./dist/css/tabler-flags.min.css?1692870487" rel="stylesheet" />
+  <link href="./dist/css/tabler-payments.min.css?1692870487" rel="stylesheet" />
+  <link href="./dist/css/tabler-vendors.min.css?1692870487" rel="stylesheet" />
+  <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet" />
+
+  <link href="./dist/css/datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+  <style>
+    @import url('https://rsms.me/inter/inter.css');
+
+    :root {
+      --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+    }
+
+    body {
+      font-feature-settings: "cv03", "cv04", "cv11";
+    }
+  </style>
+</head>
+
+<body>
+  <script src="./dist/js/demo-theme.min.js?1692870487"></script>
+  <div class="page">
+    <!-- Navbar -->
+    <div id="horizontal-menu-placeholder"></div>
+    <div class="page-wrapper">
+      <!-- Page header -->
+      <!-- Page body -->
+      <div class="page-body">
+        <div class="container">
+          <div class="row row-deck row-cards">
+            <div class="col-12">
+              <form class="card" autocomplete="off" >
+                <div class="card-body">
+                  <h3 class="card-title text-decoration-underline">User Details:</h3>
+
+                  <div id="tableLoader" class="container container-slim py-4">
+                    <div class="text-center">
+                      <div class="text-secondary mb-3">Loading...</div>
+                      <div class="progress progress-sm">
+                        <div class="progress-bar progress-bar-indeterminate"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="userDetailsContainer" class="row row-cards d-none">
+
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="mb-3">
+                                  <img id="imagePreview" src="">
+                                </div>
+                              </div>
+                        </div>
+                      </div>
+                      <div class="col-md-8">
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <div class="mb-3 row">
+                                    <label class="col-3 col-form-label">Name</label>
+                                    <div id="name" class="col col-form-label fw-normal"></div>
+                                  </div>
+                                </div>
+        
+                                <div class="col-md-6">
+                                  <div class="mb-3 row">
+                                    <label class="col-3 col-form-label">Email</label>
+                                  <div id="email" class="col col-form-label fw-normal"></div>
+                                  </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                  <div class="mb-3 row">
+                                    <label class="col-3 col-form-label">Role</label>
+                                  <div id="role" class="col col-form-label fw-normal"></div>
+                                  </div>
+                                </div>
+                          </div>
+                      </div>
+                  </div>
+
+                </div>
+                <div class="card-footer text-end">
+                  <a href="users.html" class="btn btn-primary">Back</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="footer-placeholder"></div>
+    </div>
+  </div>
+  <!-- Toast Notification -->
+  <div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="successToast" class="toast align-items-center border-0" role="alert" aria-live="assertive"
+      aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body">
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+          aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Libs JS -->
+  <script src="./dist/libs/apexcharts/dist/apexcharts.min.js?1692870487" defer></script>
+  <script src="./dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1692870487" defer></script>
+  <script src="./dist/libs/jsvectormap/dist/maps/world.js?1692870487" defer></script>
+  <script src="./dist/libs/jsvectormap/dist/maps/world-merc.js?1692870487" defer></script>
+  <script src="./dist/libs/litepicker/dist/litepicker.js?1692870487" defer></script>
+  <script src="./dist/libs/tom-select/dist/js/tom-select.base.min.js?1692870487" defer></script>
+  <!-- Tabler Core -->
+  <script src="./dist/js/tabler.min.js?1692870487" defer></script>
+  <script src="./dist/js/demo.min.js?1692870487" defer></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+  <script type="text/javascript" src="./commonFunction/commonFunction.js"></script>
+  <script src="./dist/js/configUrl.js"></script>
+  <script src="./dist/js/menu-footer.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+                window.location = config_url.frontendBaseURL;
+            }
+        });
+  </script>
+  <script>
+    $(document).ready(function () {
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('value');
+
+        // Function for getUserDetailsById api call
+        async function getUserDetailsById(id){
+          try {
+            const response = await getDetailsById('getUserDetailsById', id);
+            const details = response.data;
+            $('#name').text(details.name || "");
+            $('#email').text(details.email || "");
+            $('#role').text(details.role == 'admin' ? 'Admin' : details.role == 'officer' ? 'Officer' : details.role == 'superadmin' ? 'Superadmin' : 'Citizen');
+            if(details.profilePhoto){
+              $("#imagePreview").attr('src', details.profilePhoto); //.css('display', 'block')
+            }
+
+            $('#tableLoader').addClass('d-none');
+            $('#userDetailsContainer').removeClass('d-none');
+
+          } catch (error) {
+            console.error(error);
+            $('#tableLoader').addClass('d-none');
+            $('#userDetailsContainer').removeClass('d-none');
+
+          }  
+        }
+
+        if(id){
+          getUserDetailsById(id);
+          }
+
+    });
+  </script>
+</body>
+
+</html>

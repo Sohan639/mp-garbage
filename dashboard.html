@@ -1,0 +1,991 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Mauxi Panchayat</title>
+    <!-- CSS files -->
+    <link href="./dist/css/tabler.min.css?1692870487" rel="stylesheet"/>
+    <link href="./dist/css/tabler-flags.min.css?1692870487" rel="stylesheet"/>
+    <link href="./dist/css/tabler-payments.min.css?1692870487" rel="stylesheet"/>
+    <link href="./dist/css/tabler-vendors.min.css?1692870487" rel="stylesheet"/>
+    <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet"/>
+    <link href="./dist/css/datatable/dataTables.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+    <style>
+      @import url('https://rsms.me/inter/inter.css');
+      :root {
+      	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+      }
+      body {
+      	font-feature-settings: "cv03", "cv04", "cv11";
+      }
+      #map {
+        height: 450px; /* Set the height of the map container */
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body >
+    <script src="./dist/js/demo-theme.min.js?1692870487"></script>
+    <div class="page">
+      <!-- Navbar -->
+      <div id="horizontal-menu-placeholder"></div>
+      <div class="page-wrapper">
+        <!-- Page header -->
+        <div class="page-header d-print-none">
+          <div class="container">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <!-- Page pre-title -->
+                <div class="page-pretitle">
+                  Overview
+                </div>
+                <h2 class="page-title">
+                  Dashboard
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Page body -->
+        <div class="page-body">
+          <div class="container">
+            <div class="row row-deck row-cards">
+              <div class="col-lg-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h3 class="card-title">Male vs Female</h3>
+                    <div id="chart-demo-pie"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h3 class="card-title">Age group</h3>
+                    <div id="chart-tasks-overview"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-12 col-lg-6">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Qualification Overview</h3>
+                  </div>
+                  <div class="tableContainer d-none">
+                    <div class="card-body border-bottom py-3">
+                      <div class="d-flex">
+                        <div class="ms-auto text-secondary">
+                          Search:
+                          <div class="ms-2 d-inline-block">
+                            <input id="customSearch" type="text" class="form-control form-control-sm" aria-label="Search invoice">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="table-responsive">
+                      <table id="educationTable" class="table card-table table-vcenter text-nowrap datatable">
+                        <thead>
+                          <tr>
+                            <th class="w-1">No. 
+                              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-sm icon-thick" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 15l6 -6l6 6" /></svg>
+                            </th>
+                            <th>Qualification Name</th>
+                            <th>Total Male Count</th>
+                            <th>Total Female Count</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="noRecordsContainer d-none h3" style="text-align: center; margin-top: 16px;">
+                      No records found.
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-12 col-lg-6">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Reports</h3>
+                  </div>
+                  <div class="tableContainer d-none">
+                    <div class="card-body border-bottom py-3">
+                      <select id="rentReport" class="form-control form-select">
+                        <option value="" selected>Select Report</option>
+                        <option value="rent_tax_verification_report">Rent Tax Verification Report</option>
+                        <option value="daily_collection_status_report">Daily Collection Status Report</option>
+                        <option value="staff_wise_collection_report">Staff Wise Collection Report</option>
+                        <!-- <option value="middle">Report 2</option>
+                        <option value="high">Report 3</option> -->
+                      </select>
+                    </div>
+                    <div class="card-body  py-3">
+                      <div class="row row-deck row-cards rentReportSection d-none">
+                          <div class="col-md-6 col-xs-12 col-lg-6">
+                            <select id="yearSelect" class="form-control form-select">
+                              <option value="" selected>Select Year</option>
+                            </select>
+                          </div>
+                          <div class="col-md-6 col-xs-12 col-lg-6">
+                              <select type="text" id="houseNoSelect" class="form-control form-select" value=""  multiple>
+                                <option value="" selected>Select House Number</option>
+                              </select>
+                          </div>
+                          <div class="col-md-6 col-xs-12 col-lg-6">
+                            <button id="excelBtn" onclick="getRentReport()" type="button" class="btn btn-primary" disabled>
+                              <div class="spinner-border text-light d-none" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                             &nbsp; </div>
+                              Download as Excel</button>
+                          </div>
+                      </div>
+
+                      <div class="row row-deck row-cards dailyReportSection d-none">
+                          <div class="col-md-6 col-xs-12 col-lg-6">
+                            <div class="input-icon mb-2">
+                              <input id="fromDailyDate" class="form-control mb-2" placeholder="From date" value="">
+                              <span id="fromDailyDateIcon" class="input-icon-addon">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M11 15h1" /><path d="M12 15v3" /></svg>
+                              </span>
+                          </div>
+                          </div>
+                          <div class="col-md-6 col-xs-12 col-lg-6">
+                            <div class="input-icon mb-2">
+                              <input id="toDailyDate" class="form-control mb-2" placeholder="To date" value="">
+                              <span id="toDailyDateIcon" class="input-icon-addon">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M11 15h1" /><path d="M12 15v3" /></svg>
+                              </span>
+                          </div>
+                          </div>
+                          <div class="col-md-6 col-xs-12 col-lg-6">
+                            <button id="excelDailyBtn" onclick="getDailyReport()" type="button" class="btn btn-primary" disabled>
+                              <div class="spinner-border text-light d-none" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                             &nbsp; </div>
+                              Download as Excel</button>
+                          </div>
+                      </div>
+
+                      <div class="row row-deck row-cards staffReportSection d-none">
+                          <div class="col-md-6 col-xs-12 col-lg-6">
+                            <div class="input-icon mb-2">
+                              <input id="fromStaffDate" class="form-control mb-2" placeholder="From date" value="">
+                              <span id="fromStaffDateIcon" class="input-icon-addon">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M11 15h1" /><path d="M12 15v3" /></svg>
+                              </span>
+                          </div>
+                          </div>
+                          <div class="col-md-6 col-xs-12 col-lg-6">
+                            <div class="input-icon mb-2">
+                              <input id="toStaffDate" class="form-control mb-2" placeholder="To date" value="">
+                              <span id="toStaffDateIcon" class="input-icon-addon">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M11 15h1" /><path d="M12 15v3" /></svg>
+                              </span>
+                          </div>
+                          </div>
+                          <div class="col-md-6 col-xs-12 col-lg-6">
+                            <select type="text" id="staffNameSelect" class="form-control form-select" value=""  multiple>
+                              <option value="" selected>Select Satff name</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 col-xs-12 col-lg-6"></div>
+                          <div class="col-md-6 col-xs-12 col-lg-6">
+                            <button id="excelStaffBtn" onclick="getStaffReport()" type="button" class="btn btn-primary" disabled>
+                              <div class="spinner-border text-light d-none" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                             &nbsp; </div>
+                              Download as Excel</button>
+                          </div>
+                      </div>
+
+                    </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="row justify-content-between">
+                        <h3 class="card-title col-md-2">Map</h3>
+                        <div class="input-icon mb-2 col-md-3">
+                          <input id="mapDate" class="form-control mb-2" placeholder="Select a date" value="">
+                          <div id="mapDate-Val" class="invalid-feedback d-none">Date is required</div>
+                          <span id="" class="input-icon-addon">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M11 15h1" /><path d="M12 15v3" /></svg>
+                          </span>
+                        </div>
+                      </div>
+                      <div id="map"></div>
+                      <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15376.47741752042!2d74.10461063611183!3d15.53173108540867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbfa19cce56e221%3A0xaeb0dff49e0dba7!2sValpoy%2C%20Goa%20403506!5e0!3m2!1sen!2sin!4v1734110693364!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+          </div>
+        </div>
+        <div id="footer-placeholder"></div>
+      </div>
+    </div>
+
+     <!-- Toast Notification -->
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+      <div id="successToast" class="toast align-items-center border-0" role="alert" aria-live="assertive"
+        aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body">
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+            aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Libs JS -->
+    <script src="./dist/libs/apexcharts/dist/apexcharts.min.js?1692870487" defer></script>
+    <script src="./dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1692870487" defer></script>
+    <script src="./dist/libs/jsvectormap/dist/maps/world.js?1692870487" defer></script>
+    <script src="./dist/libs/jsvectormap/dist/maps/world-merc.js?1692870487" defer></script>
+    <script src="./dist/libs/litepicker/dist/litepicker.js?1692870487" defer></script>
+    <script src="./dist/libs/tom-select/dist/js/tom-select.base.min.js?1692870487" defer></script>
+    <script src="./dist/libs/litepicker/dist/litepicker.js?1692870487" defer></script>
+    <!-- Tabler Core -->
+    <script src="./dist/js/tabler.min.js?1692870487" defer></script>
+    <script src="./dist/js/demo.min.js?1692870487" defer></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+    <script type="text/javascript" src="./commonFunction/commonFunction.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+    <script src="./dist/js/configUrl.js"></script>
+    <script src="./dist/js/menu-footer.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+          const userId = localStorage.getItem('userId');
+          if (!userId) {
+                  window.location = config_url.frontendBaseURL;
+              }
+          });
+    </script>
+    <script>
+      $(document).ready(function () {
+
+          // Map initilization
+          const map = L.map('map').setView([15.5266, 74.1222], 14);
+
+          // Add the OpenStreetMap tiles
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          }).addTo(map);
+
+          new Litepicker({
+          element: document.getElementById(`mapDate`),
+          format: 'YYYY-MM-DD',
+          dropdowns: {
+            minYear: 1900,
+            maxYear: new Date().getFullYear(),
+            months: true, // Enable month dropdown
+            years: true,  // Enable year dropdown
+          },
+          buttonText: {
+            previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>`,
+            nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>`,
+          },
+          setup: (picker) => {
+            picker.on('selected', (date1, date2) => {
+              // Trigger jQuery change event on input
+              $('#mapDate').trigger('change');
+            });
+          },
+        });
+
+          const yearSelect = document.getElementById('yearSelect');
+        const houseNoSelect = document.getElementById('houseNoSelect');
+        const staffNameSelect = document.getElementById('staffNameSelect');
+        const fromDailyDate = document.getElementById('fromDailyDate');
+        const toDailyDate = document.getElementById('toDailyDate');
+        const excelDailyBtn = document.getElementById('excelDailyBtn');
+        const toStaffDate = document.getElementById('toStaffDate');
+        const fromStaffDate = document.getElementById('fromStaffDate');
+        const excelStaffBtn = document.getElementById('excelStaffBtn');
+        const currentYear = new Date().getFullYear();
+        const startYear = 1990; // Adjust this as per your requirement
+
+        new Litepicker({
+          element: document.getElementById(`fromDailyDate`),
+          format: 'YYYY-MM-DD', // Set the desired format
+          setup: (picker) => {
+            picker.on('selected', (date1) => {
+              fromDailyDate.value = date1.format('YYYY-MM-DD'); // Ensure the input value is updated
+              checkSelectDailyValues();
+            });
+          },
+          dropdowns: {
+            minYear: 1900,
+            maxYear: new Date().getFullYear(),
+            months: true, // Enable month dropdown
+            years: true,  // Enable year dropdown
+          },
+          // maxDate: new Date(),
+          buttonText: {
+            previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>`,
+            nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>`,
+          }
+        });
+
+        new Litepicker({
+          element: document.getElementById(`toDailyDate`),
+          format: 'YYYY-MM-DD', // Set the desired format
+          setup: (picker) => {
+            picker.on('selected', (date1) => {
+              toDailyDate.value = date1.format('YYYY-MM-DD'); // Ensure the input value is updated
+              checkSelectDailyValues();
+            });
+          },
+          dropdowns: {
+            minYear: 1900,
+            maxYear: new Date().getFullYear(),
+            months: true, // Enable month dropdown
+            years: true,  // Enable year dropdown
+          },
+          // maxDate: new Date(),
+          buttonText: {
+            previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>`,
+            nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>`,
+          }
+        });
+
+        new Litepicker({
+          element: document.getElementById(`fromStaffDate`),
+          format: 'YYYY-MM-DD', // Set the desired format
+          setup: (picker) => {
+            picker.on('selected', (date1) => {
+              fromStaffDate.value = date1.format('YYYY-MM-DD'); // Ensure the input value is updated
+              checkSelectStaffValues();
+            });
+          },
+          dropdowns: {
+            minYear: 1900,
+            maxYear: new Date().getFullYear(),
+            months: true, // Enable month dropdown
+            years: true,  // Enable year dropdown
+          },
+          // maxDate: new Date(),
+          buttonText: {
+            previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>`,
+            nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>`,
+          }
+        });
+
+        new Litepicker({
+          element: document.getElementById(`toStaffDate`),
+          format: 'YYYY-MM-DD', // Set the desired format
+          setup: (picker) => {
+            picker.on('selected', (date1) => {
+              toStaffDate.value = date1.format('YYYY-MM-DD'); // Ensure the input value is updated
+              checkSelectStaffValues();
+            });
+          },
+          dropdowns: {
+            minYear: 1900,
+            maxYear: new Date().getFullYear(),
+            months: true, // Enable month dropdown
+            years: true,  // Enable year dropdown
+          },
+          // maxDate: new Date(),
+          buttonText: {
+            previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>`,
+            nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>`,
+          }
+        });
+
+        
+
+        window.downloadExcelReport = function(data, reportType) {
+          try {
+            // Format the data into the desired structure
+            let formattedData;
+            if(reportType == 1){
+            formattedData = data.map((record) => ({
+              "House No": record.houseNo,
+              "HOF Name": record.hofName,
+              "Address": record.address,
+              "Contact": record.contact,
+              "Assessment Year": record.assessmentYear,
+              "Rent": record.rent,
+            }));
+            } else if (reportType == 2 || reportType == 3){
+              formattedData = data.map((record) => ({
+              "House No": record.houseNo,
+              "Collection status": record.collectionStatus,
+              "Cleaning staff name": record.staffName,
+            }));
+            }
+
+            // Create a new workbook
+            const workbook = XLSX.utils.book_new();
+
+            // Convert data to a worksheet with headers
+            const worksheet = XLSX.utils.json_to_sheet(formattedData);
+
+            if(reportType == 1){
+              worksheet["!cols"] = [
+                { wch: 10 }, // "House No"
+                { wch: 20 }, // "HOF Name"
+                { wch: 30 }, // "Address"
+                { wch: 15 }, // "Contact"
+                { wch: 20 }, // "Assessment Year"
+                { wch: 10 }, // "Rent"
+              ];
+              // Append worksheet to workbook
+              XLSX.utils.book_append_sheet(workbook, worksheet, "House Records");
+              // Generate Excel file and download
+              XLSX.writeFile(workbook, "Rent_Tax_Verification_Report.xlsx");
+            } else if (reportType == 2){
+              worksheet["!cols"] = [
+                { wch: 10 }, // "House No"
+                { wch: 20 }, // "Collection status"
+                { wch: 20 }, // "Cleaning staff name"
+              ];
+              // Append worksheet to workbook
+              XLSX.utils.book_append_sheet(workbook, worksheet, "Collection Records");
+              // Generate Excel file and download
+              XLSX.writeFile(workbook, "Daily_Collection_Status_Report.xlsx");
+            } else if (reportType == 3){
+              worksheet["!cols"] = [
+                { wch: 10 }, // "House No"
+                { wch: 20 }, // "Collection status"
+                { wch: 20 }, // "Cleaning staff name"
+              ];
+              // Append worksheet to workbook
+              XLSX.utils.book_append_sheet(workbook, worksheet, "Collection Records");
+              // Generate Excel file and download
+              XLSX.writeFile(workbook, "Staff_Wise_Collection_Report.xlsx");
+            }
+          } catch (error) {
+            console.error("Error generating Excel:", error);
+            alert("Failed to download Excel.");
+          }
+        }
+
+        // Show toast function
+      function showToastMessage(message, type) {
+        const toast = new bootstrap.Toast(document.getElementById('successToast'));
+        $('.toast-body').text(message);
+        if (type == "success") {
+          $('#successToast').removeClass('text-bg-danger');
+          $('#successToast').addClass('text-bg-success');
+        } else {
+          $('#successToast').removeClass('text-bg-success');
+          $('#successToast').addClass('text-bg-danger');
+        }
+        toast.show();
+      }
+
+        async function getRentTaxVerificationReportApiFunction(data) {
+        try {
+          const response = await addData('getRentTaxVerificationReport', data);
+          if (response.code == 200 || response.code == 201) {
+            console.log(response.data);
+            if(response.data.length > 0){
+                downloadExcelReport(response.data, 1);
+                showToastMessage("Rent tax verification report downloaded successfully", 'success');
+              }else {
+                showToastMessage("No records found", 'error');
+              }
+          } else {
+            showToastMessage(response.message ? response.message : response.error, 'error');
+          }
+        } catch (error) {
+          console.error(error);
+          showToastMessage('Error getting report!', 'error');
+        }
+      }
+
+      var options = {
+      // plugins: ['remove_button'],
+      onItemRemove: function(value) {
+        const option = this.getOption(value);
+        if (option) {
+          option.remove();
+        }
+      },
+      render: {
+        option: function(data, escape) {
+          return '<div class="d-flex"><span>' + escape(data.text) + '</span></div>';
+        },
+        item: function(data, escape) {
+          return '<div>' + escape(data.text) + '</div>';
+        }
+      },
+    };
+      var selectHouseNo = new TomSelect("#houseNoSelect", options);
+      var selectStaffName = new TomSelect("#staffNameSelect", options);
+
+        async function getHouseNumberList() {
+          try {
+            const response = await getAllListing('getHouseNumberList');
+          const details = response.data;
+            if (response && response.code === 200) {
+              // var vendorData = postResponse.data;
+              selectHouseNo.clearOptions(); // Clear the loading placeholder
+              details.forEach(function(vendor) {
+                selectHouseNo.addOption({
+                  value: vendor,
+                  text: vendor
+                });
+              });
+            }
+          } catch (error) {
+            console.error(error);
+          // showToastMessage('Error getting house no!', 'error');
+          }
+        }
+
+        async function getStaffNameList() {
+          try {
+            const response = await getAllListing('getUserList');
+            const details = response.data.filter((item) => item.role == "cleaning-staff");
+            // const details = ["Staff one", "Staff two", "Staff three"];
+              if (response && response.code === 200) {
+                selectStaffName.clearOptions(); // Clear the loading placeholder
+                details.forEach(function(vendor) {
+                  selectStaffName.addOption({
+                    value: vendor.userId,
+                    text: vendor.name
+                  });
+                });
+              }
+          } catch (error) {
+            console.error(error);
+          // showToastMessage('Error getting house no!', 'error');
+          }
+        }
+
+
+      getHouseNumberList();
+      getStaffNameList();
+
+        window.getRentReport = function() {
+          const selectedHouseNumbers = Array.from(houseNoSelect.selectedOptions).map(option => option.value);
+          const data = {
+            taxYear: yearSelect.value,
+            houseNumber: selectedHouseNumbers,
+          }
+          getRentTaxVerificationReportApiFunction(data);
+        }
+
+        async function getDailyCollectionStatusReportApiFunction(data, reportType) {
+          try {
+            const response = await addData('getDailyCollectionStatusReport', data);
+            if (response.code == 200 || response.code == 201) {
+              if(response.data.length > 0){
+                downloadExcelReport(response.data, reportType);
+                showToastMessage("Daily collection status report downloaded successfully", 'success');
+              }else {
+                showToastMessage("No records found", 'error');
+              }
+              console.log(response.data);
+            } else {
+              showToastMessage(response.message ? response.message : response.error, 'error');
+            }
+          } catch (error) {
+            console.error(error);
+            showToastMessage('Error getting report!', 'error');
+          }
+        }
+
+        window.getDailyReport = function() {
+          const data = {
+            staffId: [],
+            fromDate: fromDailyDate.value,
+            toDate: toDailyDate.value,
+          }
+          console.log(data);
+          getDailyCollectionStatusReportApiFunction(data, 2);
+        }
+        
+        window.getStaffReport = function() {
+          const selectedStaffName = Array.from(staffNameSelect.selectedOptions).map(option => option.value);
+          const data = {
+            staffId: selectedStaffName,
+            fromDate: fromStaffDate.value,
+            toDate: toStaffDate.value,
+          }
+          console.log(data);
+          getDailyCollectionStatusReportApiFunction(data, 3);
+        }
+
+        // Populate the select options with years
+        for (let year = currentYear; year >= startYear; year--) {
+          const option = document.createElement('option');
+          option.value = year;
+          option.textContent = year;
+          yearSelect.appendChild(option);
+        }
+
+
+        // On report select change
+        $('#rentReport').on('change', function () {
+          const selectedOption = $(this).val(); // Get the selected <option>
+
+          if (selectedOption == "rent_tax_verification_report") {
+            $('.rentReportSection').removeClass('d-none');
+            $('.dailyReportSection').addClass('d-none');
+            $('.staffReportSection').addClass('d-none');
+          } else if (selectedOption == "daily_collection_status_report") {
+            $('.rentReportSection').addClass('d-none');
+            $('.dailyReportSection').removeClass('d-none');
+            $('.staffReportSection').addClass('d-none');
+          } else if (selectedOption == "staff_wise_collection_report"){
+            $('.rentReportSection').addClass('d-none');
+            $('.dailyReportSection').addClass('d-none');
+            $('.staffReportSection').removeClass('d-none');
+          }
+        });
+
+        // disable download button and call api function call
+        function checkSelectValues() {
+          if (yearSelect.value && houseNoSelect.value) {
+            excelBtn.removeAttribute('disabled');
+          } else {
+            excelBtn.setAttribute('disabled', 'disabled');
+          }
+        }
+
+        function checkSelectDailyValues() {
+          if (fromDailyDate.value && toDailyDate.value) {
+            excelDailyBtn.removeAttribute('disabled');
+          } else {
+            excelDailyBtn.setAttribute('disabled', 'disabled');
+          }
+        }
+
+        function checkSelectStaffValues() {
+          if (fromStaffDate.value && toStaffDate.value && staffNameSelect.value) {
+            excelStaffBtn.removeAttribute('disabled');
+          } else {
+            excelStaffBtn.setAttribute('disabled', 'disabled');
+          }
+        }
+
+        // Add event listeners to both selects
+        yearSelect.addEventListener('change', checkSelectValues);
+        houseNoSelect.addEventListener('change', checkSelectValues);
+        fromDailyDate.addEventListener('change', checkSelectDailyValues);
+        toDailyDate.addEventListener('change', checkSelectDailyValues);
+        fromStaffDate.addEventListener('change', checkSelectStaffValues);
+        toStaffDate.addEventListener('change', checkSelectStaffValues);
+        staffNameSelect.addEventListener('change', checkSelectStaffValues);
+
+        function snakeToSentence(snakeCaseText) {
+            // Replace underscores with spaces and convert to sentence case
+            let sentenceCase = snakeCaseText
+                .replace(/_/g, ' ') // Replace underscores with spaces
+                .toLowerCase() // Convert to lowercase
+                .replace(/^\w/, c => c.toUpperCase()); // Capitalize the first letter
+            return sentenceCase;
+        }
+
+        // Api call for getQualificationResidentCount
+        async function getQualificationResidentCount(){
+          try {
+            const listing = await getAllListing('getQualificationResidentCount');
+            const tableBody = $("#educationTable tbody");
+            // Clear the table before populating
+            tableBody.empty();
+
+            if(listing.data.length > 0){
+              $('.tableContainer').removeClass('d-none');
+              $('.noRecordsContainer').addClass('d-none');
+            } else {
+              $('.tableContainer').addClass('d-none');
+              $('.noRecordsContainer').removeClass('d-none');
+            }
+
+            // Loop through each record and append a table row
+            $.each(listing.data, function(index, record) {
+              const row = `
+                <tr>
+                  <td><span class="text-secondary">${index+1}</span></td>
+                  <td><a href="#" class="text-reset" tabindex="-1">${snakeToSentence(record.qualification)}</a></td>
+                  <td>${record.maleCount}</td>
+                  <td>${record.femaleCount}</td>
+                </tr>
+              `;
+              tableBody.append(row);
+            });
+
+            // Initialize DataTables with pagination, sorting, and search functionality
+            const dataTable = $(".datatable").DataTable({
+              paging: true,
+              pageLength: 10, // Show 10 entries per page
+              lengthChange: false, // Hide "entries per page" dropdown
+              searching: true, // Enable search
+              ordering: true, // Enable sorting
+              info: true, // Show "Showing x to y of z entries"
+              autoWidth: false, // Keep the layout intact
+              language: {
+                search: "_INPUT_", // Customize the search input
+                searchPlaceholder: "Search...",
+                paginate: {
+                  previous: "< prev", // Change 'Previous' text
+                  next: "next >",    // Change 'Next' text
+                },
+              },
+            });
+
+            $('#customSearch').keyup(function(){
+              dataTable.search($(this).val()).draw();
+            })
+          } catch (error) {
+            console.error(error)
+          }
+          
+        }
+
+        getQualificationResidentCount();
+
+        // Api call for getMaleVFemaleList
+        async function getMaleVFemaleList(){
+          try {
+            const listing = await getAllListing('getMaleVFemaleList');
+
+            const chartData = {
+              series: listing.data.map(item => item.count), // Example: percentages
+              labels: listing.data.map(item => item.gender), // Categories
+            };
+
+            renderPieChart('chart-demo-pie', chartData);
+            
+          } catch (error) {
+            console.error(error)
+          }
+          
+        }
+
+        getMaleVFemaleList();
+
+        // Api call for getAgeGroupResident
+        async function getAgeGroupResident(){
+          try {
+            const listing = await getAllListing('getAgeGroupResident');
+
+            const barGraphData = {
+              seriesName: "Count", // Series Name
+              seriesData: listing.data.map(item => item.count), // Data for bars
+              categories: listing.data.map(item => item.ageGroup) // x-axis categories
+            };
+
+            renderBarGraph('chart-tasks-overview', barGraphData);
+            
+          } catch (error) {
+            console.error(error)
+          }
+          
+        }
+
+        getAgeGroupResident();
+
+        // Create a LayerGroup to manage markers
+        const markersLayer = L.layerGroup().addTo(map);
+
+        async function getGarbageCollectionData(data){
+          try {
+            const listing = await addData('getGarbageCollectionData', data);
+            const houses = listing.data;
+
+            // Clear existing markers
+            markersLayer.clearLayers();
+
+          // Add markers to the map
+          houses.forEach((house) => {
+            const markerColor = house.collected ? 'green' : 'red';
+
+            // Create a custom marker
+            const markerIcon = L.divIcon({
+              className: `custom-marker-${markerColor}`,
+              html: `<div style="background-color: ${markerColor}; width: 12px; height: 12px; border-radius: 50%; border: 2px solid ${markerColor};"></div>`,
+              iconSize: [12, 12], // Adjust the size of the marker
+              iconAnchor: [6, 6]  // Center the marker
+            });
+
+            // Popup message
+            L.marker([house.lat, house.lng], { icon: markerIcon })
+              .addTo(markersLayer)
+              .bindPopup(`Garbage Collection Status: ${house.collected ? 'Collected' : 'Not Collected'}`);
+          });
+            
+          } catch (error) {
+            console.error(error)
+          }
+          
+        }
+
+        $('#mapDate').on('change', function () {
+          const selectedDate = $(this).val();
+          console.log('Date selected:', selectedDate);
+          const data = {
+            date: selectedDate
+          }
+          getGarbageCollectionData(data);
+          // Perform your desired actions here
+        });
+
+        const data = {
+          date: new Date().toISOString().split('T')[0]
+        }
+
+        getGarbageCollectionData(data);
+
+        // Function to render male v femail pie chart
+        function renderPieChart(chartElementId, chartData) {
+          if (window.ApexCharts) {
+            const chart = new ApexCharts(document.getElementById(chartElementId), {
+              chart: {
+                type: "donut",
+                fontFamily: 'inherit',
+                height: 320,
+                sparkline: {
+                  enabled: true
+                },
+                animations: {
+                  enabled: false
+                },
+              },
+              fill: {
+                opacity: 1,
+              },
+              series: chartData.series, // Data for the chart
+              labels: chartData.labels, // Labels for the chart
+              tooltip: {
+                theme: 'dark'
+              },
+              grid: {
+                strokeDashArray: 4,
+              },
+              colors: [tabler.getColor("primary"), tabler.getColor("gray-300")],
+              legend: {
+                show: true,
+                position: 'bottom',
+                offsetY: 12,
+                markers: {
+                  width: 10,
+                  height: 10,
+                  radius: 100,
+                },
+                itemMargin: {
+                  horizontal: 8,
+                  vertical: 8
+                },
+              },
+              tooltip: {
+                fillSeriesColor: false
+              },
+            });
+            chart.render(); // Renders the chart
+          } else {
+            console.error("ApexCharts library is not loaded.");
+          }
+        }
+
+        // Function to render bar graph
+        function renderBarGraph(chartElementId, chartData) {
+          if (window.ApexCharts) {
+            const chart = new ApexCharts(document.getElementById(chartElementId), {
+              chart: {
+                type: "bar",
+                fontFamily: 'inherit',
+                height: 320,
+                parentHeightOffset: 0,
+                toolbar: {
+                  show: false,
+                },
+                animations: {
+                  enabled: false
+                },
+              },
+              plotOptions: {
+                bar: {
+                  columnWidth: '50%',
+                }
+              },
+              dataLabels: {
+                enabled: false,
+              },
+              fill: {
+                opacity: 1,
+              },
+              series: [{
+                name: chartData.seriesName, // Series Name (e.g., "Count")
+                data: chartData.seriesData // Data for the bars
+              }],
+              tooltip: {
+                theme: 'dark'
+              },
+              grid: {
+                padding: {
+                  top: -20,
+                  right: 0,
+                  left: -4,
+                  bottom: -4
+                },
+                strokeDashArray: 4,
+              },
+              xaxis: {
+                labels: {
+                  padding: 0,
+                },
+                tooltip: {
+                  enabled: false
+                },
+                axisBorder: {
+                  show: false,
+                },
+                categories: chartData.categories, // Categories for the x-axis
+              },
+              yaxis: {
+                labels: {
+                  padding: 4
+                },
+                min: 0, // Minimum value
+                max: Math.max(...chartData.seriesData), // Maximum value
+                forceNiceScale: true,
+              },
+              colors: [tabler.getColor("primary")],
+              legend: {
+                show: false,
+              },
+            });
+            chart.render();
+          } else {
+            console.error("ApexCharts library is not loaded.");
+          }
+        }
+
+      });
+    </script>
+  </body>
+</html>

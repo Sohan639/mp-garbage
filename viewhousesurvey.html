@@ -1,0 +1,1206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Mauxi Panchayat</title>
+    <!-- CSS files -->
+    <link href="./dist/css/tabler.min.css?1692870487" rel="stylesheet"/>
+    <link href="./dist/css/tabler-flags.min.css?1692870487" rel="stylesheet"/>
+    <link href="./dist/css/tabler-payments.min.css?1692870487" rel="stylesheet"/>
+    <link href="./dist/css/tabler-vendors.min.css?1692870487" rel="stylesheet"/>
+    <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet"/>
+    <link href="./dist/css/datatable/dataTables.css" rel="stylesheet"/>
+
+    <link href="./dist/css/datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <style>
+      @import url('https://rsms.me/inter/inter.css');
+      :root {
+      	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+      }
+      body {
+      	font-feature-settings: "cv03", "cv04", "cv11";
+      }
+      .fslightbox-source{
+        width: 1000px !important;
+        height: 600px !important;
+        object-fit: contain !important;
+      }
+    </style>
+  </head>
+  <body >
+    <script src="./dist/js/demo-theme.min.js?1692870487"></script>
+    <div class="page">
+      <!-- Navbar -->
+      <div id="horizontal-menu-placeholder"></div>
+      <div class="page-wrapper">
+        <!-- Page header -->
+        <!-- Page body -->
+        <div class="page-body">
+          <div class="container">
+            <div class="row row-deck row-cards">
+              <div class="col-12">
+                <form class="card">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-4 col-xs-12 col-sm-12">
+                          <h3 class="card-title text-decoration-underline">House details</h3>
+                        </div>
+                        <div class="col-6 d-none" id="houseNoDropdown">
+                          <div class="mb-3 row">
+                            <label class="col-md-3 col-xs- 12 col-sm-12 col-form-label">Select House no</label>
+                            <div class="col-md-3 col-xs-12 col-sm-12">
+                              <select id="houseNoSelect" class="form-select">
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div id="tableLoader" class="container container-slim py-4">
+                        <div class="text-center">
+                          <div class="text-secondary mb-3">Loading...</div>
+                          <div class="progress progress-sm">
+                            <div class="progress-bar progress-bar-indeterminate"></div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div id="houseDetailContainer" class="d-none">
+                        <div class="row row-cards">
+
+                          <input id="houseId" type="hidden">
+                          <input id="citizenId" type="hidden">
+                          <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="mb-3">
+
+                                      <div id="carousel-controls" class="carousel slide" data-bs-ride="carousel" style="height: 170px">
+                                        <div id="carousel-inner-houses" class="carousel-inner" style="height: 100%">
+                                        
+                                        </div>
+                                        <a class="carousel-control-prev" href="#carousel-controls" role="button" data-bs-slide="prev">
+                                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                          <span class="visually-hidden">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#carousel-controls" role="button" data-bs-slide="next">
+                                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                          <span class="visually-hidden">Next</span>
+                                        </a>
+                                      </div>
+
+                                    </div>
+                                  </div>
+                            </div>
+                          </div>
+                          <div class="col-md-8">
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <label class="form-label" style="float: left !important;">House no: &nbsp;</label>
+                                  <div id="houseNo" class="form-label fw-normal"></div>
+                              </div>
+      
+                              <div class="col-md-4">
+                                  <label class="form-label" style="float: left !important;">Income level: &nbsp;</label>
+                                <div id="incomeLevel" class="form-label fw-normal"></div>
+                              </div>
+
+                              <div class="col-md-4">
+                                  <label class="form-label" style="float: left !important;">Members count: &nbsp;</label>
+                                  <div id="memberCount" class="form-label fw-normal"></div>
+                              </div>
+
+                              <div class="col-md-12">
+                                <!-- <div class="row">
+                                  <label class="col-md-4 col-xl-3 col-lg-3 col-xxl-2 col-xs-12 col-sm-12 col-form-label">House Address:</label>
+                                <div id="address" class="col col-form-label fw-normal"></div>
+                                </div> -->
+                                <label class="form-label" style="float: left !important;">House Address: &nbsp;</label>
+                                  <div id="address" class="form-label fw-normal"></div>
+                              </div>
+
+                              <div class="col-md-12">
+                                <label class="form-label" style="float: left !important;">House Type: &nbsp;</label>
+                                <div id="houseType" class="form-label fw-normal"></div>
+                            </div>
+
+                              <div class="col-md-3">
+                                  <label class="form-label" style="float: left !important;">Length: &nbsp;</label>
+                                  <div id="houseLength" class="form-label fw-normal"></div>
+                              </div>
+
+                              <div class="col-md-3">
+                                  <label class="form-label" style="float: left !important;">Breadth: &nbsp;</label>
+                                  <div id="houseBreadth" class="form-label fw-normal"></div>
+                              </div>
+
+                              <div class="col-md-3">
+                                  <label class="form-label" style="float: left !important;">Height: &nbsp;</label>
+                                  <div id="houseHeight" class="form-label fw-normal"></div>
+                              </div>
+
+                              <div class="col-md-3">
+                                  <label class="form-label" style="float: left !important;">Number of floors: &nbsp;</label>
+                                  <div id="noOfFloors" class="form-label fw-normal"></div>
+                              </div>
+
+                              <div id="rentSection" class="d-none col-12">
+                                <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-label" style="float: left !important;">Rent type: &nbsp;</label>
+                                    <div id="renttype" class="form-label fw-normal"></div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label" style="float: left !important;">Business type: &nbsp;</label>
+                                    <div id="businessType" class="form-label fw-normal"></div>
+                                </div>
+
+                                <!-- <div class="col-md-4">
+                                </div> -->
+                                </div>
+                              </div>
+            
+                              </div>
+                          </div>
+
+                          <div class="col-12 d-none" id="rentPreviews">
+                            <div class="row">
+                              <div class="col-md-4">
+                                <label class="form-label" style="float: left !important;">Rent receipt: &nbsp;</label>
+                                <a id="rentReceipt" target="_blank" class="">
+                                  <span id="rentReceiptName"></span> <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-zoom-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /><path d="M7 10l2 2l4 -4" /></svg>
+                                </a>
+                              </div>
+
+                              <div class="col-md-4">
+                                <label class="form-label" style="float: left !important;">Rent agreement: &nbsp;</label>
+                                <a id="rentAgreement" target="_blank" class="">
+                                  <span id="rentAgreementName"></span> <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-zoom-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /><path d="M7 10l2 2l4 -4" /></svg>
+                                </a>
+                              </div>
+
+                              <div class="col-md-4">
+                                <label class="form-label" style="float: left !important;">Police verification: &nbsp;</label>
+                                <a id="policeVerification" target="_blank" class="">
+                                  <span id="policeVerificationName"></span> <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-zoom-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /><path d="M7 10l2 2l4 -4" /></svg>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="houseTaxContainer row row-cards d-none">
+                          <div class="col">
+                            <div class="table-responsive">
+                              <table id="houseTax" class="table table-vcenter card-table">
+                                <thead>
+                                  <tr>
+                                    <th>Type</th>
+                                    <th>Amount</th>
+                                    <th>Payment date</th>
+                                    <th>Receipt no</th>
+                                    <th >Tax year</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      
+
+                      <div class="hr-text"></div>
+
+                      <h3 class="card-title text-decoration-underline">Resident details</h3>
+
+                      <div class="row row-cards">
+                        <div class="accordion" id="accordion-example">
+
+                        </div>
+                      </div>
+                    </div>
+
+                    </div>
+                    <div class="card-footer text-end">
+                      <a href="housesurvey.html" class="btn btn-primary">Back</a>
+                    </div>
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="footer-placeholder"></div>
+      </div>
+    </div>
+
+     <!-- Toast Notification -->
+  <div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="successToast" class="toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body">
+          
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- Libs JS -->
+    <script src="./dist/libs/apexcharts/dist/apexcharts.min.js?1692870487" defer></script>
+    <script src="./dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1692870487" defer></script>
+    <script src="./dist/libs/jsvectormap/dist/maps/world.js?1692870487" defer></script>
+    <script src="./dist/libs/jsvectormap/dist/maps/world-merc.js?1692870487" defer></script>
+    <script src="./dist/libs/litepicker/dist/litepicker.js?1692870487" defer></script>
+
+    <script src="./dist/libs/fslightbox/index.js?1692870487" defer></script>
+    <!-- Tabler Core -->
+    <script src="./dist/js/tabler.min.js?1692870487" defer></script>
+    <script src="./dist/js/demo.min.js?1692870487" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+    <script type="text/javascript" src="./commonFunction/commonFunction.js"></script>
+    <script src="./dist/js/configUrl.js"></script>
+    <script src="./dist/js/menu-footer.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+          const userId = localStorage.getItem('userId');
+          if (!userId) {
+                  window.location = config_url.frontendBaseURL;
+              }
+          });
+    </script>
+
+    <script>
+      $(document).ready(function () {
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('value');
+        const location = urlParams.get('location');
+
+        function snakeToSentence(snakeCaseText) {
+            // Replace underscores with spaces and convert to sentence case
+            let sentenceCase = snakeCaseText
+                .replace(/_/g, ' ') // Replace underscores with spaces
+                .toLowerCase() // Convert to lowercase
+                .replace(/^\w/, c => c.toUpperCase()); // Capitalize the first letter
+            return sentenceCase;
+        }
+
+        // Initialize qulification table
+        function qualificationTable() {
+        return new DataTable("#qualificationTable", {
+              paging: true,
+              retrieve: true,
+              pageLength: 5, // Show 10 entries per page
+              lengthChange: false, // Hide "entries per page" dropdown
+              searching: false, // Enable search
+              ordering: true, // Enable sorting
+              info: false, // Show "Showing x to y of z entries"
+              autoWidth: false, // Keep the layout intact
+              language: {
+                search: "_INPUT_", // Customize the search input
+                searchPlaceholder: "Search...",
+                paginate: {
+                  previous: "< prev", // Change 'Previous' text
+                  next: "next >",    // Change 'Next' text
+                },
+              },
+            });
+        }
+
+        // Initialize employment table
+        function employmentTable() {
+        return new DataTable("#employmentTable", {
+              paging: true,
+              retrieve: true,
+              pageLength: 5, // Show 10 entries per page
+              lengthChange: false, // Hide "entries per page" dropdown
+              searching: false, // Enable search
+              ordering: true, // Enable sorting
+              info: false, // Show "Showing x to y of z entries"
+              autoWidth: false, // Keep the layout intact
+              language: {
+                search: "_INPUT_", // Customize the search input
+                searchPlaceholder: "Search...",
+                paginate: {
+                  previous: "< prev", // Change 'Previous' text
+                  next: "next >",    // Change 'Next' text
+                },
+              },
+            });
+        }
+
+        // Initialize scheme table
+        function schemeTable() {
+        return new DataTable("#schemeTable", {
+              paging: true,
+              retrieve: true,
+              pageLength: 5, // Show 10 entries per page
+              lengthChange: false, // Hide "entries per page" dropdown
+              searching: false, // Enable search
+              ordering: true, // Enable sorting
+              info: false, // Show "Showing x to y of z entries"
+              autoWidth: false, // Keep the layout intact
+              language: {
+                search: "_INPUT_", // Customize the search input
+                searchPlaceholder: "Search...",
+                paginate: {
+                  previous: "< prev", // Change 'Previous' text
+                  next: "next >",    // Change 'Next' text
+                },
+              },
+            });
+        }
+
+        // Initialize tax table
+        function taxTable() {
+        return new DataTable("#taxTable", {
+              paging: true,
+              retrieve: true,
+              pageLength: 5, // Show 10 entries per page
+              lengthChange: false, // Hide "entries per page" dropdown
+              searching: false, // Enable search
+              ordering: true, // Enable sorting
+              info: false, // Show "Showing x to y of z entries"
+              autoWidth: false, // Keep the layout intact
+              language: {
+                search: "_INPUT_", // Customize the search input
+                searchPlaceholder: "Search...",
+                paginate: {
+                  previous: "< prev", // Change 'Previous' text
+                  next: "next >",    // Change 'Next' text
+                },
+              },
+            });
+        }
+
+        // Initialize asset table
+        function assetTable() {
+        return new DataTable("#assetTable", {
+              paging: true,
+              retrieve: true,
+              pageLength: 5, // Show 10 entries per page
+              lengthChange: false, // Hide "entries per page" dropdown
+              searching: false, // Enable search
+              ordering: true, // Enable sorting
+              info: false, // Show "Showing x to y of z entries"
+              autoWidth: false, // Keep the layout intact
+              language: {
+                search: "_INPUT_", // Customize the search input
+                searchPlaceholder: "Search...",
+                paginate: {
+                  previous: "< prev", // Change 'Previous' text
+                  next: "next >",    // Change 'Next' text
+                },
+              },
+            });
+        }
+
+        function documentPreviewTable(id) {
+        return new DataTable(`#documentPreviewTable-${id}`, {
+              paging: true,
+              retrieve: true,
+              pageLength: 5, // Show 10 entries per page
+              lengthChange: false, // Hide "entries per page" dropdown
+              searching: false, // Enable search
+              ordering: true, // Enable sorting
+              info: false, // Show "Showing x to y of z entries"
+              autoWidth: false, // Keep the layout intact
+              language: {
+                search: "_INPUT_", // Customize the search input
+                searchPlaceholder: "Search...",
+                paginate: {
+                  previous: "< prev", // Change 'Previous' text
+                  next: "next >",    // Change 'Next' text
+                },
+              },
+            });
+        }
+
+        // On change of house select dropdown call getResidentDetailsByHNo api
+        $("#houseNoSelect").on("change", function () {
+            const selectedHouseId = $(this).val(); // Get the selected value (houseId)
+            if (selectedHouseId) {
+                getHouseDetails(selectedHouseId); // Call getHouseDetails with the selected value
+            }
+        });
+
+        let relationshipData;
+        // Function to call getRelationshipOptionList api
+        async function getRelationshipOptionList(){
+          try {
+            const listing = await getAllListing('getRelationshipOptionList');
+            relationshipData = listing.data;
+          } catch (error) {
+            console.error(error)
+          }
+        }
+
+        function relationWithHof(id){
+          const relation = relationshipData.filter((item)=> item.schemeId == id);
+          return relation[0].schemeName;
+        }
+
+        // function to call viewHouseListByCitizenId api
+        async function viewHouseListByCitizenId(id){
+          try {
+            await getRelationshipOptionList();
+            const response = await getDetailsById('viewHouseListByCitizenId', id);
+            const details = response.data;
+
+            const $houseNoSelect = $("#houseNoSelect");
+
+            // Clear existing options
+            $houseNoSelect.empty();
+
+            details.forEach((detail, index) => {
+                const option = `<option ${index == 0 ? "selected" : ""} value="${detail.houseId}">${detail.houseNo}</option>`;
+                $houseNoSelect.append(option);
+
+                // Call getHouseDetails for the first index
+                if (index == 0) {
+                    getHouseDetails(detail.houseId);
+                }
+            });
+
+          } catch (error) {
+            console.error(error);
+          }
+        }
+
+        if(location == "resident"){
+          viewHouseListByCitizenId(id);
+          $('#houseNoDropdown').removeClass('d-none');
+        }
+
+        window.previewDocumentBtn = function(documentLink) {
+            if (!documentLink) {
+                console.error("No document link provided");
+                return;
+            }
+
+            // Open the document link in a new tab
+            const newWindow = window.open(documentLink, '_blank');
+            
+            // Check if the new tab or window was blocked by a popup blocker
+            if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+                alert("Popup blocked! Please allow popups for this website.");
+            }
+        }
+
+        // get document preview
+        function getDocumentPreview (data, id) {
+          if(data?.length > 0){
+          return data
+          .map((data, index) => `
+            <div class="row" id="doc-preview-${id}-${index}" data-documentid="${data.documentId}">
+              <div class="col-md-4">
+                <div class="row">
+                  <div class="col-6 form-label">Document type:</div>
+                  <div class="col-6 form-label">${data.documentType}</div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="row">
+                  <div class="col-6 form-label">Document name:</div>
+                  <div class="col-6 form-label">${data.documentName}</div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="row">
+                  <div class="col-6 form-label"></div>
+                  <div class="col-6 form-label">
+                    <button onclick="previewDocumentBtn('${data.document}')" type="button" class="btn btn-outline-primary active w-100">
+                      Preview
+                    </button>
+                  </div>
+                </div>
+              </div>
+              </div>`)
+          .join('');
+          }
+          return "";
+        }
+
+        let houseStatus, hof;
+        let newIndex = 1;
+        // Function to call getResidentDetailsByHNo api
+        async function getHouseDetails(id){
+          try {
+          const response = await getDetailsById('viewResidentDetailsByHNo', id);
+          newIndex = 1;
+          const details = response.data;
+
+          $('#houseId').val(details.houseId); 
+          $('#houseNo').text(details.houseNo  || "");
+          $('#incomeLevel').text(details.incomeLevel == "low" ? "Low" : details.incomeLevel == "middle" ? "Middle" : details.incomeLevel == "high" ? "High" :  "-");
+          $('#address').text(details.address || "");
+          $('#houseType').text(details.houseType == "owned" ? "Self owned" : "Rent");
+          $('#houseLength').text(details.houseLength || "");
+          $('#houseBreadth').text(details.houseBreadth || "");
+          $('#houseHeight').text(details.houseHeight || "");
+          $('#noOfFloors').text(details.noOfFloors || "");
+
+          if(details.houseType == "rent"){
+            $('#rentSection').removeClass('d-none');
+            $('#rentPreviews').removeClass('d-none');
+            $('#renttype').text(details.renttype || "");
+            $('#businessType').text(details.businessType || "");
+            $('#rentReceipt').attr('href', details.rentReceipt);
+            $('#rentReceiptName').text(details.rentReceiptName || "");
+            $('#rentAgreement').attr('href', details.rentAgreement);
+            $('#rentAgreementName').text(details.rentAgreementName || "");
+            $('#policeVerification').attr('href', details.policeVerification);
+            $('#policeVerificationName').text(details.policeVerificationName || "");
+          }
+          houseStatus = details.status;
+          hof = details.hof;
+          $('#memberCount').text(details.membersCount || "");
+          if(details?.houseImage?.length > 0){
+          const carouselInner = $("#carousel-inner-houses");
+          carouselInner.empty();
+
+          $.each(details.houseImage, function(index, record) {
+              const image = `
+               <div class="carousel-item ${index == 0 ? "active" : ""}" style="height: 100%">
+                <a data-fslightbox="gallery" href=${record}>
+                  <img class="d-block w-100" alt="" src=${record} style="height: 100%">
+                </a>
+                </div>
+              `;
+              carouselInner.append(image);
+            });
+
+            refreshFsLightbox();
+          }
+
+          if(details.tax?.length > 0){
+            $('.houseTaxContainer').removeClass('d-none');
+            const tableBody = $("#houseTax tbody");
+            // Clear the table before populating
+            tableBody.empty();
+
+            // Loop through each record and append a table row
+            $.each(details.tax, function(index, record) {
+              const row = `
+                <tr>
+                  <td>${record.taxType || ""}</td>
+                  <td>${record.taxAmount || ""}</td>
+                  <td>${record.paymentDate || ""}</td>
+                  <td>${record.receiptNumber || ""}</td>
+                  <td>${record.taxYear || ""}</td>
+                </tr>
+              `;
+              tableBody.append(row);
+            });
+
+            // Initialize DataTables with pagination, sorting, and search functionality
+            const dataTable = $("#houseTax").DataTable({
+              retrieve: true,
+              paging: true,
+              pageLength: 5, // Show 5 entries per page
+              lengthChange: false, // Hide "entries per page" dropdown
+              searching: false, // Enable search
+              ordering: true, // Enable sorting
+              info: false, // Show "Showing x to y of z entries"
+              autoWidth: false, // Keep the layout intact
+              language: {
+                search: "_INPUT_", // Customize the search input
+                searchPlaceholder: "Search...",
+                paginate: {
+                  previous: "< prev", // Change 'Previous' text
+                  next: "next >",    // Change 'Next' text
+                },
+              },
+            });
+          }
+
+          if(details.citizenDetails?.length > 0){
+            const $accordionContainer = $("#accordion-example");
+            $accordionContainer.empty();
+            details.citizenDetails.forEach(item=>{
+              const newAccordionItem = `
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="heading-${newIndex}" data-citizenid=${item.citizenId}>
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${newIndex}" aria-expanded="true">
+                    ${item.isHof == 1 ? `Head of family/House owner: <span style="font-weight: normal">&nbsp;${item.name}</span>` : `Resident ${newIndex}: <span style="font-weight: normal">&nbsp;${item.name}</span>`}
+                  </button>
+                </h2>
+                <div id="collapse-${newIndex}" class="accordion-collapse collapse" data-bs-parent="#accordion-example">
+                  <div class="accordion-body pt-0">
+                    <div class="card">
+                      <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs nav-fill" data-bs-toggle="tabs">
+                          <li class="nav-item">
+                            <a href="#tabs-general-${newIndex}" class="nav-link active" data-bs-toggle="tab">General</a>
+                          </li>
+                          <li class="nav-item">
+                            <a id="#tabs-qualification-tab-${newIndex}" href="#tabs-qualification-${newIndex}" class="nav-link" data-bs-toggle="tab">Qualification</a>
+                          </li>
+                          <li class="nav-item">
+                            <a id="#tabs-medical-tab-${newIndex}" href="#tabs-medical-${newIndex}" class="nav-link" data-bs-toggle="tab">Medical</a>
+                          </li>
+                          <li class="nav-item">
+                            <a id="#tabs-employment-tab-${newIndex}" href="#tabs-employment-${newIndex}" class="nav-link" data-bs-toggle="tab">Employment</a>
+                          </li>
+                          <li class="nav-item">
+                            <a id="#tabs-schemes-tab-${newIndex}" href="#tabs-schemes-${newIndex}" class="nav-link" data-bs-toggle="tab">Schemes</a>
+                          </li>
+                          <li class="nav-item">
+                            <a id="#tabs-taxes-tab-${newIndex}" href="#tabs-taxes-${newIndex}" class="nav-link" data-bs-toggle="tab">Taxes</a>
+                          </li>
+                          <li class="nav-item">
+                            <a id="#tabs-assets-tab-${newIndex}" href="#tabs-assets-${newIndex}" class="nav-link" data-bs-toggle="tab">Assets</a>
+                          </li>
+                          <li class="nav-item">
+                            <a id="#tabs-documents-tab-${newIndex}" href="#tabs-documents-${newIndex}" class="nav-link" data-bs-toggle="tab">Documents</a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="card-body">
+                        <div class="tab-content">
+                          <div class="tab-pane active show" id="tabs-general-${newIndex}">
+                            <!-- General Form Content -->
+                            <div class="row row-cards">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                         <div class="col-12">
+                                            <div class="mb-3 row">
+                                            <label class="col-md-3 col-6 col-form-label">Name</label>
+                                            <div class="col-md-9 col-6 col-form-label fw-normal">${item.name || ""}</div>
+                                            </div>
+                                        </div>
+
+                                          <div class="col-12">
+                                            <div class="mb-3 row">
+                                            <div class="col-md-3 col-6 col-form-label">Gender</div>
+                                            <div class="col-md-9 col-6 col-form-label fw-normal">${item.gender || ""}</div>
+                                            </div>
+                                        </div>
+
+                                         <div class="col-12">
+                                            <div class="mb-3 row">
+                                                <label class="col-md-3 col-6 col-form-label">Date of birth</label>
+                                                <div class="col-md-9 col-6 col-form-label fw-normal">${item.dob || ""}</div>
+                                            </div>
+                                        </div>
+
+                                         <div class="col-12">
+                                            <div class="mb-3 row">
+                                            <label class="col-md-3 col-6 col-form-label">Aadhar no</label>
+                                                <div class="col-md-9 col-6 col-form-label fw-normal">${item.aadharNo || ""}</div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                         <div class="col-12">
+                                  <div class="mb-3">
+                                    <label class="form-label">Citizen Image</label>
+                                    <img  src="${item?.citizenImage || './static/defaultProfile.png'}" alt="Citizen Image Preview" class="mt-2 rounded" style="max-width: 100%; max-height: 200px; border: 1px solid #ccc; border-radius: 5px;">
+                                  </div>
+                                </div>
+                                    </div>
+                                </div>
+                             
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-md-3 col-6 col-form-label">Pan card no</label>
+                                    <div class="col-md-9 col-6 col-form-label fw-normal">${item.panCard || ""}</div>
+                                </div>
+                              </div>
+    
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-md-3 col-6 col-form-label">Driving license</label>
+                                                                      <div class="col-md-9 col-6 col-form-label fw-normal">${item.drivingLicense || ""}</div>
+
+                                </div>
+                              </div>
+    
+                              
+
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-md-3 col-6 col-form-label">Mobile no</label>
+                                                                      <div class="col-md-9 col-6 col-form-label fw-normal">${item.contact || ""}</div>
+
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-md-3 col-6 col-form-label">Alternate Mobile no</label>
+                                                                      <div class="col-md-9 col-6 col-form-label fw-normal">${item.altContact || ""}</div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="mb-3 row">
+                                    <label class="col-md-3 col-6 col-form-label">Email</label>
+                                                                        <div class="col-md-9 col-6 col-form-label fw-normal">${item.email || ""}</div>
+                                  </div>
+                                </div>
+      
+                                <div class="col-md-6">
+                                  <div class="mb-3 row">
+                                    <label class="col-md-3 col-6 col-form-label">Password</label>
+                                                                        <div class="col-md-9 col-6 col-form-label fw-normal">${item.password || ""}</div>
+
+                                  </div>
+                                </div>
+      
+                                <div class="col-md-6">
+                                  <div class="mb-3 row">
+                                  <div class="col-md-3 col-6 col-form-label">Are you the head of family?</div>
+                                                                        <div class="col-md-9 col-6 col-form-label fw-normal">${item.isHof == 1 ? "Yes" : "No"}</div>
+
+                                </div>
+                                </div>
+      
+                                <div class="col-md-6">
+                                  <div class="mb-3 row">
+                                    <label class="col-md-3 col-6 col-form-label">Relation with head of family</label>
+                                    <div class="col-md-9 col-6 col-form-label fw-normal">${relationWithHof(item.relationWithHof)}</div>
+
+                                
+                                  </div>
+                                </div>
+      
+                                <div class="col-md-6">
+                                  <div class="mb-3 row">
+                                    <label class="col-md-3 col-6 col-form-label">Annual income</label>
+                                    <div class="col-md-9 col-6 col-form-label fw-normal">${item.annualIncome || ""}</div>
+
+                                  </div>
+                                </div>
+
+                                   <div class="col-md-6">
+                               <div class="mb-3 row">
+                                  <label class="col-md-3 col-6 col-form-label"> Native Address</label>
+                                    <div class="col-md-9 col-6 col-form-label fw-normal">${item.address || ""}</div>
+                                </div>
+                               
+                              </div>
+
+                               
+                                
+                            </div>
+                          </div>
+                          <div class="tab-pane" id="tabs-qualification-${newIndex}">
+                            <!-- Qualification Content -->
+                            <div class="row row-cards">
+
+                                <div class="col d-none qualification-${newIndex}">
+                                  <div class="table-responsive">
+                                    <table id="qualificationTable" class="table table-vcenter card-table">
+                                      <thead>
+                                        <tr>
+                                          <th>Qualification name</th>
+                                          <th>Institution name</th>
+                                          <th>Year of passing</th>
+                                          <th>Grade</th>
+                                          <th>Degree type</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+
+                                <div class="qualification-noRecordsContainer-${newIndex} d-none h3" style="text-align: center; margin-top: 16px;">
+                                    No records found.
+                                </div>
+
+                            </div>
+                          </div>
+                          <div class="tab-pane" id="tabs-medical-${newIndex}">
+                            <!-- Medical Content -->
+
+                              <div class="row row-cards">
+                               <div class="col-md-6">
+                                  <div class="mb-3 row">
+                                    <label class="col-md-3 col-6 col-form-label">Blood group</label>
+                                    <div class="col-md-9 col-6 col-form-label fw-normal">${item.medicalDetails && item.medicalDetails?.length > 0 && item.medicalDetails[0].bloodGroup ? item.medicalDetails[0].bloodGroup : "-"}</div>
+                                  </div>
+                                </div>
+
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-md-3 col-6 col-form-label">Weight (in Kgs.)</label>
+                                    <div class="col-md-9 col-6 col-form-label fw-normal">${item.medicalDetails && item.medicalDetails?.length > 0 && item.medicalDetails[0].weight ? item.medicalDetails[0].weight : "-"}</div>
+                                </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                <div class="mb-3 row">
+                                  <label class="col-md-3 col-6 col-form-label">Height (in Fts.)</label>
+                                    <div class="col-md-9 col-6 col-form-label fw-normal">${item.medicalDetails && item.medicalDetails?.length > 0 && item.medicalDetails[0].height ? item.medicalDetails[0].height : "-"}</div>
+                                </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                  <div class="mb-3 row">
+                                    <label class="col-md-3 col-6 col-form-label">Health status</label>
+                                    <div class="col-md-9 col-6 col-form-label fw-normal">${item.medicalDetails && item.medicalDetails?.length > 0 && item.medicalDetails[0].healthStatus && item.medicalDetails[0].healthStatus.length > 0 ? item.medicalDetails[0].healthStatus : "-"}</div>
+
+                                  </div>
+                                </div>
+
+                            </div>
+
+                             
+                          </div>
+                          <div class="tab-pane" id="tabs-employment-${newIndex}">
+                            <!-- Employment Content -->
+                            <div class="row row-cards">
+
+                                  <div class="col d-none employment-${newIndex}">
+                                  <div class="table-responsive">
+                                    <table id="employmentTable" class="table table-vcenter card-table">
+                                      <thead>
+                                        <tr>
+                                          <th>Service type</th>
+                                          <th>Employer name</th>
+                                          <th>Position</th>
+                                          <th>Salary</th>
+                                          <th>Joining date</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+
+                                <div class="employment-noRecordsContainer-${newIndex} d-none h3" style="text-align: center; margin-top: 16px;">
+                                    No records found.
+                                </div>
+
+                             
+                            </div>
+                          </div>
+                          <div class="tab-pane" id="tabs-schemes-${newIndex}">
+                            <!-- Schemes Content -->
+                            <div class="row row-cards">
+
+                                 <div class="col d-none scheme-${newIndex}">
+                                  <div class="table-responsive">
+                                    <table id="schemeTable" class="table table-vcenter card-table">
+                                      <thead>
+                                        <tr>
+                                          <th>Scheme</th>
+                                          <th>Enrollment date</th>
+                                          <th>Status</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+
+                                 <div class="scheme-noRecordsContainer-${newIndex} d-none h3" style="text-align: center; margin-top: 16px;">
+                                    No records found.
+                                </div>
+
+
+                             
+                            </div>
+                          </div>
+                          <div class="tab-pane" id="tabs-taxes-${newIndex}">
+                            <!-- Taxes Content -->
+                            <div class="row row-cards">
+
+                                <div class="col d-none tax-${newIndex}">
+                                  <div class="table-responsive">
+                                    <table id="taxTable" class="table table-vcenter card-table">
+                                      <thead>
+                                        <tr>
+                                          <th>Type</th>
+                                          <th>Amount</th>
+                                          <th>Payment date</th>
+                                          <th>Receipt number</th>
+                                          <th>Tax year</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+
+                                 <div class="tax-noRecordsContainer-${newIndex} d-none h3" style="text-align: center; margin-top: 16px;">
+                                    No records found.
+                                </div>
+
+                             
+                            </div>
+                          </div>
+                          <div class="tab-pane" id="tabs-assets-${newIndex}">
+                            <!-- Assets Content -->
+                            <div class="row row-cards">
+
+                               <div class="col d-none asset-${newIndex}">
+                                  <div class="table-responsive">
+                                    <table id="assetTable" class="table table-vcenter card-table">
+                                      <thead>
+                                        <tr>
+                                          <th>Name</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+
+                                 <div class="asset-noRecordsContainer-${newIndex} d-none h3" style="text-align: center; margin-top: 16px;">
+                                    No records found.
+                                </div>
+
+                              
+                            </div>
+                          </div>
+                          <div class="tab-pane" id="tabs-documents-${newIndex}">
+                            <!-- Documents Content -->
+                            <div class="row row-cards">
+
+                                 <div class="col d-none document-${newIndex}">
+                                  <div class="table-responsive">
+                                    <table id="documentPreviewTable-${newIndex}" class="table table-vcenter card-table">
+                                      <thead>
+                                        <tr>
+                                          <th>Document type</th>
+                                          <th>Document name</th>
+                                          <th>Action</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+
+                                 <div class="document-noRecordsContainer-${newIndex} d-none h3" style="text-align: center; margin-top: 16px;">
+                                    No records found.
+                                </div>
+
+                              
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+            $accordionContainer.append(newAccordionItem);
+
+            if(item.document?.length > 0){
+              const tableBody = $(`#tabs-documents-${newIndex} #documentPreviewTable-${newIndex} tbody`);
+              // Clear the table before populating
+              tableBody.empty();
+
+              // Loop through each record and append a table row
+              $.each(item.document, function(index, record) {
+                const row = `
+                  <tr id="documentRecord-${newIndex}-${index}" data-documentid=${record.documentId}>
+                    <td>${record.documentType || "-"}</td>
+                    <td>${record.documentName || "-"}</td>
+                    <td>
+                      <button onclick="previewDocumentBtn('${record.document}')" type="button" class="btn btn-outline-primary active">
+                        Preview
+                      </button>
+                    </td>
+                  </tr>
+                `;
+                tableBody.append(row);
+              });
+              // Initialize DataTables with pagination, sorting, and search functionality
+              documentPreviewTable(newIndex);
+              $(`.document-${newIndex}`).removeClass('d-none');
+              $(`.document-noRecordsContainer-${newIndex}`).addClass('d-none');
+          } else {
+            $(`.document-${newIndex}`).addClass('d-none');
+            $(`.document-noRecordsContainer-${newIndex}`).removeClass('d-none');
+          }
+
+
+            if(item.qualificationDetails.length > 0){
+              const tableBody = $("#qualificationTable tbody");
+              // Clear the table before populating
+              tableBody.empty();
+
+              // Loop through each record and append a table row
+              $.each(item.qualificationDetails, function(index, record) {
+                const row = `
+                  <tr>
+                    <td>${snakeToSentence(record.qualificationName) || "-"}</td>
+                    <td>${record.institutionName || "-"}</td>
+                    <td>${record.yop || "-"}</td>
+                    <td>${record.grade || "-"}</td>
+                    <td>${record.degreeType || "-"}</td>
+                  </tr>
+                `;
+                tableBody.append(row);
+              });
+
+              // Initialize DataTables with pagination, sorting, and search functionality
+              qualificationTable();
+              $(`.qualification-${newIndex}`).removeClass('d-none');
+              $(`.qualification-noRecordsContainer-${newIndex}`).addClass('d-none');
+          } else {
+            $(`.qualification-${newIndex}`).addClass('d-none');
+            $(`.qualification-noRecordsContainer-${newIndex}`).removeClass('d-none');
+          }
+
+            if(item.employmentDetails?.length > 0){
+              const tableBody = $("#employmentTable tbody");
+              // Clear the table before populating
+              tableBody.empty();
+
+              // Loop through each record and append a table row
+              $.each(item.employmentDetails, function(index, record) {
+                const row = `
+                  <tr>
+                    <td>${record.serviceType || "-"}</td>
+                    <td>${record.employerName || "-"}</td>
+                    <td>${record.position || "-"}</td>
+                    <td>${record.salary || "-"}</td>
+                    <td>${record.joiningDate || "-"}</td>
+                  </tr>
+                `;
+                tableBody.append(row);
+              });
+
+              // Initialize DataTables with pagination, sorting, and search functionality
+              employmentTable();
+              $(`.employment-${newIndex}`).removeClass('d-none');
+              $(`.employment-noRecordsContainer-${newIndex}`).addClass('d-none');
+          } else {
+            $(`.employment-${newIndex}`).addClass('d-none');
+            $(`.employment-noRecordsContainer-${newIndex}`).removeClass('d-none');
+          }
+
+            if(item.schemeDetails?.length > 0){
+              const tableBody = $("#schemeTable tbody");
+              // Clear the table before populating
+              tableBody.empty();
+
+              // Loop through each record and append a table row
+              $.each(item.schemeDetails, function(index, record) {
+                const row = `
+                  <tr>
+                    <td>${record.schemeName || "-"}</td>
+                    <td>${record.enrollmentDate || "-"}</td>
+                    <td>${record.status || "-"}</td>
+                  </tr>
+                `;
+                tableBody.append(row);
+              });
+
+              // Initialize DataTables with pagination, sorting, and search functionality
+              schemeTable();
+              $(`.scheme-${newIndex}`).removeClass('d-none');
+              $(`.scheme-noRecordsContainer-${newIndex}`).addClass('d-none');
+          } else {
+            $(`.scheme-${newIndex}`).addClass('d-none');
+            $(`.scheme-noRecordsContainer-${newIndex}`).removeClass('d-none');
+          }
+
+            if(item.taxDetails?.length > 0){
+              const tableBody = $("#taxTable tbody");
+              // Clear the table before populating
+              tableBody.empty();
+
+              // Loop through each record and append a table row
+              $.each(item.taxDetails, function(index, record) {
+                const row = `
+                  <tr>
+                    <td>${record.type || "-"}</td>
+                    <td>${record.amount || "-"}</td>
+                    <td>${record.paymentDate || "-"}</td>
+                    <td>${record.receiptNumber || "-"}</td>
+                    <td>${record.taxYear || "-"}</td>
+                  </tr>
+                `;
+                tableBody.append(row);
+              });
+
+              // Initialize DataTables with pagination, sorting, and search functionality
+              taxTable();
+              $(`.tax-${newIndex}`).removeClass('d-none');
+              $(`.tax-noRecordsContainer-${newIndex}`).addClass('d-none');
+          } else {
+            $(`.tax-${newIndex}`).addClass('d-none');
+            $(`.tax-noRecordsContainer-${newIndex}`).removeClass('d-none');
+          }
+
+            if(item.assetDetails?.length > 0){
+              const tableBody = $("#assetTable tbody");
+              // Clear the table before populating
+              tableBody.empty();
+
+              // Loop through each record and append a table row
+              $.each(item.assetDetails, function(index, record) {
+                const row = `
+                  <tr>
+                    <td>${record.assetName || "-"}</td>
+                  </tr>
+                `;
+                tableBody.append(row);
+              });
+
+              // Initialize DataTables with pagination, sorting, and search functionality
+              assetTable();
+              $(`.asset-${newIndex}`).removeClass('d-none');
+              $(`.asset-noRecordsContainer-${newIndex}`).addClass('d-none');
+          } else {
+            $(`.asset-${newIndex}`).addClass('d-none');
+            $(`.asset-noRecordsContainer-${newIndex}`).removeClass('d-none');
+          }
+                newIndex++;
+            });
+          }
+
+          $('#tableLoader').addClass('d-none');
+          $('#houseDetailContainer').removeClass('d-none');
+        } catch (error) {
+            console.error(error);
+            $('#tableLoader').addClass('d-none');
+            $('#houseDetailContainer').removeClass('d-none');
+          }
+        }
+
+        async function callFunctions(id){
+          await getRelationshipOptionList();
+          await getHouseDetails(id);
+        }
+
+        if(id && location == "housesurvey"){
+          callFunctions(id);
+        }
+
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,3410 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Mauxi Panchayat</title>
+  <!-- CSS files -->
+  <link href="./dist/css/tabler.min.css?1692870487" rel="stylesheet" />
+  <link href="./dist/css/tabler-flags.min.css?1692870487" rel="stylesheet" />
+  <link href="./dist/css/tabler-payments.min.css?1692870487" rel="stylesheet" />
+  <link href="./dist/css/tabler-vendors.min.css?1692870487" rel="stylesheet" />
+  <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet" />
+
+  <link href="./dist/css/datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+  <style>
+    @import url('https://rsms.me/inter/inter.css');
+
+    :root {
+      --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+    }
+
+    body {
+      font-feature-settings: "cv03", "cv04", "cv11";
+    }
+  </style>
+</head>
+
+<body>
+  <script src="./dist/js/demo-theme.min.js?1692870487"></script>
+  <div class="page">
+    <!-- Navbar -->
+    <div id="horizontal-menu-placeholder"></div>
+    <div class="page-wrapper">
+      <!-- Page header -->
+      <!-- Page body -->
+      <div class="page-body">
+        <div class="container">
+          <div class="row row-deck row-cards">
+            <div class="col-12">
+              <form class="card" autocomplete="off" >
+                <div class="card-body">
+                  <h3 class="card-title text-decoration-underline">House Details:</h3>
+                  <div class="row row-cards">
+
+                        <input id="houseId" type="hidden">
+                        <input id="citizenId" type="hidden">
+                        <div class="col-md-6">
+                          <div class="mb-3">
+                            <label class="form-label required">House no</label>
+                            <input id="houseNo" type="text" class="form-control" placeholder="House no"
+									          value="">
+                            <div id="houseNo-Val" class="invalid-feedback d-none">House no is required</div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="mb-3">
+                            <label class="form-label required">Income level</label>
+                            <select id="incomeLevel" class="form-control form-select">
+                              <option value="" selected>Select Income Level</option>
+                              <option value="low">Low</option>
+                              <option value="middle">Middle</option>
+                              <option value="high">High</option>
+                            </select>
+                            <div id="incomeLevel-Val" class="invalid-feedback d-none">Income level is required</div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                              <label class="form-label required">Address</label>
+                              <textarea id="address" rows="2" class="form-control" placeholder="Address" value=""></textarea>
+                              <div id="address-Val" class="invalid-feedback d-none">Address is required</div>
+
+                            </div>
+                          </div>
+
+                          <div class="col-md-6">
+                            <div class="mb-3">
+                              <label class="form-label">House Image</label>
+                              <input id="houseImage" type="file"  accept="image/*" multiple class="form-control" placeholder="Upload Image">
+                              <div id="imagePreviewContainer" class="mt-2" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                <!-- Previews will be appended here -->
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-6">
+                            <div class="mb-3">
+                            <div class="form-label required">House type</div>
+                            <div>
+                              <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="radios-house-type" checked="" value="owned">
+                                <span class="form-check-label">Self owned</span>
+                              </label>
+                              <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="radios-house-type" value="rent">
+                                <span class="form-check-label">Rent</span>
+                              </label>
+                            </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-6">
+                            <label class="form-label">Length (in mtrs.):</label>
+                            <input id="houseLength" type="number" class="form-control" placeholder="Enter length" value="">
+                        </div>
+                          <div class="col-md-6">
+                            <label class="form-label">Breadth (in mtrs.):</label>
+                            <input id="houseBreadth" type="number" class="form-control" placeholder="Enter breadth" value="">
+                        </div>
+                          <div class="col-md-6">
+                            <label class="form-label">Height (in mtrs.):</label>
+                            <input id="houseHeight" type="number" class="form-control" placeholder="Enter height" value="">
+                        </div>
+                          <div class="col-md-6">
+                            <label class="form-label">Number of floors:</label>
+                            <input id="noOfFloors" type="number" class="form-control" placeholder="Enter No. of floors" value="">
+                        </div>
+
+                          <div class="col-md-6 rentReceipt d-none">
+                            <div class="mb-3">
+                              <label class="form-label">Rent receipt</label>
+                              <input id="rentReceipt" type="file"  accept="" multiple class="form-control" placeholder="Upload Image">
+                              <!-- <div id="rentReceipt-Val" class="invalid-feedback d-none">Rent receipt is required</div> -->
+                            </div>
+                          </div>
+
+                          <div class="col-md-6 rentAgreement d-none">
+                            <div class="mb-3">
+                              <label class="form-label">Rent agreement</label>
+                              <input id="rentAgreement" type="file"  accept="" multiple class="form-control" placeholder="Upload Image">
+                              <!-- <div id="rentAgreement-Val" class="invalid-feedback d-none">Rent agreement is required</div> -->
+                            </div>
+                          </div>
+
+                          <div class="col-md-6 policeVerification d-none">
+                            <div class="mb-3">
+                              <label class="form-label">Police verification</label>
+                              <input id="policeVerification" type="file"  accept="" multiple class="form-control" placeholder="Upload Image">
+                              <!-- <div id="policeVerification-Val" class="invalid-feedback d-none">Police verification is required</div> -->
+                            </div>
+                          </div>
+
+                          <div class="col-md-6 rentTypeSection d-none">
+                            <div class="mb-3">
+                            <div class="form-label required">Rent type</div>
+                            <div>
+                              <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="radios-rent-type" checked="" value="residential">
+                                <span class="form-check-label">Residential</span>
+                              </label>
+                              <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="radios-rent-type" value="commercial">
+                                <span class="form-check-label">Commercial</span>
+                              </label>
+                            </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-6 bussinessTypeSection d-none">
+                            <div class="mb-3">
+                              <label class="form-label">Business Type</label>
+                              <textarea id="bussinessType" rows="2" class="form-control" placeholder="Business type" value="" maxlength="50"></textarea>
+                              <div id="remainingChars" class="form-text text-end">50 characters remaining</div>
+                              <div id="bussinessType-Val" class="invalid-feedback d-none"></div>
+                            </div>
+                          </div>
+
+                      </div>
+
+                      <div class="row row-cards" style="padding-top:20px;">
+                        <div class="accordion" id="accordion-example-house-tax">
+
+                        </div>
+                      </div>
+
+                      <div class="row justify-content-start">
+                        <div class="col-auto py-3">
+                          <button type="button" onclick="addHouseTaxBtn()" class="btn btn-outline-primary active w-100">
+                            + Add taxes
+                          </button>
+                        </div>
+                      </div>
+
+                      <div class="row justify-content-end">
+                        <div class="col-auto py-3">
+                          <button onclick="saveBtn()" type="button" class="btn btn-primary">
+                            <div class="spinner-border text-light d-none" role="status">
+                              <span class="visually-hidden">Loading...</span>
+                            </div>&nbsp;
+                            Save</button>
+                        </div>
+                      </div>
+
+                      <div class="d-none" id="residentDeatailsContainer">
+                      <div class="hr-text"></div>
+
+                      <h3 class="card-title text-decoration-underline">Resident details</h3>
+                      <div class="row row-cards">
+                        <div class="accordion" id="accordion-example">
+
+                        </div>
+                      </div>
+
+                      <div class="row justify-content-start">
+                        <div class="col-auto py-3">
+                          <button type="button" onclick="addResidentsBtn()" class="btn btn-outline-primary active w-100">
+                            + Add Resident
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="footer-placeholder"></div>
+    </div>
+  </div>
+  <!-- Toast Notification -->
+  <div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="successToast" class="toast align-items-center border-0" role="alert" aria-live="assertive"
+      aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body">
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+          aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Libs JS -->
+  <script src="./dist/libs/apexcharts/dist/apexcharts.min.js?1692870487" defer></script>
+  <script src="./dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1692870487" defer></script>
+  <script src="./dist/libs/jsvectormap/dist/maps/world.js?1692870487" defer></script>
+  <script src="./dist/libs/jsvectormap/dist/maps/world-merc.js?1692870487" defer></script>
+  <script src="./dist/libs/litepicker/dist/litepicker.js?1692870487" defer></script>
+  <script src="./dist/libs/tom-select/dist/js/tom-select.base.min.js?1692870487" defer></script>
+  <!-- Tabler Core -->
+  <script src="./dist/js/tabler.min.js?1692870487" defer></script>
+  <script src="./dist/js/demo.min.js?1692870487" defer></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+  <script type="text/javascript" src="./commonFunction/commonFunction.js"></script>
+  <script src="./dist/js/configUrl.js"></script>
+  <script src="./dist/js/menu-footer.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+                window.location = config_url.frontendBaseURL;
+            }
+        });
+  </script>
+  <script>
+    $(document).ready(function () {
+
+      document.getElementById("bussinessType").addEventListener("input", function (e) {
+        // Replace any non-alphabetic characters with an empty string
+        e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, "");
+
+        const maxLength = 50;
+        const currentLength = e.target.value.length;
+        const remainingChars = maxLength - currentLength;
+
+        document.getElementById("remainingChars").textContent = `${remainingChars} characters remaining`;
+
+        // Optional: Add a validation error if limit is exceeded (though `maxlength` prevents this)
+        if (remainingChars < 0) {
+          document.getElementById("bussinessType-Val").classList.remove("d-none");
+          document.getElementById("bussinessType-Val").textContent = "Character limit exceeded!";
+        } else {
+          document.getElementById("bussinessType-Val").classList.add("d-none");
+        }
+
+      });
+
+      let relationWithHOFFlag = true;
+      let rentFlag = false;
+      // On house type radio click
+      $('input[name="radios-house-type"]').on('change', function () {
+        const $accordionContainer = $("#accordion-example");
+        const itemCount = $accordionContainer.find(".accordionItemResident").length;
+        if ($(this).val() === "rent") { // Value for "Rent"
+          $('.policeVerification').removeClass('d-none');
+          $('.rentTypeSection').removeClass('d-none');
+          $('.rentReceipt').removeClass('d-none');
+          $('.rentAgreement').removeClass('d-none');
+          $('.relationWithHOFSection').addClass('d-none');
+          relationWithHOFFlag = false;
+          rentFlag = true;
+         
+        } else {
+          $('.policeVerification').addClass('d-none');
+          $('.rentTypeSection').addClass('d-none');
+          $('.rentReceipt').addClass('d-none');
+          $('.rentAgreement').addClass('d-none');
+          $('.relationWithHOFSection').removeClass('d-none');
+          relationWithHOFFlag = true;
+          rentFlag = false;
+        }
+        // for (let i = 1; i <= itemCount; i++) {
+        //     $(`#name-${i}`).attr('list', `datalistOptions-${i}`);
+        //   }
+      });
+
+
+      // On rent type change
+      $('input[name="radios-rent-type"]').on('change', function () {
+        if ($(this).val() === "commercial") { // Value for "Rent"
+          $('.bussinessTypeSection').removeClass('d-none');
+        } else {
+          $('.bussinessTypeSection').addClass('d-none');
+        }
+      });
+
+
+      let aadharList;
+      // Function to call getRelationshipOptionList api
+      async function getAadharList() {
+        try {
+          const listing = await getAllListing('getAadharList');
+          aadharList = listing.data;
+        } catch (error) {
+          console.error(error)
+        }
+      }
+
+      getAadharList();
+
+
+      let relationshipData;
+      // Function to call getRelationshipOptionList api
+      async function getRelationshipOptionList() {
+        try {
+          const listing = await getAllListing('getRelationshipOptionList');
+          relationshipData = listing.data;
+        } catch (error) {
+          console.error(error)
+        }
+      }
+
+      getRelationshipOptionList();
+
+      let healthStatusData;
+      // Function to call getHealthStatusOptionList api
+      async function getHealthStatusOptionList() {
+        try {
+          const listing = await getAllListing('getHealthStatusOptionList');
+          healthStatusData = listing.data;
+        } catch (error) {
+          console.error(error)
+        }
+      }
+
+      getHealthStatusOptionList();
+
+      let residentOptionList;
+      // Function to call getResidentOptionList api
+      async function getResidentOptionList() {
+        try {
+          const listing = await getAllListing('getResidentOptionList');
+          residentOptionList = listing.data;
+        } catch (error) {
+          console.error(error)
+        }
+      }
+
+      getResidentOptionList();
+
+      let schemeData;
+      // Function to call getSchemesOptionList api
+      async function getSchemesOptionList() {
+        try {
+          const listing = await getAllListing('getSchemesOptionList');
+          schemeData = listing.data;
+        } catch (error) {
+          console.error(error)
+        }
+      }
+
+      getSchemesOptionList();
+
+      let assetData;
+      // Function to call getAssetsOptionList api
+      async function getAssetsOptionList() {
+        try {
+          const listing = await getAllListing('getAssetsOptionList');
+          assetData = listing.data;
+        } catch (error) {
+          console.error(error)
+        }
+      }
+
+      getAssetsOptionList();
+
+      // Function to append relationship options
+      function getRelationshipOptions(newIndex) {
+        // Default option for "Select Relation"
+        const filteredRelationshipData = newIndex != 1
+          ? relationshipData.filter(item => item.schemeId !== 1)
+          : [...relationshipData];
+
+        let options = `<option value="" selected>Select Relation</option>`;
+
+        // Add options from relationshipData
+        filteredRelationshipData.forEach(item => {
+          options += `<option ${newIndex == 1 && item.schemeId == 1 ? "selected" : ""} value="${item.schemeId}">${item.schemeName}</option>`;
+        });
+
+        return options;
+      }
+
+      // Function to append Health status options
+      function getHealthStatusOptions() {
+        let options = `<option value="" selected>Select Health status</option>`;
+
+        healthStatusData.forEach(item => {
+          options += `<option value="${item.id}">${item.status}</option>`;
+        });
+
+        return options;
+      }
+
+      // Function to append Scheme options
+      function getSchemeOptions(newIndex) {
+        // Default option for "Select Relation"
+        let options = `<option value="" selected>Select Scheme</option>`;
+
+        // Add options from relationshipData
+        schemeData.forEach(item => {
+          options += `<option value="${item.schemeId}">${item.schemeName}</option>`;
+        });
+
+        return options;
+      }
+
+      // Function to append Asset options
+      function getAssetOptions(newIndex) {
+        // Default option for "Select Relation"
+        let options = `<option value="" selected>Select Asset</option>`;
+
+        // Add options from relationshipData
+        assetData.forEach(item => {
+          options += `<option value="${item.assetId}" data-assettype="${item.assetType}">${item.assetName}</option>`;
+        });
+
+        return options;
+      }
+
+      // Display preview on change of House image
+      $(document).on('change', '#houseImage', function () {
+        const fileInput = this;
+        const previewContainer = $('#imagePreviewContainer');
+
+        // Clear existing previews
+        previewContainer.empty();
+
+        // Limit the number of images to 5
+        if (fileInput.files.length > 5) {
+          alert('You can upload a maximum of 5 images.');
+          fileInput.value = ''; // Reset the file input
+          return;
+        }
+
+        // Loop through the selected files
+        Array.from(fileInput.files).forEach((file, index) => {
+          // Validate if the uploaded file is an image
+          if (!file.type.startsWith('image/')) {
+            alert(`File ${index + 1} is not a valid image.`);
+            return;
+          }
+
+          // Use FileReader to read the image
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            // Create an image element for the preview
+            const img = $('<img>')
+              .attr('src', e.target.result)
+              .addClass('rounded')
+              .css({
+                display: 'block',
+                maxWidth: '100px',
+                maxHeight: '100px',
+                border: '1px solid #ccc',
+                borderRadius: '5px',
+              });
+
+            // Append the image to the preview container
+            previewContainer.append(img);
+          };
+
+          // Read the file as a data URL
+          reader.readAsDataURL(file);
+        });
+      });
+
+      // Show toast function
+      function showToastMessage(message, type) {
+        const toast = new bootstrap.Toast(document.getElementById('successToast'));
+        $('.toast-body').text(message);
+        if (type == "success") {
+          $('#successToast').removeClass('text-bg-danger');
+          $('#successToast').addClass('text-bg-success');
+        } else {
+          $('#successToast').removeClass('text-bg-success');
+          $('#successToast').addClass('text-bg-danger');
+        }
+        toast.show();
+      }
+
+      // Function to call addHouseDetails api
+      async function addHouseDetails(data, id) {
+        try {
+          const response = await addData(id ? `updateHouseDetail/${id}` : 'addHouseDetails', data);
+          if (response.code == 200 || response.code == 201) {
+            showToastMessage(response.message, 'success');
+            if (response.data) {
+              $('#residentDeatailsContainer').removeClass('d-none');
+              $('#houseId').val(response.data);
+            }
+            return true;
+          } else {
+            showToastMessage(response.message ? response.message : response.error, 'error');
+            return false;
+          }
+          // $('.spinner-border').addClass('d-none');
+        } catch (error) {
+          console.error(error);
+          showToastMessage('Error adding house details', 'error');
+          // $('.spinner-border').addClass('d-none');
+          return false;
+        }
+      }
+
+      // Function for house detail validation and save
+      let taxLength = 0;
+      window.saveBtn = async function () {
+        const houseId = $('#houseId').val();
+          let isValid = true; 
+          const $houseNo = $('#houseNo');
+          const $houseNoVal = $('#houseNo-Val');
+          if (!$houseNo.val().trim()) {
+            $houseNo.addClass('is-invalid');
+            $houseNoVal.removeClass('d-none');
+            isValid = false;
+          } else {
+            $houseNo.removeClass('is-invalid');
+            $houseNoVal.addClass('d-none');
+          }
+
+          const $incomeLevel = $('#incomeLevel');
+          const $incomeLevelVal = $('#incomeLevel-Val');
+          if (!$incomeLevel.val().trim()) {
+            $incomeLevel.addClass('is-invalid');
+            $incomeLevelVal.removeClass('d-none');
+            isValid = false;
+          } else {
+            $incomeLevel.removeClass('is-invalid');
+            $incomeLevelVal.addClass('d-none');
+          }
+
+          const $address = $('#address');
+          const $addressVal = $('#address-Val');
+          if (!$address.val().trim()) {
+            $address.addClass('is-invalid');
+            $addressVal.removeClass('d-none');
+            isValid = false;
+          } else {
+            $address.removeClass('is-invalid');
+            $addressVal.addClass('d-none');
+          }
+          // if(rentFlag == true){
+          //   const $rentReceipt = $('#rentReceipt');
+          //   const $rentReceiptVal = $('#rentReceipt-Val');
+          //   const rentReceiptInput = $rentReceipt[0];
+          //   if (!(rentReceiptInput.files && rentReceiptInput.files[0])) {
+          //     $rentReceipt.addClass('is-invalid');
+          //     $rentReceiptVal.removeClass('d-none');
+          //     isValid = false;
+          //   } else {
+          //     $rentReceipt.removeClass('is-invalid');
+          //     $rentReceiptVal.addClass('d-none');
+          //   }
+
+          //   const $rentAgreement = $('#rentAgreement');
+          //   const $rentAgreementVal = $('#rentAgreement-Val');
+          //   const rentAgreementInput = $rentAgreement[0];
+          //   if (!(rentAgreementInput.files && rentAgreementInput.files[0])) {
+          //     $rentAgreement.addClass('is-invalid');
+          //     $rentAgreementVal.removeClass('d-none');
+          //     isValid = false;
+          //   } else {
+          //     $rentAgreement.removeClass('is-invalid');
+          //     $rentAgreementVal.addClass('d-none');
+          //   }
+
+          //   const $policeVerification = $('#policeVerification');
+          //   const $policeVerificationVal = $('#policeVerification-Val');
+          //   const policeVerificationInput = $policeVerification[0];
+          //   if (!(policeVerificationInput.files && policeVerificationInput.files[0])) {
+          //     $policeVerification.addClass('is-invalid');
+          //     $policeVerificationVal.removeClass('d-none');
+          //     isValid = false;
+          //   } else {
+          //     $policeVerification.removeClass('is-invalid');
+          //     $policeVerificationVal.addClass('d-none');
+          //   }
+          // }
+
+          const accordionItems = document.querySelectorAll('#accordion-example-house-tax .accordion-item');
+          if(accordionItems.length > 0){
+            accordionItems.forEach((item, index) => {
+              const taxTypeInput = document.querySelector(`#houseTaxType-${index + 1}`);
+              const taxAmountInput = document.querySelector(`#houseTaxAmount-${index + 1}`);
+              const taxPaymentDateInput = document.querySelector(`#housePaymentDate-${index + 1}`);
+              const taxTaxYearInput = document.querySelector(`#houseTaxYear-${index + 1}`);
+              const taxTypeValError = document.querySelector(`#houseTaxType-Val-${index + 1}`);
+              const taxAmountValError = document.querySelector(`#houseTaxAmount-Val-${index + 1}`);
+              const taxPaymentDateValError = document.querySelector(`#housePaymentDate-Val-${index + 1}`);
+              const taxTaxYearValError = document.querySelector(`#houseTaxYear-Val-${index + 1}`);
+              
+              
+              if (!taxTypeInput.value.trim()) {
+                taxTypeInput.classList.add('is-invalid');
+                taxTypeValError.classList.remove('d-none');
+                isValid = false;
+              } else {
+                taxTypeInput.classList.remove('is-invalid');
+                taxTypeValError.classList.add('d-none');
+              }
+              if (!taxAmountInput.value.trim()) {
+                taxAmountInput.classList.add('is-invalid');
+                taxAmountValError.classList.remove('d-none');
+                isValid = false;
+              } else {
+                taxAmountInput.classList.remove('is-invalid');
+                taxAmountValError.classList.add('d-none');
+              }
+              if (!taxPaymentDateInput.value.trim()) {
+                taxPaymentDateInput.classList.add('is-invalid');
+                taxPaymentDateValError.classList.remove('d-none');
+                document.querySelector(`#housePaymentDate-Icon-${index + 1}`).classList.add('d-none');
+                isValid = false;
+              } else {
+                taxPaymentDateInput.classList.remove('is-invalid');
+                taxPaymentDateValError.classList.add('d-none');
+                document.querySelector(`#housePaymentDate-Icon-${index + 1}`).classList.remove('d-none');
+              }
+              if (!taxTaxYearInput.value.trim()) {
+                taxTaxYearInput.classList.add('is-invalid');
+                taxTaxYearValError.classList.remove('d-none');
+                isValid = false;
+              } else {
+                taxTaxYearInput.classList.remove('is-invalid');
+                taxTaxYearValError.classList.add('d-none');
+              }
+            });
+          }
+
+          if (!isValid) {
+            return;
+          }
+
+          const formData = new FormData();
+          formData.append('houseNo', document.getElementById('houseNo').value);
+          // formData.append('hof', document.getElementById('hof').value);
+          formData.append('address', document.getElementById('address').value);
+          // formData.append('memberCount', document.getElementById('memberCount').value);
+          formData.append('incomeLevel', document.getElementById('incomeLevel').value);
+          formData.append('houseLength', document.getElementById('houseLength').value);
+          formData.append('houseBreadth', document.getElementById('houseBreadth').value);
+          formData.append('houseHeight', document.getElementById('houseHeight').value);
+          formData.append('noOfFloors', document.getElementById('noOfFloors').value);
+          const selectedHouseType = document.querySelector('input[name="radios-house-type"]:checked').value;
+          formData.append('houseType', selectedHouseType);
+          if(selectedHouseType == "rent"){
+            const rentReceipt = document.getElementById('rentReceipt');
+          if (rentReceipt.files && rentReceipt.files[0]) {
+            formData.append('rentReceipt', rentReceipt.files[0]);
+          } else {
+            formData.append('rentReceipt', "");
+          }
+          const rentAgreement = document.getElementById('rentAgreement');
+          if (rentAgreement.files && rentAgreement.files[0]) {
+            formData.append('rentAgreement', rentAgreement.files[0]);
+          } else {
+            formData.append('rentAgreement', "");
+          }
+          const policeVerification = document.getElementById('policeVerification');
+          if (policeVerification.files && policeVerification.files[0]) {
+            formData.append('policeVerification', policeVerification.files[0]);
+          } else {
+            formData.append('policeVerification', "");
+          }
+          const selectedRentType = document.querySelector('input[name="radios-rent-type"]:checked').value;
+          formData.append('rentType', selectedRentType);
+            if(selectedRentType == "commercial"){
+              formData.append('businessType', document.getElementById('bussinessType').value);
+            }else {
+              formData.append('businessType', "");
+            }
+        } else {
+          formData.append('rentReceipt', "");
+          formData.append('rentAgreement', "");
+          formData.append('policeVerification', "");
+          formData.append('rentType', "");
+          formData.append('businessType', "");
+        }
+        const houseImage = document.getElementById('houseImage');
+        if (houseImage.files) {
+          Array.from(houseImage.files).forEach((file, index) => {
+            formData.append(`houseImage[]`, file); // Use an array-like name for multiple files
+          });
+        }
+
+        accordionItems.forEach((item, index) => {
+          if (index < taxLength) return;
+          const taxType = item.querySelector(`#houseTaxType-${index + 1}`).value;
+          const taxAmount = item.querySelector(`#houseTaxAmount-${index + 1}`).value;
+          const paymentDate = item.querySelector(`#housePaymentDate-${index + 1}`).value;
+          const receiptNumber = item.querySelector(`#houseReceiptNumber-${index + 1}`).value;
+          const taxYear = item.querySelector(`#houseTaxYear-${index + 1}`).value;
+          if(houseId){
+            formData.append(`tax[${index}][taxId]`, "");
+          }
+          formData.append(`tax[${index}][taxType]`, taxType);
+          formData.append(`tax[${index}][taxAmount]`, taxAmount);
+          formData.append(`tax[${index}][paymentDate]`, paymentDate);
+          formData.append(`tax[${index}][receiptNumber]`, receiptNumber);
+          formData.append(`tax[${index}][taxYear]`, taxYear);
+        });
+
+        if(houseId != ""){
+          formData.append('houseId', houseId);
+          formData.append('houseStatus', 1);
+        }
+
+        $('.spinner-border').removeClass('d-none');
+
+        // for (var pair of formData.entries()){
+        //   console.log(pair[0]+','+pair[1]);
+        // }
+        const isTaxSaved = await addHouseDetails(formData, houseId);
+        if(isTaxSaved == true){
+          taxLength = accordionItems.length;
+          $('.spinner-border').addClass('d-none');
+        } else {
+          $('.spinner-border').addClass('d-none');
+        }
+      }
+
+      let newHouseTaxIndex;
+      // Function to add house tax accordion
+      window.addHouseTaxBtn = function () {
+        const $accordionContainer = $('#accordion-example-house-tax');
+
+        // Find the number of existing accordion items to set unique IDs
+        const itemCount = $accordionContainer.find(".accordion-item").length;
+        newHouseTaxIndex = itemCount + 1;
+
+        const newAccordionItem = `
+         <div class="accordion-item">
+                              <h2 class="accordion-header" id="heading-${newHouseTaxIndex}">
+                                  <button class="accordion-button ${newHouseTaxIndex == 1 ? "" : "collapsed"}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-taxes-${newHouseTaxIndex}" aria-expanded="${newHouseTaxIndex == 1 ? "true" : "false"}" aria-controls="collapse-taxes-${newHouseTaxIndex}">
+                                  Tax Detail ${newHouseTaxIndex}
+                                  </button>
+                              </h2>
+                              <div id="collapse-taxes-${newHouseTaxIndex}" class="accordion-collapse collapse ${newHouseTaxIndex == 1 ? "show" : ""}" aria-labelledby="heading-${newHouseTaxIndex}" data-bs-parent="#accordion-example-house-tax">
+                                  <div class="accordion-body">
+                                      <div class="row row-cards">
+
+                                              <div class="col-md-6">
+                                                <div class="mb-3">
+                                                  <label class="form-label required">Type</label>
+                                                  <select id="houseTaxType-${newHouseTaxIndex}" class="form-control form-select">
+                                                    <option value="" selected>Select type</option>
+                                                    <option value="House Tax">House Tax</option>
+                                                    <option value="Professional Tax">Professional Tax</option>
+                                                    <option value="Rent Tax">Rent Tax</option>
+                                                  </select>
+                                                  <div id="houseTaxType-Val-${newHouseTaxIndex}" class="invalid-feedback d-none">Tax type is required</div>
+                                                </div>
+                                              </div>
+
+                                            <div class="col-md-6">
+                                              <div class="mb-3">
+                                                <label class="form-label required">Amount</label>
+                                                <input id="houseTaxAmount-${newHouseTaxIndex}" type="number" class="form-control" placeholder="Amount" value="">
+                                                <div id="houseTaxAmount-Val-${newHouseTaxIndex}" class="invalid-feedback d-none">Amount is required</div>
+                                              </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                              <div class="mb-3">
+                                                  <label class="form-label required">Payment date</label>
+                                                  <div class="input-icon mb-2">
+                                                    <input id="housePaymentDate-${newHouseTaxIndex}" class="form-control mb-2" placeholder="Select a date" value="">
+                                                    <div id="housePaymentDate-Val-${newHouseTaxIndex}" class="invalid-feedback d-none">Payment date required</div>
+                                                    <span id="housePaymentDate-Icon-${newHouseTaxIndex}" class="input-icon-addon">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M11 15h1" /><path d="M12 15v3" /></svg>
+                                                    </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label class="form-label">Receipt number</label>
+                                                <input id="houseReceiptNumber-${newHouseTaxIndex}" type="text" class="form-control" placeholder="Receipt number" value="">
+                                            </div>
+
+                                            <div class="col-md-6">
+                                              <div class="mb-3">
+                                                <label class="form-label required">Tax year</label>
+                                                <input id="houseTaxYear-${newHouseTaxIndex}" type="text" class="form-control" placeholder="Tax year" value="">
+                                                <div id="houseTaxYear-Val-${newHouseTaxIndex}" class="invalid-feedback d-none">Tax year is required</div>
+                                              </div>
+                                            </div>                           
+
+                                            
+
+                                          </div>
+                                      </div>
+                              </div>
+                              </div>`;
+        $accordionContainer.append(newAccordionItem);
+
+        new Litepicker({
+          element: document.getElementById(`housePaymentDate-${newHouseTaxIndex}`),
+          format: 'YYYY-MM-DD', // Set the desired format
+          dropdowns: {
+            minYear: 1900,
+            maxYear: new Date().getFullYear(),
+            months: true, // Enable month dropdown
+            years: true,  // Enable year dropdown
+          },
+          buttonText: {
+            previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>`,
+            nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>`,
+          }
+        });
+
+      }
+
+      let newQulificationIndex;
+      // Function to add Qualification accordion
+      window.addQualificationBtn = function (id) {
+        const $accordionContainer = $(`#accordion-qualification-${id}`);
+
+        // Find the number of existing accordion items to set unique IDs
+        const itemCount = $accordionContainer.find(".accordion-item").length;
+        newQulificationIndex = itemCount + 1;
+
+        const newAccordionItem = `
+         <div class="accordion-item">
+                              <h2 class="accordion-header d-flex" id="heading-${newQulificationIndex}" style="padding: 3px 20px !important;  align-items: center">
+                                  <button class="accordion-button collapsed w-90" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-qualification-${newQulificationIndex}" aria-expanded="false" aria-controls="collapse-qualification-${newQulificationIndex}">
+                                  Qualification Detail ${newQulificationIndex}
+                                  </button>
+                                    <a onclick="deleteQualification(${newQulificationIndex}, ${id})" class="btn btn-youtube btn-icon col-auto" aria-label="Delete" style="height: 20px !important;">
+                                      <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
+                                  </a>
+                              </h2>
+                              <div id="collapse-qualification-${newQulificationIndex}" class="accordion-collapse collapse" aria-labelledby="heading-${newQulificationIndex}" data-bs-parent="#accordion-qualification-${id}">
+                                  <div class="accordion-body">
+                                      <div class="row row-cards">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                <label class="form-label required">Qualification Name</label>
+                                                <select id="qualificationName-${newQulificationIndex}" class="form-control form-select">
+                                                  <option value="" selected>Select Qulification</option>
+                                                  <option value="bachelor_of_engineering">Bachelor of Engineering</option>
+                                                  <option value="master_of_engineering">Master of Engineering</option>
+                                                  <option value="bachelor_of_science">Bachelor of Science</option>
+                                                  <option value="master_of_science">Master of Science</option>
+                                                  <option value="bachelor_of_arts">Bachelor of Arts</option>
+                                                  <option value="master_of_arts">Master of Arts</option>
+                                                  <option value="bachelor_of_business_administration">Bachelor of Business Administration</option>
+                                                  <option value="master_of_business_administration">Master of Business Administration</option>
+                                                  <option value="bachelor_of_medicine_and_surgery">Bachelor of Medicine and Surgery (MBBS)</option>
+                                                  <option value="master_of_dental_surgery">Master of Dental Surgery</option>
+                                                  <option value="bachelor_of_laws">Bachelor of Laws (LLB)</option>
+                                                  <option value="master_of_laws">Master of Laws (LLM)</option>
+                                                  <option value="doctor_of_philosophy">Doctor of Philosophy (PhD)</option>
+                                                   <option value="other">Other</option>
+                                                </select>
+                                                <div id="qualificationName-Val-${newQulificationIndex}" class="invalid-feedback d-none">Qualification Name is required</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                              <div class="mb-3">
+                                                <label class="form-label required">Institution Name</label>
+                                                <input id="institutionName-${newQulificationIndex}" type="text" class="form-control" placeholder="Institution Name" value="">
+                                               <div id="institutionName-Val-${newQulificationIndex}" class="invalid-feedback d-none">Institution Name is required</div>
+                                              </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                              <div class="mb-3">
+                                                <label class="form-label required">Year of passing</label>
+                                               <input id="yop-${newQulificationIndex}" type="text" class="form-control" placeholder="Year of passing" value="">
+                                               <div id="yop-Val-${newQulificationIndex}" class="invalid-feedback d-none">Year of passing is required</div>
+                                              </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label class="form-label">Grade</label>
+                                                <input id="grade-${newQulificationIndex}" type="text" class="form-control" placeholder="Grade" value="">
+                                            </div>
+
+                                            <div class="col-md-6">
+                                              <div class="mb-3">
+                                                <label class="form-label required">Degree type</label>
+                                                <select id="degreeType-${newQulificationIndex}" class="form-control form-select">
+                                                  <option value="" selected>Select Degree type</option>
+                                                  <option value="Graduate">Graduate</option>
+                                                  <option value="Postgraduate">Postgraduate</option>
+                                                  <option value="Diploma">Diploma</option>
+                                                  <option value="Certificates">Certificates</option>
+                                                  <option value="Other">Other</option>
+                                                </select>
+                                                <div id="degreeType-Val-${newQulificationIndex}" class="invalid-feedback d-none">Degree type is required</div>
+                                              </div>
+                                            </div>
+
+                                            <div class="row justify-content-end">
+                                              <div class="col-auto py-3">
+                                                <a href="housesurvey.html" class="btn btn-primary">Cancel</a>
+                                              </div>
+                                              <div class="col-auto py-3">
+                                                <button onclick="addNewQualification(${newQulificationIndex}, ${id})" type="button" class="btn btn-outline-primary active w-100">
+                                                  Submit
+                                                </button>
+                                              </div>
+                                            </div>
+
+                                          </div>
+                                      </div>
+                              </div>
+                              </div>`;
+        $accordionContainer.append(newAccordionItem);
+      }
+
+      let newEmploymentIndex;
+      // Function to add Employment accordion
+      window.addEmploymentBtn = function (id) {
+        const $accordionContainer = $(`#accordion-employment-${id}`);
+
+        // Find the number of existing accordion items to set unique IDs
+        const itemCount = $accordionContainer.find(".accordion-item").length;
+        newEmploymentIndex = itemCount + 1;
+
+        const newAccordionItem = `
+         <div class="accordion-item">
+                              <h2 class="accordion-header d-flex" id="heading-${newEmploymentIndex}" style="padding: 3px 20px !important;  align-items: center">
+                                  <button class="accordion-button collapsed w-90" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-employment-${newEmploymentIndex}" aria-expanded="false" aria-controls="collapse-employment-${newEmploymentIndex}">
+                                  Employment Detail ${newEmploymentIndex}
+                                  </button>
+                                  <a onclick="deleteEmployment(${newEmploymentIndex}, ${id})" class="btn btn-youtube btn-icon col-auto" aria-label="Delete" style="height: 20px !important;">
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
+                                  </a>
+                              </h2>
+                              <div id="collapse-employment-${newEmploymentIndex}" class="accordion-collapse collapse" aria-labelledby="heading-${newEmploymentIndex}" data-bs-parent="#accordion-employment-${id}">
+                                  <div class="accordion-body">
+                                      <div class="row row-cards">
+                                            <div class="col-md-6">
+                                              <div class="mb-3">
+                                                <label class="form-label required">Service Type</label>
+                                                <select id="serviceType-${newEmploymentIndex}" class="form-control form-select">
+                                                  <option value="" selected>Select Service Type</option>
+                                                  <option value="Govt">Govt</option>
+                                                  <option value="Employed">Employed</option>
+                                                  <option value="Self Employed">Self Employed</option>
+                                                  <option value="Retired">Retired</option>
+                                                </select>
+                                                <div id="serviceType-Val-${newEmploymentIndex}" class="invalid-feedback d-none">Service Type is required</div>
+                                              </div>
+                                            </div>
+
+                                          <div class="col-md-6">
+                                            <div class="mb-3">
+                                              <label class="form-label required">Employer name</label>
+                                              <input id="employerName-${newEmploymentIndex}" type="text" class="form-control" placeholder="Employer name" value="">
+                                                <div id="employerName-Val-${newEmploymentIndex}" class="invalid-feedback d-none">Employer name is required</div>
+                                            </div>
+                                          </div>
+
+                                          <div class="col-md-6">
+                                            <div class="mb-3">
+                                              <label class="form-label required">Position</label>
+                                              <input id="position-${newEmploymentIndex}" type="text" class="form-control" placeholder="Position" value="">
+                                                <div id="position-Val-${newEmploymentIndex}" class="invalid-feedback d-none">Position is required</div>
+
+                                            </div>
+                                          </div>
+
+                                          <div class="col-md-6">
+                                            <div class="mb-3">
+                                              <label class="form-label required">Salary</label>
+                                              <input id="salary-${newEmploymentIndex}" type="number" class="form-control" placeholder="Salary" value="">
+                                                <div id="salary-Val-${newEmploymentIndex}" class="invalid-feedback d-none">Salary is required</div>
+                                            </div>
+                                          </div>
+
+                                          <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label required">Joining date</label>
+                                                <div class="input-icon mb-2">
+                                                  <input id="joiningDate-${id}-${newEmploymentIndex}" class="form-control mb-2" placeholder="Select a date" value="">
+                                                  <div id="joiningDate-Val-${newEmploymentIndex}" class="invalid-feedback d-none">Joining date is required</div>
+                                                  <span id="joiningDate-Icon-${newEmploymentIndex}" class="input-icon-addon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M11 15h1" /><path d="M12 15v3" /></svg>
+                                                  </span>
+                                              </div>
+                                          </div>
+                                          </div>
+
+                                          <div class="row justify-content-end">
+                                            <div class="col-auto py-3">
+                                                <a href="housesurvey.html" class="btn btn-primary">Cancel</a>
+                                              </div>
+                                            <div class="col-auto py-3">
+                                              <button onclick="addNewEmployment(${newEmploymentIndex}, ${id})" type="button" class="btn btn-outline-primary active w-100">
+                                                Submit
+                                              </button>
+                                            </div>
+                                          </div>
+
+                                          </div>
+                                      </div>
+                              </div>
+                              </div>`;
+        $accordionContainer.append(newAccordionItem);
+
+
+        new Litepicker({
+          element: document.getElementById(`joiningDate-${id}-${newEmploymentIndex}`),
+          format: 'YYYY-MM-DD', // Set the desired format
+          dropdowns: {
+            minYear: 1900,
+            maxYear: new Date().getFullYear(),
+            months: true, // Enable month dropdown
+            years: true,  // Enable year dropdown
+          },
+          maxDate: new Date(), // Prevent selecting future dates
+          buttonText: {
+            previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>`,
+            nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>`,
+          }
+        });
+      }
+
+      let newSchemesIndex;
+      // Function to add Scheme accordion
+      window.addSchemesBtn = function (id) {
+        const $accordionContainer = $(`#accordion-schemes-${id}`);
+
+        // Find the number of existing accordion items to set unique IDs
+        const itemCount = $accordionContainer.find(".accordion-item").length;
+        newSchemesIndex = itemCount + 1;
+
+        const newAccordionItem = `
+         <div class="accordion-item">
+                              <h2 class="accordion-header d-flex" id="heading-${newSchemesIndex}" style="padding: 3px 20px !important;  align-items: center">
+                                  <button class="accordion-button collapsed w-90" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-schemes-${newSchemesIndex}" aria-expanded="false" aria-controls="collapse-schemes-${newSchemesIndex}">
+                                  Schemes Detail ${newSchemesIndex}
+                                  </button>
+                                    <a onclick="deleteScheme(${newSchemesIndex}, ${id})" class="btn btn-youtube btn-icon col-auto" aria-label="Delete" style="height: 20px !important;">
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
+                                  </a>
+                              </h2>
+                              <div id="collapse-schemes-${newSchemesIndex}" class="accordion-collapse collapse" aria-labelledby="heading-${newSchemesIndex}" data-bs-parent="#accordion-schemes-${id}">
+                                  <div class="accordion-body">
+                                      <div class="row row-cards">
+                                             <div class="col-md-6">
+                                                <div class="mb-3">
+                                                  <label class="form-label required">Scheme</label>
+                                                  <select id="schemeId-${newSchemesIndex}" class="form-control form-select">
+                                                      ${getSchemeOptions(id)}
+                                                    
+                                                    </select>
+                                                    <div id="schemeId-Val-${newSchemesIndex}" class="invalid-feedback d-none">Scheme is required</div>
+                                                </div>
+                                              </div>
+
+                                              <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label required">Enrollment date</label>
+                                                    <div class="input-icon mb-2">
+                                                      <input id="enrollmentDate-${newSchemesIndex}" class="form-control mb-2" placeholder="Select a date" value="">
+                                                      <div id="enrollmentDate-Val-${newSchemesIndex}" class="invalid-feedback d-none">Enrollment date is required</div>
+                                                      <span id="enrollmentDate-Icon-${newSchemesIndex}" class="input-icon-addon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M11 15h1" /><path d="M12 15v3" /></svg>
+                                                      </span>
+                                                    </div>
+                                              </div>
+                                              </div>
+
+                                              <div class="col-md-6">
+                                                  <div class="mb-3">
+                                                    <label class="form-label required">Status</label>
+                                                    <select id="status-${newSchemesIndex}" class="form-control form-select">
+                                                      <option value="" selected>Select status</option>
+                                                      <option value="Active">Active</option>
+                                                      <option value="Inactive">Inactive</option>
+                                                    </select>
+                                                                                                          <div id="status-Val-${newSchemesIndex}" class="invalid-feedback d-none">Status is required</div>
+                                                  </div>
+                                                </div>
+
+                                              <div class="row justify-content-end">
+                                                <div class="col-auto py-3">
+                                                <a href="housesurvey.html" class="btn btn-primary">Cancel</a>
+                                              </div>
+                                                <div class="col-auto py-3">
+                                                  <button onclick="addNewCitizenScheme(${newSchemesIndex}, ${id})" type="button" class="btn btn-outline-primary active w-100">
+                                                    Submit
+                                                  </button>
+                                                </div>
+                                              </div>
+
+                                          </div>
+                                      </div>
+                              </div>
+                              </div>`;
+        $accordionContainer.append(newAccordionItem);
+
+        new Litepicker({
+          element: document.getElementById(`enrollmentDate-${newSchemesIndex}`),
+          format: 'YYYY-MM-DD', // Set the desired format
+          dropdowns: {
+            minYear: 1900,
+            maxYear: new Date().getFullYear(),
+            months: true, // Enable month dropdown
+            years: true,  // Enable year dropdown
+          },
+          buttonText: {
+            previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>`,
+            nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>`,
+          }
+        });
+
+      }
+
+      let newTaxIndex;
+      // Function to add Tax accordion
+      window.addTaxesBtn = function (id) {
+        const $accordionContainer = $(`#accordion-taxes-${id}`);
+
+        // Find the number of existing accordion items to set unique IDs
+        const itemCount = $accordionContainer.find(".accordion-item").length;
+        newTaxIndex = itemCount + 1;
+
+        const newAccordionItem = `
+         <div class="accordion-item">
+                              <h2 class="accordion-header d-flex" id="heading-${newTaxIndex}" style="padding: 3px 20px !important;  align-items: center">
+                                  <button class="accordion-button collapsed w-90" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-taxes-${newTaxIndex}" aria-expanded="false" aria-controls="collapse-taxes-${newTaxIndex}">
+                                  Tax Detail ${newTaxIndex}
+                                  </button>
+                                  <a onclick="deleteTax(${newTaxIndex}, ${id})" class="btn btn-youtube btn-icon col-auto" aria-label="Delete" style="height: 20px !important;">
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
+                                  </a>
+                              </h2>
+                              <div id="collapse-taxes-${newTaxIndex}" class="accordion-collapse collapse" aria-labelledby="heading-${newTaxIndex}" data-bs-parent="#accordion-taxes-${id}">
+                                  <div class="accordion-body">
+                                      <div class="row row-cards">
+
+                                              <div class="col-md-6">
+                                                <div class="mb-3">
+                                                  <label class="form-label required">Type</label>
+                                                  <select id="type-${newTaxIndex}" class="form-control form-select">
+                                                    <option value="" selected>Select type</option>
+                                                    <option value="Income Tax">Income Tax</option>
+                                                    <option value="Other">Other</option>
+                                                  </select>
+                                                  <div id="type-Val-${newTaxIndex}" class="invalid-feedback d-none">Type is required</div>
+                                                </div>
+                                              </div>
+
+                                            <div class="col-md-6">
+                                              <div class="mb-3">
+                                                <label class="form-label required">Amount</label>
+                                                <input id="amount-${newTaxIndex}" type="number" class="form-control" placeholder="Amount" value="">
+                                                <div id="amount-Val-${newTaxIndex}" class="invalid-feedback d-none">Amount is required</div>
+                                              </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                              <div class="mb-3">
+                                                  <label class="form-label required">Payment date</label>
+                                                  <div class="input-icon mb-2">
+                                                    <input id="paymentDate-${newTaxIndex}" class="form-control mb-2" placeholder="Select a date" value="">
+                                                    <div id="paymentDate-Val-${newTaxIndex}" class="invalid-feedback d-none">Payment date is required</div>
+                                                    <span id="paymentDate-Icon-${newTaxIndex}" class="input-icon-addon">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M11 15h1" /><path d="M12 15v3" /></svg>
+                                                    </span>
+                                                  </div>
+                                            </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                              <div class="mb-3">
+                                                <label class="form-label">Receipt number</label>
+                                                <input id="receiptNumber-${newTaxIndex}" type="text" class="form-control" placeholder="Receipt number" value="">
+                                              </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                              <div class="mb-3">
+                                                <label class="form-label required">Tax year</label>
+                                                <input id="taxYear-${newTaxIndex}" type="text" class="form-control" placeholder="Tax year" value="">
+                                                <div id="taxYear-Val-${newTaxIndex}" class="invalid-feedback d-none">Tax year is required</div>
+                                              </div>
+                                            </div>                           
+
+                                            <div class="row justify-content-end">
+                                              <div class="col-auto py-3">
+                                                <a href="housesurvey.html" class="btn btn-primary">Cancel</a>
+                                              </div>
+                                              <div class="col-auto py-3">
+                                                <button onclick="addNewCitizenTax(${newTaxIndex}, ${id})" type="button" class="btn btn-outline-primary active w-100">
+                                                  Submit
+                                                </button>
+                                              </div>
+                                            </div>
+
+                                          </div>
+                                      </div>
+                              </div>
+                              </div>`;
+        $accordionContainer.append(newAccordionItem);
+
+        new Litepicker({
+          element: document.getElementById(`paymentDate-${newTaxIndex}`),
+          format: 'YYYY-MM-DD', // Set the desired format
+          dropdowns: {
+            minYear: 1900,
+            maxYear: new Date().getFullYear(),
+            months: true, // Enable month dropdown
+            years: true,  // Enable year dropdown
+          },
+          buttonText: {
+            previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>`,
+            nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>`,
+          }
+        });
+
+      }
+
+      let newAssetIndex;
+      // Function to add Asset accordion
+      window.addAssetsBtn = function (id) {
+        const $accordionContainer = $(`#accordion-assets-${id}`);
+
+        // Find the number of existing accordion items to set unique IDs
+        const itemCount = $accordionContainer.find(".accordion-item").length;
+        newAssetIndex = itemCount + 1;
+
+        const newAccordionItem = `
+         <div class="accordion-item">
+                              <h2 class="accordion-header d-flex" id="heading-${newAssetIndex}" style="padding: 3px 20px !important;  align-items: center">
+                                  <button class="accordion-button collapsed w-90" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-assets-${newAssetIndex}" aria-expanded="false" aria-controls="collapse-assets-${newAssetIndex}">
+                                  Asset Detail ${newAssetIndex}
+                                  </button>
+                                   <a onclick="deleteAsset(${newAssetIndex}, ${id})" class="btn btn-youtube btn-icon col-auto" aria-label="Delete" style="height: 20px !important;">
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
+                                  </a>
+                              </h2>
+                              <div id="collapse-assets-${newAssetIndex}" class="accordion-collapse collapse" aria-labelledby="heading-${newAssetIndex}" data-bs-parent="#accordion-assets-${id}">
+                                  <div class="accordion-body">
+                                      <div class="row row-cards">
+
+                                              <div class="col-md-6">
+                                                  <div class="mb-3">
+                                                    <label class="form-label required">Assets</label>
+                                                    <select id="assetId-${newAssetIndex}" class="form-control form-select">
+                                                        ${getAssetOptions(id)}
+                                                      
+                                                      </select>
+                                                      <div id="assetId-Val-${newAssetIndex}" class="invalid-feedback d-none">Asset is required</div>
+                                                  </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                      <label class="form-label">Type</label>
+                                                      <select id="assetType-${newAssetIndex}" class="form-control form-select" disabled>
+                                                        <option value="" selected>Select type</option>
+                                                        <option value="Road">Road</option>
+                                                        <option value="Building">Building</option>
+                                                        <option value="Land">Land</option>
+                                                        <option value="Other">Other</option>
+                                                      </select>
+                                                  </div>
+
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Location</label>
+                                                    <input id="assetLocation-${newAssetIndex}" type="text" class="form-control" placeholder="Location" value="">
+                                                </div>
+
+                                                <div class="row justify-content-end">
+                                                  <div class="col-auto py-3">
+                                                <a href="housesurvey.html" class="btn btn-primary">Cancel</a>
+                                              </div>
+                                                <div class="col-auto py-3">
+                                                  <button onclick="addNewCitizenAsset(${newAssetIndex}, ${id})" type="button" class="btn btn-outline-primary active w-100">
+                                                    Submit
+                                                  </button>
+                                                </div>
+                                              </div>
+
+                                          </div>
+                                      </div>
+                              </div>
+                              </div>`;
+        $accordionContainer.append(newAccordionItem);
+
+        $(`#tabs-assets-${id}`).on('change', `#assetId-${newAssetIndex}`, function () {
+          const selectedOption = $(this).find(':selected'); // Get the selected <option>
+          const assetType = selectedOption.data('assettype'); // Get the data-assettype attribute
+
+          if (assetType) {
+            $(`#tabs-assets-${newIndex} #assetType-${newAssetIndex}`).val(assetType).trigger('change');
+          } else {
+            $(`#tabs-assets-${newIndex} #assetType-${newAssetIndex}`).val("").trigger('change');
+          }
+        });
+
+      }
+
+      let newDocumentIndex;
+      // Function to add Document row
+      window.addDocumentsBtn = function (id) {
+        const $documentContainer = $(`#documentContainer-${id}`);
+
+        // Find the number of existing accordion items to set unique IDs
+        const itemCount = $documentContainer.find(".doc-row").length;
+        newDocumentIndex = itemCount + 1;
+
+        const newDocItem = `
+        <div class="row doc-row" id="doc-row-${newDocumentIndex}">
+         <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label required">Document type</label>
+              <select id="documentType" class="form-control form-select">
+                <option value="" selected>Select type</option>
+                <option value="Aadhar Card">Aadhar Card</option>
+                <option value="PAN Card">PAN Card</option>
+                <option value="Passport">Passport</option>
+                <option value="Driving License">Driving License</option>
+                <option value="Water Bill">Water Bill</option>
+                <option value="Electricity Bill">Electricity Bill</option>
+                <option value="Other">Other</option>
+              </select>
+              <div id="documentType-Val" class="invalid-feedback d-none">Document type is required</div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label required">Choose document</label>
+              <input id="document" type="file" accept="image/*,.pdf,.doc,.docx,.txt" multiple class="form-control" placeholder="Upload file">
+              <div id="document-Val" class="invalid-feedback d-none">Document is required</div>
+            </div>
+          </div>
+        </div>
+
+        `;
+        $documentContainer.append(newDocItem);
+
+      }
+
+      // Function to append resident options
+      function appendResidentOptions(id) {
+        if (residentOptionList?.length > 0) {
+          return residentOptionList
+            .map(resident =>
+              `<option value="${resident.name}" data-citizen-id="${resident.citizenId}"></option>`
+            )
+            .join(''); // Join all options into a single string
+        }
+        return '';
+      }
+
+      // Function to call deleteCitizen api
+      async function deleteCitizenCall(id){
+          try {
+            const response = await deleteDataById(`deleteCitizen/${id}`);
+            if(response.code == 200){
+              showToastMessage(response.message, 'success');
+              return true;
+            } else {
+              showToastMessage(response.message, 'error');
+              return false;
+            }
+          } catch (error) {
+            console.error(error);
+            showToastMessage('Error deleting citizen', 'error');
+            return false;
+          }
+        }
+
+        // Function to delete Citizen accordion
+      window.deleteCitizen = async function(id){
+        const $heading = $(`#accordion-example #heading-${id}`); // Select the heading
+
+        // Check if the heading has data-citizenid
+        if ($heading.data("citizenid")) {
+            const citizenId = $heading.data("citizenid"); // Get the citizen ID
+            const isDeleted = await deleteCitizenCall(citizenId);
+            if(isDeleted){
+              const $accordionItem = $heading.closest(".accordion-item");
+              $accordionItem.remove();
+            }
+        } else {
+          // Remove the accordion item
+          const $accordionItem = $heading.closest(".accordion-item");
+          $accordionItem.remove();
+        }
+
+      }
+
+      // Function to call deleteMedical api
+      async function deleteMedicalCall(id){
+          try {
+            const response = await deleteDataById(`deleteMedical/${id}`);
+            if(response.code == 200){
+              showToastMessage(response.message, 'success');
+              return true;
+            } else {
+              showToastMessage(response.message, 'error');
+              return false;
+            }
+          } catch (error) {
+            console.error(error);
+            showToastMessage('Error deleting medical details', 'error');
+            return false;
+          }
+        }
+
+        // Function to delete medical details
+      window.deleteMedical = async function(id){
+        const $medical = $(`#tabs-medical-${id}`); // Select the medical
+
+        // Check if the medical has data-citizenid
+        if ($medical.data("medicalid")) {
+            const medicalid = $medical.data("medicalid"); // Get the citizen ID
+            const isDeleted = await deleteMedicalCall(medicalid);
+            if(isDeleted){
+              $medical.removeAttr("data-medicalid");
+              $(`#tabs-medical-${id} #bloodGroup`).val("");
+              $(`#tabs-medical-${id} #weight`).val("");
+              $(`#tabs-medical-${id} #height`).val("");
+              const el = document.getElementById(`healthStatus-${id}`);
+              const tomSelectInstance = el.tomselect; // TomSelect binds its instance to the DOM element
+
+              if (tomSelectInstance) {
+                  tomSelectInstance.clear(); // Clears all selected values
+              }
+            }
+        } else {
+          // Remove the accordion item
+          $(`#tabs-medical-${id} #bloodGroup`).val("");
+          $(`#tabs-medical-${id} #weight`).val("");
+          $(`#tabs-medical-${id} #height`).val("");
+          const el = document.getElementById(`healthStatus-${newIndex}`);
+          const tomSelectInstance = el.tomselect; // TomSelect binds its instance to the DOM element
+
+              if (tomSelectInstance) {
+                  tomSelectInstance.clear(); // Clears all selected values
+              }
+        }
+
+      }
+
+      // Function to call deleteQualification api
+      async function deleteQualificationCall(id){
+          try {
+            const response = await deleteDataById(`deleteQualification/${id}`);
+            if(response.code == 200){
+              showToastMessage(response.message, 'success');
+              return true;
+            } else {
+              showToastMessage(response.message, 'error');
+              return false;
+            }
+          } catch (error) {
+            console.error(error);
+            showToastMessage('Error deleting qualification', 'error');
+            return false;
+          }
+        }
+
+        // Function to delete qualification accordion
+      window.deleteQualification = async function(id, rid){
+        const $heading = $(`#accordion-qualification-${rid} #heading-${id}`); // Select the heading
+
+        // Check if the heading has data-citizenid
+        if ($heading.data("qualificationid")) {
+            const qualificationId = $heading.data("qualificationid"); // Get the citizen ID
+            const isDeleted = await deleteQualificationCall(qualificationId);
+            if(isDeleted){
+              const $accordionItem = $heading.closest(".accordion-item");
+              $accordionItem.remove();
+            }
+        } else {
+          // Remove the accordion item
+          const $accordionItem = $heading.closest(".accordion-item");
+          $accordionItem.remove();
+        }
+
+      }
+
+      // Function to call deleteEmployment api
+      async function deleteEmploymentCall(id){
+          try {
+            const response = await deleteDataById(`deleteEmployment/${id}`);
+            if(response.code == 200){
+              showToastMessage(response.message, 'success');
+              return true;
+            } else {
+              showToastMessage(response.message, 'error');
+              return false;
+            }
+          } catch (error) {
+            console.error(error);
+            showToastMessage('Error deleting employment details', 'error');
+            return false;
+          }
+        }
+
+        // Function to delete Employment accordion
+      window.deleteEmployment = async function(id, rid){
+        const $heading = $(`#accordion-employment-${rid} #heading-${id}`); // Select the heading
+
+        // Check if the heading has data-citizenid
+        if ($heading.data("employmentid")) {
+            const employmentId = $heading.data("employmentid"); // Get the citizen ID
+            const isDeleted = await deleteEmploymentCall(employmentId);
+            if(isDeleted){
+              const $accordionItem = $heading.closest(".accordion-item");
+              $accordionItem.remove();
+            }
+        } else {
+          // Remove the accordion item
+          const $accordionItem = $heading.closest(".accordion-item");
+          $accordionItem.remove();
+        }
+      }
+
+      // Function to call deleteScheme api
+      async function deleteSchemeCall(id){
+          try {
+            const response = await deleteDataById(`deleteScheme/${id}`);
+            if(response.code == 200){
+              showToastMessage(response.message, 'success');
+              return true;
+            } else {
+              showToastMessage(response.message, 'error');
+              return false;
+            }
+          } catch (error) {
+            console.error(error);
+            showToastMessage('Error deleting scheme', 'error');
+            return false;
+          }
+        }
+
+        // Function to delete Scheme accordion
+      window.deleteScheme = async function(id, rid){
+        const $heading = $(`#accordion-schemes-${rid} #heading-${id}`); // Select the heading
+
+        // Check if the heading has data-citizenid
+        if ($heading.data("schemeid")) {
+            const schemeId = $heading.data("schemeid"); // Get the citizen ID
+            const isDeleted = await deleteSchemeCall(schemeId);
+            if(isDeleted){
+              const $accordionItem = $heading.closest(".accordion-item");
+              $accordionItem.remove();
+            }
+        } else {
+          // Remove the accordion item
+          const $accordionItem = $heading.closest(".accordion-item");
+          $accordionItem.remove();
+        }
+      }
+
+      // Function to call deleteTax api
+      async function deleteTaxCall(id){
+          try {
+            const response = await deleteDataById(`deleteTax/${id}`);
+            if(response.code == 200){
+              showToastMessage(response.message, 'success');
+              return true;
+            } else {
+              showToastMessage(response.message, 'error');
+              return false;
+            }
+          } catch (error) {
+            console.error(error);
+            showToastMessage('Error deleting tax', 'error');
+            return false;
+          }
+        }
+
+        // Function to delete Tax accordion
+      window.deleteTax = async function(id, rid){
+        const $heading = $(`#accordion-taxes-${rid} #heading-${id}`); // Select the heading
+
+        // Check if the heading has data-citizenid
+        if ($heading.data("taxid")) {
+            const taxId = $heading.data("taxid"); // Get the citizen ID
+            const isDeleted = await deleteTaxCall(taxId);
+            if(isDeleted){
+              const $accordionItem = $heading.closest(".accordion-item");
+              $accordionItem.remove();
+            }
+        } else {
+          // Remove the accordion item
+          const $accordionItem = $heading.closest(".accordion-item");
+          $accordionItem.remove();
+        }
+      }
+
+      // Function to call deleteAsset api
+      async function deleteAssetCall(id){
+          try {
+            const response = await deleteDataById(`deleteAsset/${id}`);
+            if(response.code == 200){
+              showToastMessage(response.message, 'success');
+              return true;
+            } else {
+              showToastMessage(response.message, 'error');
+              return false;
+            }
+          } catch (error) {
+            console.error(error);
+            showToastMessage('Error deleting asset', 'error');
+            return false;
+          }
+        }
+
+        // Function to delete Asset accordion
+      window.deleteAsset = async function(id, rid){
+        const $heading = $(`#accordion-assets-${rid} #heading-${id}`); // Select the heading
+
+        // Check if the heading has data-citizenid
+        if ($heading.data("assetid")) {
+            const assetId = $heading.data("assetid"); // Get the citizen ID
+            const isDeleted = await deleteAssetCall(assetId);
+            if(isDeleted){
+              const $accordionItem = $heading.closest(".accordion-item");
+              $accordionItem.remove();
+            }
+        } else {
+          // Remove the accordion item
+          const $accordionItem = $heading.closest(".accordion-item");
+          $accordionItem.remove();
+        }
+      }
+
+      // let newIndex;
+      // Function to add Citizen/Resident accordion
+      window.addResidentsBtn = function () {
+        const $accordionContainer = $("#accordion-example");
+
+        // Find the number of existing accordion items to set unique IDs
+        const itemCount = $accordionContainer.find(".accordionItemResident").length;
+        // newIndex = itemCount + 1;
+        const newIndex = itemCount + 1;
+
+        // Create the new accordion item
+        const newAccordionItem = `
+            <div class="accordion-item accordionItemResident">
+              <h2 class="accordion-header d-flex" id="heading-${newIndex}" style="padding: 3px 20px !important; align-items: center">
+                <button class="accordion-button w-90" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${newIndex}" aria-expanded="true">
+                 ${newIndex == 1 ? `Head of family/House owner:` : `Resident ${newIndex}:`} 
+                </button>
+                <a onclick="deleteCitizen(${newIndex})" class="btn btn-youtube btn-icon col-auto" aria-label="Delete" style="height: 20px !important;">
+                  <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
+                </a>
+                </h2>
+              <div id="collapse-${newIndex}" class="accordion-collapse collapse" data-bs-parent="#accordion-example">
+                <div class="accordion-body pt-0">
+                  <div class="card">
+                    <div class="card-header">
+                      <ul class="nav nav-tabs card-header-tabs nav-fill" data-bs-toggle="tabs">
+                        <li class="nav-item">
+                          <a href="#tabs-general-${newIndex}" class="nav-link active" data-bs-toggle="tab">General</a>
+                        </li>
+                        <li class="nav-item">
+                          <a id="#tabs-qualification-tab-${newIndex}" href="#tabs-qualification-${newIndex}" class="nav-link" data-bs-toggle="tab">Qualification</a>
+                        </li>
+                        <li class="nav-item">
+                          <a id="#tabs-medical-tab-${newIndex}" href="#tabs-medical-${newIndex}" class="nav-link" data-bs-toggle="tab">Medical</a>
+                        </li>
+                        <li class="nav-item">
+                          <a id="#tabs-employment-tab-${newIndex}" href="#tabs-employment-${newIndex}" class="nav-link" data-bs-toggle="tab">Employment</a>
+                        </li>
+                        <li class="nav-item">
+                          <a id="#tabs-schemes-tab-${newIndex}" href="#tabs-schemes-${newIndex}" class="nav-link" data-bs-toggle="tab">Schemes</a>
+                        </li>
+                        <li class="nav-item">
+                          <a id="#tabs-taxes-tab-${newIndex}" href="#tabs-taxes-${newIndex}" class="nav-link" data-bs-toggle="tab">Taxes</a>
+                        </li>
+                        <li class="nav-item">
+                          <a id="#tabs-assets-tab-${newIndex}" href="#tabs-assets-${newIndex}" class="nav-link" data-bs-toggle="tab">Assets</a>
+                        </li>
+                        <li class="nav-item">
+                          <a id="#tabs-documents-tab-${newIndex}" href="#tabs-documents-${newIndex}" class="nav-link" data-bs-toggle="tab">Documents</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="card-body">
+                      <div class="tab-content">
+                        <div class="tab-pane active show" id="tabs-general-${newIndex}">
+                          <!-- General Form Content -->
+                          <div class="row row-cards">
+                            <div class="col-md-6">
+                              <div class="mb-3">
+                                <label class="form-label required">Name</label>
+                                <input id="name-${newIndex}" class="form-control" list="datalistOptions-${newIndex}"  placeholder="Name" value="">
+                                <datalist id="datalistOptions-${newIndex}">
+                                ${appendResidentOptions(newIndex)}
+                                 </datalist>
+                                 <div id="nameText-${newIndex}" class="invalid-feedback"></div>
+                            </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="mb-3">
+                              <div class="form-label required">Gender</div>
+                              <div>
+                                <label class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="radios-gender-${newIndex}" checked="" value="male">
+                                  <span class="form-check-label">Male</span>
+                                </label>
+                                <label class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="radios-gender-${newIndex}" value="female">
+                                  <span class="form-check-label">Female</span>
+                                </label>
+                                <label class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="radios-gender-${newIndex}" value="other">
+                                  <span class="form-check-label">Other</span>
+                                </label>
+                              </div>
+                            </div>
+                            </div>
+  
+                            <div class="col-md-6">
+                              <div class="mb-3">
+                                  <label class="form-label required">Date of birth</label>
+                                  <div class="input-icon mb-2">
+                                    <input id="dob-${newIndex}" class="form-control mb-2" placeholder="Select a date" value="">
+                                    <div id="dob-Val-${newIndex}" class="invalid-feedback d-none">Date of birth is required</div>
+                                    <span id="dob-Icon-${newIndex}" class="input-icon-addon">
+                                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M11 15h1" /><path d="M12 15v3" /></svg>
+                                    </span>
+                                  </div>
+                            </div>
+                            </div>
+  
+                            <div class="col-md-6">
+                              <div class="mb-3">
+                                <label class="form-label">Aadhar no</label>
+                                <input id="aadharNo" type="number" class="form-control" placeholder="Aadhar no"
+                                              value="">
+                                 <div id="aadharNo-Val" class="invalid-feedback d-none"></div>             
+                              </div>
+                            </div>
+  
+                            <div class="col-md-6">
+                              <div class="mb-3">
+                                <label class="form-label">Pan card no</label>
+                                <input id="panCardNo" type="text" class="form-control" placeholder="Pan card no"
+                                              value="">
+                              </div>
+                            </div>
+  
+                            <div class="col-md-6">
+                              <div class="mb-3">
+                                <label class="form-label">Driving license</label>
+                                <input id="drivingLicense" type="text" class="form-control" placeholder="Driving license"
+                                              value="">
+                              </div>
+                            </div>
+  
+                            <div class="col-md-12">
+                              <div class="mb-3">
+                                <label class="form-label required">Native Address &nbsp;&nbsp;
+                                  
+                                    <input id="same-as-above-${newIndex}" class="form-check-input" type="checkbox">
+                                    <span class="fw-normal">same as above</span>
+                                  
+                                </label>
+                                <textarea id="citizenAddress-${newIndex}" rows="2" class="form-control" placeholder="Address" value=""></textarea>
+                                <div id="citizenAddress-Val-${newIndex}" class="invalid-feedback d-none">Native Address is required</div>
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="mb-3">
+                                <label class="form-label required">Mobile no</label>
+                                <input id="mobileNo" type="number" class="form-control" placeholder="Mobile no" value="" autocomplete="new-password">
+                                <div id="mobileNo-Val" class="invalid-feedback d-none"></div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Alternate Mobile no</label>
+                                <input id="altMobileNo" type="number" class="form-control" placeholder="Alternate Mobile no" value="" autocomplete="new-password">
+                                <div id="altMobileNo-Val" class="invalid-feedback d-none"></div>
+                            </div>
+                             <div class="col-md-6">
+                                  <label class="form-label">Email</label>
+                                  <input id="email" type="email" class="form-control" placeholder="Email"
+                                                  value="" autocomplete="new-password">
+                              </div>
+    
+                              <div class="col-md-6 ${newIndex == 1 ? "" : "d-none"}">
+                                <div class="mb-3">
+                                  <label class="form-label required">Password</label>
+                                  <input id="password" type="password" class="form-control" placeholder="Password"
+                                                  value="" autocomplete="new-password">
+                                  <div id="password-Val" class="invalid-feedback d-none"></div>
+
+                                </div>
+                              </div>
+    
+                              <div class="col-md-6 relationWithHOFSection ${relationWithHOFFlag == false ? "d-none" : ""}">
+                                <div class="mb-3">
+                                  <label class="form-label required">Relation with head of family</label>
+                                  <select id="relation" class="form-control form-select" ${newIndex == 1 ? "disabled" : ""}>
+                                    ${getRelationshipOptions(newIndex)}
+                                   
+                                  </select>
+                                  <div id="relation-Val" class="invalid-feedback d-none">Relation with head of family is required</div>
+
+                                </div>
+                              </div>
+    
+                              <div class="col-md-6">
+                                <div class="mb-3">
+                                  <label class="form-label">Annual income</label>
+                                  <input id="annualIncome" type="number" class="form-control" placeholder="Annual income"
+                                                  value="">
+
+                                </div>
+                              </div>
+
+                     
+
+                              <div class="col-md-6">
+                                <div class="mb-3">
+                                  <label class="form-label">Passport No.</label>
+                                  <input id="passportNo" type="text" class="form-control" placeholder="Passport No"
+                                                  value="">
+                                </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                  <label class="form-label">Citizen Image</label>
+                                  <input id="citizenImage-${newIndex}" type="file"  accept="image/*" class="form-control mb-2" placeholder="Upload Image">
+                                  <img id="citizenImagePreview-${newIndex}" src="" class="rounded" style="display: none;" />
+                              </div>
+
+                              <div class="row justify-content-end">
+                                <div class="col-auto py-3">
+                                                <a href="housesurvey.html" class="btn btn-primary">Cancel</a>
+                                              </div>
+                                <div class="col-auto py-3">
+                                  <button onclick="addNewCitizen(${newIndex})" type="button" class="btn btn-outline-primary active w-100">
+                                    Submit
+                                  </button>
+                                </div>
+                              </div>
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="tabs-qualification-${newIndex}">
+                          <!-- Qualification Content -->
+                           <div class="row row-cards">
+
+                            <div class="accordion" id="accordion-qualification-${newIndex}">
+                              <div class="accordion-item">
+                              <h2 class="accordion-header d-flex" id="heading-1" style="padding: 3px 20px !important;  align-items: center">
+                                  <button class="accordion-button w-90" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-qualification-1" aria-expanded="true" aria-controls="collapse-qualification-1">
+                                  Qualification Detail 1
+                                  </button>
+                                   <a onclick="deleteQualification(1, ${newIndex})" class="btn btn-youtube btn-icon col-auto" aria-label="Delete" style="height: 20px !important;">
+                                      <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
+                                    </a>
+                              </h2>
+                              <div id="collapse-qualification-1" class="accordion-collapse collapse show" aria-labelledby="heading-1" data-bs-parent="#accordion-qualification-${newIndex}">
+                                  <div class="accordion-body">
+                                      <div class="row row-cards">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                <label class="form-label required">Qualification Name</label>
+                                                <select id="qualificationName-1" class="form-control form-select">
+                                                  <option value="" selected>Select Qulification</option>
+                                                  <option value="bachelor_of_engineering">Bachelor of Engineering</option>
+                                                  <option value="master_of_engineering">Master of Engineering</option>
+                                                  <option value="bachelor_of_science">Bachelor of Science</option>
+                                                  <option value="master_of_science">Master of Science</option>
+                                                  <option value="bachelor_of_arts">Bachelor of Arts</option>
+                                                  <option value="master_of_arts">Master of Arts</option>
+                                                  <option value="bachelor_of_business_administration">Bachelor of Business Administration</option>
+                                                  <option value="master_of_business_administration">Master of Business Administration</option>
+                                                  <option value="bachelor_of_medicine_and_surgery">Bachelor of Medicine and Surgery (MBBS)</option>
+                                                  <option value="master_of_dental_surgery">Master of Dental Surgery</option>
+                                                  <option value="bachelor_of_laws">Bachelor of Laws (LLB)</option>
+                                                  <option value="master_of_laws">Master of Laws (LLM)</option>
+                                                  <option value="doctor_of_philosophy">Doctor of Philosophy (PhD)</option>
+                                                   <option value="other">Other</option>
+                                                </select>
+                                                <div id="qualificationName-Val-1" class="invalid-feedback d-none">Qualification Name is required</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                              <div class="mb-3">
+                                                <label class="form-label required">Institution Name</label>
+                                                <input id="institutionName-1" type="text" class="form-control" placeholder="Institution Name" value="">
+                                                <div id="institutionName-Val-1" class="invalid-feedback d-none">Institution Name is required</div>
+                                              </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                              <div class="mb-3">
+                                                <label class="form-label required">Year of passing</label>
+                                               <input id="yop-1" type="text" class="form-control" placeholder="Year of passing" value="">
+                                                <div id="yop-Val-1" class="invalid-feedback d-none">Year of passing is required</div>
+                                              </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label class="form-label">Grade</label>
+                                                <input id="grade-1" type="text" class="form-control" placeholder="Grade" value="">
+                                            </div>
+
+                                            <div class="col-md-6">
+                                              <div class="mb-3">
+                                                <label class="form-label required">Degree type</label>
+                                                <select id="degreeType-1" class="form-control form-select">
+                                                  <option value="" selected>Select Degree type</option>
+                                                  <option value="Graduate">Graduate</option>
+                                                  <option value="Postgraduate">Postgraduate</option>
+                                                  <option value="Diploma">Diploma</option>
+                                                  <option value="Certificates">Certificates</option>
+                                                  <option value="Other">Other</option>
+                                                </select>
+                                                <div id="degreeType-Val-1" class="invalid-feedback d-none">Degree type is required</div>
+                                              </div>
+                                            </div>
+
+                                            <div class="row justify-content-end">
+                                              <div class="col-auto py-3">
+                                                <a href="housesurvey.html" class="btn btn-primary">Cancel</a>
+                                              </div>
+                                              <div class="col-auto py-3">
+                                                <button onclick="addNewQualification(1, ${newIndex})" type="button" class="btn btn-outline-primary active w-100">
+                                                  Submit
+                                                </button>
+                                              </div>
+                                            </div>
+
+                                          </div>
+                                      </div>
+                              </div>
+                              </div>
+                            </div>
+
+                           
+
+                            <div class="row justify-content-start">
+                              <div class="col-auto py-3">
+                                <button type="button" onclick="addQualificationBtn(${newIndex})" class="btn btn-outline-primary active w-100">
+                                  + Add more Qualification
+                                </button>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+
+                        <div class="tab-pane" id="tabs-medical-${newIndex}">
+                          <!-- Medical Content -->
+                          <div class="row row-cards">
+
+                             <div class="col-md-6">
+                                <div class="mb-3">
+                                  <label class="form-label required">Blood group</label>
+                                  <select id="bloodGroup" class="form-control form-select">
+                                    <option value="" selected>Select Blood group</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="Hh">Bombay Blood Group</option>
+                                  </select>
+                                  <div id="bloodGroup-Val" class="invalid-feedback d-none">Blood group is required</div>
+                                </div>
+                              </div>
+
+                             <div class="col-md-6">
+                              <div class="mb-3">
+                                <label class="form-label required">Weight (in KGs)</label>
+                                <input id="weight" type="text" class="form-control" placeholder="Weight" value="">
+                                  <div id="weight-Val" class="invalid-feedback d-none">Weight is required</div>
+                              </div>
+                            </div>
+
+                             <div class="col-md-6">
+                              <div class="mb-3">
+                                <label class="form-label required">Height (in CMs)</label>
+                                <input id="height" type="text" class="form-control" placeholder="Height" value="">
+                                  <div id="height-Val" class="invalid-feedback d-none">Height is required</div>
+                              </div>
+                            </div>
+
+                             <div class="col-md-6">
+                                <div class="mb-3">
+                                  <label class="form-label">Health status</label>
+                                  <select id="healthStatus-${newIndex}" class="form-control form-select" multiple>
+                                    ${getHealthStatusOptions()}
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="col-md-12">
+                                <div class="mb-3">
+                                  <label class="form-label">Other Health Issue</label>
+                                  <textarea id="otherHealthIssues" rows="2" class="form-control" placeholder="Other health issue" value=""></textarea>
+                                </div>
+                              </div>
+
+                            <div class="row justify-content-end">
+                              <div class="col-auto py-3">
+                                                <a href="housesurvey.html" class="btn btn-primary">Cancel</a>
+                                              </div>
+                              <div class="col-auto py-3">
+                                <button onclick="addNewMedical(${newIndex})" type="button" class="btn btn-outline-primary active w-100">
+                                  Submit
+                                </button>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="tabs-employment-${newIndex}">
+                          <!-- Employment Content -->
+                          <div class="row row-cards">
+
+                             <div class="accordion" id="accordion-employment-${newIndex}">
+                              <div class="accordion-item">
+                              <h2 class="accordion-header d-flex" id="heading-1"  style="padding: 3px 20px !important;  align-items: center">
+                                  <button class="accordion-button w-90" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-employment-1" aria-expanded="true" aria-controls="collapse-employment-1">
+                                  Employment Detail 1
+                                  </button>
+                                  <a onclick="deleteEmployment(1, ${newIndex})" class="btn btn-youtube btn-icon col-auto" aria-label="Delete" style="height: 20px !important;">
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
+                                  </a>
+                              </h2>
+                              <div id="collapse-employment-1" class="accordion-collapse collapse show" aria-labelledby="heading-1" data-bs-parent="#accordion-employment-${newIndex}">
+                                  <div class="accordion-body">
+                                      <div class="row row-cards">
+                                             <div class="col-md-6">
+                                              <div class="mb-3">
+                                                <label class="form-label required">Service Type</label>
+                                                <select id="serviceType-1" class="form-control form-select">
+                                                  <option value="" selected>Select Service Type</option>
+                                                  <option value="Govt">Govt</option>
+                                                  <option value="Employed">Employed</option>
+                                                  <option value="Self Employed">Self Employed</option>
+                                                  <option value="Retired">Retired</option>
+                                                </select>
+                                                <div id="serviceType-Val-1" class="invalid-feedback d-none">Service Type is required</div>
+                                              </div>
+                                            </div>
+
+                                          <div class="col-md-6">
+                                            <div class="mb-3">
+                                              <label class="form-label required">Employer name</label>
+                                              <input id="employerName-1" type="text" class="form-control" placeholder="Employer name" value="">
+                                                <div id="employerName-Val-1" class="invalid-feedback d-none">Employer name is required</div>
+                                            </div>
+                                          </div>
+
+                                          <div class="col-md-6">
+                                            <div class="mb-3">
+                                              <label class="form-label required">Position</label>
+                                              <input id="position-1" type="text" class="form-control" placeholder="Position" value="">
+                                                                                              <div id="position-Val-1" class="invalid-feedback d-none">Position is required</div>
+                                            </div>
+                                          </div>
+
+                                          <div class="col-md-6">
+                                            <div class="mb-3">
+                                              <label class="form-label required">Salary</label>
+                                              <input id="salary-1" type="number" class="form-control" placeholder="Salary" value="">
+                                                                                              <div id="salary-Val-1" class="invalid-feedback d-none">Salary is required</div>
+
+                                            </div>
+                                          </div>
+
+                                          <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label required">Joining date</label>
+                                                <div class="input-icon mb-2">
+                                                  <input id="joiningDate-${newIndex}-1" class="form-control mb-2" placeholder="Select a date" value="">
+                                                                                              <div id="joiningDate-Val-1" class="invalid-feedback d-none">Joining date is required</div>
+                                                  <span id="joiningDate-Icon-1" class="input-icon-addon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M11 15h1" /><path d="M12 15v3" /></svg>
+                                                  </span>
+                                                </div>
+                                          </div>
+                                          </div>
+
+                                          <div class="row justify-content-end">
+                                            <div class="col-auto py-3">
+                                                <a href="housesurvey.html" class="btn btn-primary">Cancel</a>
+                                              </div>
+                                            <div class="col-auto py-3">
+                                              <button onclick="addNewEmployment(1, ${newIndex})" type="button" class="btn btn-outline-primary active w-100">
+                                                Submit
+                                              </button>
+                                            </div>
+                                          </div>
+
+                                          </div>
+                                      </div>
+                              </div>
+                              </div>
+                            </div>
+
+ 
+                            <div class="row justify-content-start">
+                              <div class="col-auto py-3">
+                                <button type="button" onclick="addEmploymentBtn(${newIndex})" class="btn btn-outline-primary active w-100">
+                                  + Add more Employment
+                                </button>
+                              </div>
+                            </div>
+
+
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="tabs-schemes-${newIndex}">
+                          <!-- Schemes Content -->
+                          <div class="row row-cards">
+
+                             <div class="accordion" id="accordion-schemes-${newIndex}">
+                              <div class="accordion-item">
+                              <h2 class="accordion-header d-flex" id="heading-1" style="padding: 3px 20px !important;  align-items: center">
+                                  <button class="accordion-button w-90" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-schemes-1" aria-expanded="true" aria-controls="collapse-schemes-1">
+                                  Scheme Detail 1
+                                  </button>
+                                   <a onclick="deleteScheme(1, ${newIndex})" class="btn btn-youtube btn-icon col-auto" aria-label="Delete" style="height: 20px !important;">
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
+                                  </a>
+                              </h2>
+                              <div id="collapse-schemes-1" class="accordion-collapse collapse show" aria-labelledby="heading-1" data-bs-parent="#accordion-schemes-${newIndex}">
+                                  <div class="accordion-body">
+                                      <div class="row row-cards">
+                                              <div class="col-md-6">
+                                                <div class="mb-3">
+                                                  <label class="form-label required">Scheme</label>
+                                                  <select id="schemeId-1" class="form-control form-select">
+                                                      ${getSchemeOptions(newIndex)}
+                                                    
+                                                    </select>
+                                                  <div id="schemeId-Val-1" class="invalid-feedback d-none">Scheme is required</div>
+
+                                                </div>
+                                              </div>
+
+                                              <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label required">Enrollment date</label>
+                                                    <div class="input-icon mb-2">
+                                                      <input id="enrollmentDate-1" class="form-control mb-2" placeholder="Select a date" value="">
+                                                     <div id="enrollmentDate-Val-1" class="invalid-feedback d-none">Enrollment date is required</div>
+
+                                                      <span id="enrollmentDate-Icon-1" class="input-icon-addon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M11 15h1" /><path d="M12 15v3" /></svg>
+                                                      </span>
+                                                    </div>
+                                              </div>
+                                              </div>
+
+                                              <div class="col-md-6">
+                                                  <div class="mb-3">
+                                                    <label class="form-label required">Status</label>
+                                                    <select id="status-1" class="form-control form-select">
+                                                      <option value="" selected>Select status</option>
+                                                      <option value="Active">Active</option>
+                                                      <option value="Inactive">Inactive</option>
+                                                    </select>
+                                                     <div id="status-Val-1" class="invalid-feedback d-none">Status is required</div>
+                                                  </div>
+                                                </div>
+
+                                              <div class="row justify-content-end">
+                                                <div class="col-auto py-3">
+                                                <a href="housesurvey.html" class="btn btn-primary">Cancel</a>
+                                              </div>
+                                                <div class="col-auto py-3">
+                                                  <button onclick="addNewCitizenScheme(1, ${newIndex})" type="button" class="btn btn-outline-primary active w-100">
+                                                    Submit
+                                                  </button>
+                                                </div>
+                                              </div>
+
+                                          </div>
+                                      </div>
+                              </div>
+                              </div>
+                            </div>
+
+ 
+                            <div class="row justify-content-start">
+                              <div class="col-auto py-3">
+                                <button type="button" onclick="addSchemesBtn(${newIndex})" class="btn btn-outline-primary active w-100">
+                                  + Add more Schemes
+                                </button>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="tabs-taxes-${newIndex}">
+                          <!-- Taxes Content -->
+                          <div class="row row-cards">
+
+                            <div class="accordion" id="accordion-taxes-${newIndex}">
+                              <div class="accordion-item">
+                              <h2 class="accordion-header d-flex" id="heading-1" style="padding: 3px 20px !important;  align-items: center">
+                                  <button class="accordion-button w-90" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-taxes-1" aria-expanded="true" aria-controls="collapse-taxes-1">
+                                  Tax Detail 1
+                                  </button>
+                                  <a onclick="deleteTax(1, ${newIndex})" class="btn btn-youtube btn-icon col-auto" aria-label="Delete" style="height: 20px !important;">
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
+                                  </a>
+                              </h2>
+                              <div id="collapse-taxes-1" class="accordion-collapse collapse show" aria-labelledby="heading-1" data-bs-parent="#accordion-taxes-${newIndex}">
+                                  <div class="accordion-body">
+                                      <div class="row row-cards">
+
+                                              <div class="col-md-6">
+                                                <div class="mb-3">
+                                                  <label class="form-label required">Type</label>
+                                                  <select id="type-1" class="form-control form-select">
+                                                    <option value="" selected>Select type</option>
+                                                    <option value="Income Tax">Income Tax</option>
+                                                    <option value="Other">Other</option>
+                                                  </select>
+                                                  <div id="type-Val-1" class="invalid-feedback d-none">Type is required</div>
+                                                </div>
+                                              </div>
+
+                                            <div class="col-md-6">
+                                              <div class="mb-3">
+                                                <label class="form-label required">Amount</label>
+                                                <input id="amount-1" type="number" class="form-control" placeholder="Amount" value="">
+                                                  <div id="amount-Val-1" class="invalid-feedback d-none">Amount is required</div>
+                                              </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                              <div class="mb-3">
+                                                  <label class="form-label required">Payment date</label>
+                                                  <div class="input-icon mb-2">
+                                                    <input id="paymentDate-1" class="form-control mb-2" placeholder="Select a date" value="">
+                                                    <div id="paymentDate-Val-1" class="invalid-feedback d-none">Payment date is required</div>
+                                                    <span id="paymentDate-Icon-1" class="input-icon-addon">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M11 15h1" /><path d="M12 15v3" /></svg>
+                                                    </span>
+                                                  </div>
+                                            </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                              <div class="mb-3">
+                                                <label class="form-label">Receipt number</label>
+                                                <input id="receiptNumber-1" type="text" class="form-control" placeholder="Receipt number" value="">
+                                              </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                              <div class="mb-3">
+                                                <label class="form-label required">Tax year</label>
+                                                <input id="taxYear-1" type="text" class="form-control" placeholder="Tax year" value="">
+                                                 <div id="taxYear-Val-1" class="invalid-feedback d-none">Tax year is required</div>
+
+                                              </div>
+                                            </div>                           
+
+                                            <div class="row justify-content-end">
+                                              <div class="col-auto py-3">
+                                                <a href="housesurvey.html" class="btn btn-primary">Cancel</a>
+                                              </div>
+                                              <div class="col-auto py-3">
+                                                <button onclick="addNewCitizenTax(1, ${newIndex})" type="button" class="btn btn-outline-primary active w-100">
+                                                  Submit
+                                                </button>
+                                              </div>
+                                            </div>
+
+                                          </div>
+                                      </div>
+                              </div>
+                              </div>
+                            </div>
+
+ 
+                            <div class="row justify-content-start">
+                              <div class="col-auto py-3">
+                                <button type="button" onclick="addTaxesBtn(${newIndex})" class="btn btn-outline-primary active w-100">
+                                  + Add more Taxes
+                                </button>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="tabs-assets-${newIndex}">
+                          <!-- Assets Content -->
+                          <div class="row row-cards">
+
+                            <div class="accordion" id="accordion-assets-${newIndex}">
+                              <div class="accordion-item">
+                              <h2 class="accordion-header d-flex" id="heading-1" style="padding: 3px 20px !important;  align-items: center">
+                                  <button class="accordion-button w-90" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-assets-1" aria-expanded="true" aria-controls="collapse-assets-1">
+                                  Asset Detail 1
+                                  </button>
+                                  <a onclick="deleteAsset(1, ${newIndex})" class="btn btn-youtube btn-icon col-auto" aria-label="Delete" style="height: 20px !important;">
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
+                                  </a>
+                              </h2>
+                              <div id="collapse-assets-1" class="accordion-collapse collapse show" aria-labelledby="heading-1" data-bs-parent="#accordion-assets-${newIndex}">
+                                  <div class="accordion-body">
+                                      <div class="row row-cards">
+
+                                                <div class="col-md-6">
+                                                  <div class="mb-3">
+                                                    <label class="form-label required">Assets</label>
+                                                    <select id="assetId-1" class="form-control form-select">
+                                                        ${getAssetOptions(newIndex)}
+                                                      
+                                                      </select>
+                                                      <div id="assetId-Val-1" class="invalid-feedback d-none">Asset is required</div>
+                                                  </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                      <label class="form-label">Type</label>
+                                                      <select id="assetType-1" class="form-control form-select" disabled>
+                                                        <option value="" selected>Select type</option>
+                                                        <option value="Road">Road</option>
+                                                        <option value="Building">Building</option>
+                                                        <option value="Land">Land</option>
+                                                        <option value="Other">Other</option>
+                                                      </select>
+                                                  </div>
+
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Location</label>
+                                                    <input id="assetLocation-1" type="text" class="form-control" placeholder="Location" value="">
+                                                </div>
+
+                                                <div class="row justify-content-end">
+                                                  <div class="col-auto py-3">
+                                                <a href="housesurvey.html" class="btn btn-primary">Cancel</a>
+                                              </div>
+                                                <div class="col-auto py-3">
+                                                  <button onclick="addNewCitizenAsset(1, ${newIndex})" type="button" class="btn btn-outline-primary active w-100">
+                                                    Submit
+                                                  </button>
+                                                </div>
+                                              </div>
+
+                                          </div>
+                                      </div>
+                              </div>
+                              </div>
+                            </div>
+
+ 
+                            <div class="row justify-content-start">
+                              <div class="col-auto py-3">
+                                <button type="button" onclick="addAssetsBtn(${newIndex})" class="btn btn-outline-primary active w-100">
+                                  + Add more Assets
+                                </button>
+                              </div>
+                            </div>
+                            
+                        </div>
+                        </div>
+
+                         <div class="tab-pane" id="tabs-documents-${newIndex}">
+                          <!-- Documents Content -->
+                            <div class="row row-cards">
+
+                              <div id="documentContainer-${newIndex}">
+                              </div>
+
+                               <div class="row justify-content-start">
+                                <div class="col-auto py-3">
+                                  <button type="button" onclick="addDocumentsBtn(${newIndex})" class="btn btn-outline-primary active w-100">
+                                    + Add documents
+                                  </button>
+                                </div>
+                              </div>
+
+                              <div class="row justify-content-end">
+                                <div class="col-auto py-3">
+                                                <a href="housesurvey.html" class="btn btn-primary">Cancel</a>
+                                              </div>
+                                <div class="col-auto py-3">
+                                  <button onclick="addNewCitizenDocument(${newIndex})" type="button" class="btn btn-outline-primary active w-100">
+                                    Submit
+                                  </button>
+                                </div>
+                              </div>
+
+                            </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+
+        $accordionContainer.append(newAccordionItem);
+
+        $(`#tabs-assets-${newIndex}`).on('change', '#assetId-1', function () {
+          const selectedOption = $(this).find(':selected'); // Get the selected <option>
+          const assetType = selectedOption.data('assettype'); // Get the data-assettype attribute
+
+          if (assetType) {
+            $(`#tabs-assets-${newIndex} #assetType-1`).val(assetType).trigger('change');
+          } else {
+            $(`#tabs-assets-${newIndex} #assetType-1`).val("").trigger('change');
+          }
+        });
+
+        $(`#tabs-general-${newIndex}`).on('change', `#name-${newIndex}`, function () {
+          const inputFieldValue = $(this).val();
+          const matchingOptions = $(`#datalistOptions-${newIndex} option`).filter(function () { return this.value === inputFieldValue; })
+          const citizenId = matchingOptions.data('citizen-id');
+
+          console.log(newIndex);
+
+          if (citizenId) {
+            console.log('citizenId found');
+            // Check if the citizenId exists in the residentOptionList
+            const matchedObject = residentOptionList.find(obj => obj.citizenId === citizenId);
+
+            if (matchedObject) {
+              // if (rentFlag == true) {
+                $(`input[name="radios-gender-${newIndex}"][value="${matchedObject.gender}"]`).prop('checked', true);
+                $(`#heading-${newIndex}`).attr('data-citizenid', matchedObject.citizenId);
+                $(`#tabs-general-${newIndex} #dob-${newIndex}`).val(matchedObject.dob);
+                $(`#tabs-general-${newIndex} #aadharNo`).val(Number(matchedObject.aadharNo) || "");
+                $(`#tabs-general-${newIndex} #aadharNo`).attr("data-aadhar", matchedObject.aadharNo);
+                $(`#tabs-general-${newIndex} #panCardNo`).val(matchedObject.panCard || "");
+                $(`#tabs-general-${newIndex} #drivingLicense`).val(matchedObject.drivingLicense || "");
+                $(`#tabs-general-${newIndex} #citizenAddress-${newIndex}`).val(matchedObject.address);
+                $(`#tabs-general-${newIndex} #mobileNo`).val(matchedObject.contact || "");
+                $(`#tabs-general-${newIndex} #altMobileNo`).val(matchedObject.altContact || "");
+                $(`#tabs-general-${newIndex} #email`).val(matchedObject.email || "");
+                $(`#tabs-general-${newIndex} #annualIncome`).val(matchedObject.annualIncome || "");
+                $(`#tabs-general-${newIndex} #passportNo`).val(matchedObject.passportNo || "");
+              // } else {
+              //   $(this).addClass('is-invalid');
+              //   $(`#nameText-${newIndex}`).text('Person is already Registered in the Application for another House Number');
+              // }
+
+            } else {
+              $(`input[name="radios-gender-${newIndex}"][value="Male"]`).prop('checked', true);
+              $(`#heading-${newIndex}`).removeAttr('data-citizenid');
+              $(`#tabs-general-${newIndex} #dob-${newIndex}`).val("");
+              $(`#tabs-general-${newIndex} #aadharNo`).val("");
+              $(`#tabs-general-${newIndex} #aadharNo`).attr("data-aadhar", "");
+              $(`#tabs-general-${newIndex} #panCardNo`).val("");
+              $(`#tabs-general-${newIndex} #drivingLicense`).val("");
+              $(`#tabs-general-${newIndex} #citizenAddress-${newIndex}`).val("");
+              $(`#tabs-general-${newIndex} #mobileNo`).val("");
+              $(`#tabs-general-${newIndex} #altMobileNo`).val("");
+              $(`#tabs-general-${newIndex} #email`).val("");
+              $(`#tabs-general-${newIndex} #annualIncome`).val("");
+              $(`#tabs-general-${newIndex} #passportNo`).val("");
+              $(this).removeClass('is-invalid');
+              $(`#nameText-${newIndex}`).text('');
+            }
+          } else {
+            $(`input[name="radios-gender-${newIndex}"][value="Male"]`).prop('checked', true);
+            $(`#heading-${newIndex}`).removeAttr('data-citizenid');
+            $(`#tabs-general-${newIndex} #dob-${newIndex}`).val("");
+            $(`#tabs-general-${newIndex} #aadharNo`).val("");
+            $(`#tabs-general-${newIndex} #aadharNo`).attr("data-aadhar", "");
+            $(`#tabs-general-${newIndex} #panCardNo`).val("");
+            $(`#tabs-general-${newIndex} #drivingLicense`).val("");
+            $(`#tabs-general-${newIndex} #citizenAddress-${newIndex}`).val("");
+            $(`#tabs-general-${newIndex} #mobileNo`).val("");
+            $(`#tabs-general-${newIndex} #altMobileNo`).val("");
+            $(`#tabs-general-${newIndex} #email`).val("");
+            $(`#tabs-general-${newIndex} #annualIncome`).val("");
+            $(`#tabs-general-${newIndex} #passportNo`).val("");
+            $(this).removeClass('is-invalid');
+            $(`#nameText-${newIndex}`).text('');
+          }
+
+        });
+
+        $(`#same-as-above-${newIndex}`).on('change', function () {
+          if ($(this).is(':checked')) {
+            // Code to execute when the checkbox is checked
+            $(`#citizenAddress-${newIndex}`).val($('#address').val());
+          } else {
+            $(`#citizenAddress-${newIndex}`).val('');
+          }
+        });
+
+        $(`#citizenImage-${newIndex}`).on('change', function () {
+          const fileInput = this;
+          const previewImage = $(`#citizenImagePreview-${newIndex}`);
+          const allowedExtensions = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
+          const errorMessage = $(`<div class="text-danger mt-1" id="error-${newIndex}">Invalid file type. Only PNG, JPG, JPEG, and WEBP are allowed.</div>`);
+
+          // Clear previous error message if any
+          $(`#error-${newIndex}`).remove();
+
+          if (fileInput.files && fileInput.files[0]) {
+            const file = fileInput.files[0];
+            const fileType = file.type;
+
+            if (!allowedExtensions.includes(fileType)) {
+              // If the file type is not allowed, show error and reset the input
+              $(fileInput).after(errorMessage);
+              fileInput.value = ""; // Clear the selected file
+              previewImage.attr('src', '').css('display', 'none'); // Hide preview
+              return;
+            }
+
+            // If valid, preview the image
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+              previewImage.attr('src', e.target.result).css({
+                display: 'block',
+                maxWidth: '200px',
+                maxHeight: '200px',
+                border: '1px solid #ccc',
+                borderRadius: '5px'
+              });
+            };
+
+            reader.readAsDataURL(file);
+          } else {
+            // If no file is selected, hide the preview
+            previewImage.attr('src', '').css('display', 'none');
+          }
+        });
+
+        new TomSelect(el = document.getElementById(`healthStatus-${newIndex}`), {
+          copyClassesToDropdown: false,
+          dropdownParent: 'body',
+          controlInput: '<input>',
+          render: {
+            item: function (data, escape) {
+              if (data.customProperties) {
+                return '<div><span class="dropdown-item-indicator">' + data.customProperties + '</span>' + escape(data.text) + '</div>';
+              }
+              return '<div>' + escape(data.text) + '</div>';
+            },
+            option: function (data, escape) {
+              if (data.customProperties) {
+                return '<div><span class="dropdown-item-indicator">' + data.customProperties + '</span>' + escape(data.text) + '</div>';
+              }
+              return '<div>' + escape(data.text) + '</div>';
+            },
+          },
+        })
+
+        new Litepicker({
+          element: document.getElementById(`dob-${newIndex}`),
+          format: 'YYYY-MM-DD', // Set the desired format
+          dropdowns: {
+            minYear: 1900,
+            maxYear: new Date().getFullYear(),
+            months: true, // Enable month dropdown
+            years: true,  // Enable year dropdown
+          },
+          maxDate: new Date(), // Prevent selecting future dates
+          buttonText: {
+            previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>`,
+            nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>`,
+          }
+        });
+
+        new Litepicker({
+          element: document.getElementById(`joiningDate-${newIndex}-1`),
+          format: 'YYYY-MM-DD', // Set the desired format
+          dropdowns: {
+            minYear: 1900,
+            maxYear: new Date().getFullYear(),
+            months: true, // Enable month dropdown
+            years: true,  // Enable year dropdown
+          },
+          maxDate: new Date(), // Prevent selecting future dates
+          buttonText: {
+            previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>`,
+            nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>`,
+          }
+        });
+
+        new Litepicker({
+          element: document.getElementById(`enrollmentDate-1`),
+          format: 'YYYY-MM-DD', // Set the desired format
+          dropdowns: {
+            minYear: 1900,
+            maxYear: new Date().getFullYear(),
+            months: true, // Enable month dropdown
+            years: true,  // Enable year dropdown
+          },
+          buttonText: {
+            previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>`,
+            nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>`,
+          }
+        });
+
+        new Litepicker({
+          element: document.getElementById(`paymentDate-1`),
+          format: 'YYYY-MM-DD', // Set the desired format
+          dropdowns: {
+            minYear: 1900,
+            maxYear: new Date().getFullYear(),
+            months: true, // Enable month dropdown
+            years: true,  // Enable year dropdown
+          },
+          buttonText: {
+            previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>`,
+            nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>`,
+          }
+        });
+
+      }
+
+      async function updateNewCitizenApi(data, cid) {
+          try {
+            const response = await addData(`updateCitizen/${cid}`, data);
+            if(response.code == 200 ||response.code == 201){
+              showToastMessage(response.message, 'success');
+            } else {
+              showToastMessage(response.message ? response.message : response.error, 'error');
+            }
+          } catch (error) {
+            console.error(error);
+            showToastMessage('Error updating citizen details!', 'error');
+          }
+        }
+
+
+      // Function to call addNewCitizen api
+      async function addNewCitizenApi(data, id) {
+        try {
+          const response = await addData('addNewCitizen', data);
+          if (response.code == 200 || response.code == 201) {
+            showToastMessage(response.message, 'success');
+            $(`#heading-${id}`).attr('data-citizenid', response.data);
+            $(`#tabs-qualification-tab-${id}`).removeClass('disabled');
+            $(`#tabs-medical-tab-${id}`).removeClass('disabled');
+            $(`#tabs-employment-tab-${id}`).removeClass('disabled');
+            $(`#tabs-schemes-tab-${id}`).removeClass('disabled');
+            $(`#tabs-taxes-tab-${id}`).removeClass('disabled');
+            $(`#tabs-assets-tab-${id}`).removeClass('disabled');
+          } else {
+            showToastMessage(response.message ? response.message : response.error, 'error');
+          }
+        } catch (error) {
+          console.error(error);
+          showToastMessage('Error adding citizen details!', 'error');
+        }
+      }
+
+      // Function to check citizen validation and save
+      window.addNewCitizen = function (id) {
+        let isValid = true; 
+          const $name = $(`#tabs-general-${id} #name-${id}`);
+          const $nameVal = $(`#tabs-general-${id} #nameText-${id}`);
+          if (!$name.val().trim()) {
+            $name.addClass('is-invalid');
+            $nameVal.text('Name is required');
+            isValid = false;
+          } else {
+            $name.removeClass('is-invalid');
+            $nameVal.text('');
+          }
+
+          const $dob = $(`#tabs-general-${id} #dob-${id}`);
+          const $dobVal = $(`#tabs-general-${id} #dob-Val-${id}`);
+          if (!$dob.val().trim()) {
+            $dob.addClass('is-invalid');
+            $dobVal.removeClass('d-none');
+            document.querySelector(`#tabs-general-${id} #dob-Icon-${id}`).classList.add('d-none');
+            isValid = false;
+          } else {
+            $dob.removeClass('is-invalid');
+            $dobVal.addClass('d-none');
+            document.querySelector(`#tabs-general-${id} #dob-Icon-${id}`).classList.remove('d-none');
+          }
+
+          const $aadharNo = $(`#tabs-general-${id} #aadharNo`);
+          const $aadharNoVal = $(`#tabs-general-${id} #aadharNo-Val`);
+          if ($aadharNo.val().trim().length == 0) {
+            $aadharNo.removeClass('is-invalid');
+            $aadharNoVal.addClass('d-none');
+          } else if (aadharList.includes($aadharNo.val().trim()) && $aadharNo.attr('data-aadhar') == "") {
+            // Check if the value exists in the array
+            $aadharNo.addClass('is-invalid');
+            $aadharNoVal.removeClass('d-none');
+            $aadharNoVal.text('Aadhar No already exists');
+            isValid = false;
+          } else if ($aadharNo.val().trim().length == 12){
+            $aadharNo.removeClass('is-invalid');
+            $aadharNoVal.addClass('d-none');
+          } else {
+            $aadharNo.addClass('is-invalid');
+            $aadharNoVal.removeClass('d-none');
+            $aadharNoVal.text('Aadhar Number should be 12 digits');
+            isValid = false;
+          }
+
+          const $citizenAddress = $(`#tabs-general-${id} #citizenAddress-${id}`);
+          const $citizenAddressVal = $(`#tabs-general-${id} #citizenAddress-Val-${id}`);
+          if (!$citizenAddress.val().trim()) {
+            $citizenAddress.addClass('is-invalid');
+            $citizenAddressVal.removeClass('d-none');
+            isValid = false;
+          } else {
+            $citizenAddress.removeClass('is-invalid');
+            $citizenAddressVal.addClass('d-none');
+          }
+
+          const $mobileNo = $(`#tabs-general-${id} #mobileNo`);
+          const $mobileNoVal = $(`#tabs-general-${id} #mobileNo-Val`);
+          if (!$mobileNo.val().trim()) {
+            $mobileNo.addClass('is-invalid');
+            $mobileNoVal.removeClass('d-none');
+            $mobileNoVal.text('Mobile no is required');
+            isValid = false;
+          }  else if ($mobileNo.val().trim().length == 10) {
+            // Check if mobile number exceeds 10 digits
+            $mobileNo.removeClass('is-invalid');
+            $mobileNoVal.addClass('d-none');
+          } else {
+            $mobileNo.addClass('is-invalid');
+            $mobileNoVal.removeClass('d-none');
+            $mobileNoVal.text('Mobile number should be 10 digits');
+            isValid = false;
+          }
+
+          const $altMobileNo = $(`#tabs-general-${id} #altMobileNo`);
+          const $altMobileNoVal = $(`#tabs-general-${id} #altMobileNo-Val`);
+          if ($altMobileNo.val().trim().length == 0) {
+            $altMobileNo.removeClass('is-invalid');
+            $altMobileNoVal.addClass('d-none');
+          } else if ($altMobileNo.val().trim().length == 10) {
+            $altMobileNo.removeClass('is-invalid');
+            $altMobileNoVal.addClass('d-none');
+          } else {
+            $altMobileNo.addClass('is-invalid');
+            $altMobileNoVal.removeClass('d-none');
+            $altMobileNoVal.text('Alternate Mobile number should be 10 digits');
+            isValid = false;
+          }
+
+          if(id == 1){
+            const $password = $(`#tabs-general-${id} #password`);
+            const $passwordVal = $(`#tabs-general-${id} #password-Val`);
+            if (!$password.val().trim()) {
+              $password.addClass('is-invalid');
+              $passwordVal.removeClass('d-none');
+              $passwordVal.text('Password is required');
+              isValid = false;
+            } else if ($password.val().trim().length < 8) {
+              $password.addClass('is-invalid');
+              $passwordVal.removeClass('d-none');
+              $passwordVal.text('Password must be at least 8 characters long');
+              isValid = false;
+            } else {
+              $password.removeClass('is-invalid');
+              $passwordVal.addClass('d-none');
+            }
+          }
+
+          if(relationWithHOFFlag == true){
+            const $relation = $(`#tabs-general-${id} #relation`);
+            const $relationVal = $(`#tabs-general-${id} #relation-Va`);
+            if (!$relation.val().trim()) {
+              $relation.addClass('is-invalid');
+              $relationVal.removeClass('d-none');
+              isValid = false;
+            } else {
+              $relation.removeClass('is-invalid');
+              $relationVal.addClass('d-none');
+            }
+          }
+
+          if (!isValid) {
+            return;
+          }
+
+        const formData = new FormData();
+        formData.append('houseId', $('#houseId').val());
+        formData.append('name', $(`#tabs-general-${id} #name-${id}`).val());
+        formData.append('gender', $(`#tabs-general-${id} input[name="radios-gender-${id}"]:checked`).val());
+        formData.append('dob', $(`#tabs-general-${id} #dob-${id}`).val());
+        formData.append('aadharNo', $(`#tabs-general-${id} #aadharNo`).val());
+        formData.append('panCard', $(`#tabs-general-${id} #panCardNo`).val());
+        formData.append('drivingLicense', $(`#tabs-general-${id} #drivingLicense`).val());
+        formData.append('address', $(`#tabs-general-${id} #citizenAddress-${id}`).val());
+        formData.append('contact', $(`#tabs-general-${id} #mobileNo`).val());
+        formData.append('altContact', $(`#tabs-general-${id} #altMobileNo`).val());
+        formData.append('email', $(`#tabs-general-${id} #email`).val());
+        formData.append('password', $(`#tabs-general-${id} #password`).val());
+        if(id == 1){
+          formData.append('isHof', 1);
+        } else {
+          formData.append('isHof', 0);
+        }
+        formData.append('relationWithHof', relationWithHOFFlag == true ? $(`#tabs-general-${id} #relation`).val() : "");
+        formData.append('annualIncome', $(`#tabs-general-${id} #annualIncome`).val());
+        formData.append('passportNo', $(`#tabs-general-${id} #passportNo`).val());
+        const parentElement = document.getElementById(`tabs-general-${id}`);
+        const citizenImage = parentElement.querySelector(`#citizenImage-${id}`);
+        // const citizenImage = $(`#tabs-general-${id} #citizenImage-${id}`);
+        if (citizenImage.files && citizenImage.files[0]) {
+          formData.append('citizenImage', citizenImage.files[0]);
+        } else {
+          formData.append('citizenImage', '');
+        }
+
+        const element = document.querySelector(`#heading-${id}`);
+        const citizenId = element.getAttribute('data-citizenid');
+        if(citizenId){
+          updateNewCitizenApi(formData, citizenId);
+        } else {
+          addNewCitizenApi(formData, id);
+        }
+      }
+
+      // Function to call addNewQualification api
+      async function addNewQualificationApi(data, qid, id) {
+        try {
+          const response = await addData('addNewQualification', data);
+          if (response.code == 200 || response.code == 201) {
+            $(`#tabs-qualification-${id} #heading-${qid}`).attr('data-qualificationid', response.data);
+            showToastMessage(response.message, 'success');
+          } else {
+            showToastMessage(response.message ? response.message : response.error, 'error');
+          }
+        } catch (error) {
+          console.error(error);
+          showToastMessage('Error adding qualification details!', 'error');
+        }
+      }
+
+      // Function to check qualification validation and save
+      window.addNewQualification = function (qid, id) {
+        let isValid = true; 
+
+          const $qualificationName = $(`#tabs-qualification-${id} #qualificationName-${qid}`);
+          const $qualificationNameVal = $(`#tabs-qualification-${id} #qualificationName-Val-${qid}`);
+            if (!$qualificationName.val().trim()) {
+              $qualificationName.addClass('is-invalid');
+              $qualificationNameVal.removeClass('d-none');
+              isValid = false;
+            } else {
+              $qualificationName.removeClass('is-invalid');
+              $qualificationNameVal.addClass('d-none');
+            }
+
+          const $institutionName = $(`#tabs-qualification-${id} #institutionName-${qid}`);
+          const $institutionNameVal = $(`#tabs-qualification-${id} #institutionName-Val-${qid}`);
+            if (!$institutionName.val().trim()) {
+              $institutionName.addClass('is-invalid');
+              $institutionNameVal.removeClass('d-none');
+              isValid = false;
+            } else {
+              $institutionName.removeClass('is-invalid');
+              $institutionNameVal.addClass('d-none');
+            }
+
+          const $yop = $(`#tabs-qualification-${id} #yop-${qid}`);
+          const $yopVal = $(`#tabs-qualification-${id} #yop-Val-${qid}`);
+            if (!$yop.val().trim()) {
+              $yop.addClass('is-invalid');
+              $yopVal.removeClass('d-none');
+              isValid = false;
+            } else {
+              $yop.removeClass('is-invalid');
+              $yopVal.addClass('d-none');
+            }
+
+          const $degreeType = $(`#tabs-qualification-${id} #degreeType-${qid}`);
+          const $degreeTypeVal = $(`#tabs-qualification-${id} #degreeType-Val-${qid}`);
+            if (!$degreeType.val().trim()) {
+              $degreeType.addClass('is-invalid');
+              $degreeTypeVal.removeClass('d-none');
+              isValid = false;
+            } else {
+              $degreeType.removeClass('is-invalid');
+              $degreeTypeVal.addClass('d-none');
+            }
+
+          if (!isValid) {
+            return;
+          }
+
+        const data = {
+          citizenId: $(`#heading-${id}`).attr('data-citizenid'),
+          qualificationName: $(`#tabs-qualification-${id} #qualificationName-${qid}`).val(),
+          institutionName: $(`#tabs-qualification-${id} #institutionName-${qid}`).val(),
+          yop: $(`#tabs-qualification-${id} #yop-${qid}`).val(),
+          grade: $(`#tabs-qualification-${id} #grade-${qid}`).val(),
+          degreeType: $(`#tabs-qualification-${id} #degreeType-${qid}`).val()
+        }
+
+        addNewQualificationApi(data, qid, id);
+      }
+
+      // Function to call addNewMedical api
+      async function addNewMedicalApi(data, id) {
+        try {
+          const response = await addData('addNewMedical', data);
+          if (response.code == 200 || response.code == 201) {
+            showToastMessage(response.message, 'success');
+            $(`#tabs-medical-${id}`).attr('data-medicalid', response.data);
+          } else {
+            showToastMessage(response.message ? response.message : response.error, 'error');
+          }
+        } catch (error) {
+          console.error(error);
+          showToastMessage('Error adding medical details!', 'error');
+        }
+      }
+
+      // Function to check Medical validation and save
+      window.addNewMedical = function (id) {
+        let isValid = true; 
+
+          const $bloodGroup = $(`#tabs-medical-${id} #bloodGroup`);
+          const $bloodGroupVal = $(`#tabs-medical-${id} #bloodGroup-Val`);
+            if (!$bloodGroup.val().trim()) {
+              $bloodGroup.addClass('is-invalid');
+              $bloodGroupVal.removeClass('d-none');
+              isValid = false;
+            } else {
+              $bloodGroup.removeClass('is-invalid');
+              $bloodGroupVal.addClass('d-none');
+            }
+
+          const $weight = $(`#tabs-medical-${id} #weight`);
+          const $weightVal = $(`#tabs-medical-${id} #weight-Val`);
+            if (!$weight.val().trim()) {
+              $weight.addClass('is-invalid');
+              $weightVal.removeClass('d-none');
+              isValid = false;
+            } else {
+              $weight.removeClass('is-invalid');
+              $weightVal.addClass('d-none');
+            }
+
+          const $height = $(`#tabs-medical-${id} #height`);
+          const $heightVal = $(`#tabs-medical-${id} #height-Val`);
+            if (!$height.val().trim()) {
+              $height.addClass('is-invalid');
+              $heightVal.removeClass('d-none');
+              isValid = false;
+            } else {
+              $height.removeClass('is-invalid');
+              $heightVal.addClass('d-none');
+            }
+
+          if (!isValid) {
+            return;
+          }
+
+        const data = {
+          citizenId: $(`#heading-${id}`).attr('data-citizenid'),
+          bloodGroup: $(`#tabs-medical-${id} #bloodGroup`).val(),
+          weight: $(`#tabs-medical-${id} #weight`).val(),
+          height: $(`#tabs-medical-${id} #height`).val(),
+          otherHealthIssues: $(`#tabs-medical-${id} #otherHealthIssues`).val(),
+          healthStatus: $(`#tabs-medical-${id} #healthStatus-${id}`).val()
+        }
+
+        addNewMedicalApi(data, id);
+      }
+
+      // Function to call addNewEmployment api
+      async function addNewEmploymentApi(data, eid, id) {
+        try {
+          const response = await addData('addNewEmployment', data);
+          if (response.code == 200 || response.code == 201) {
+            $(`#tabs-employment-${id} #heading-${eid}`).attr('data-employmentid', response.data.employment_id);
+            showToastMessage(response.message, 'success');
+          } else {
+            showToastMessage(response.message ? response.message : response.error, 'error');
+          }
+        } catch (error) {
+          console.error(error);
+          showToastMessage('Error adding employment details!', 'error');
+        }
+      }
+
+      // Function to check employment validation and save
+      window.addNewEmployment = function (eid, id) {
+        let isValid = true; 
+
+        const $serviceType = $(`#tabs-employment-${id} #serviceType-${eid}`);
+        const $serviceTypeVal = $(`#tabs-employment-${id} #serviceType-Val-${eid}`);
+          if (!$serviceType.val().trim()) {
+            $serviceType.addClass('is-invalid');
+            $serviceTypeVal.removeClass('d-none');
+            isValid = false;
+          } else {
+            $serviceType.removeClass('is-invalid');
+            $serviceTypeVal.addClass('d-none');
+          }
+
+        const $employerName = $(`#tabs-employment-${id} #employerName-${eid}`);
+        const $employerNameVal = $(`#tabs-employment-${id} #employerName-Val-${eid}`);
+          if (!$employerName.val().trim()) {
+            $employerName.addClass('is-invalid');
+            $employerNameVal.removeClass('d-none');
+            isValid = false;
+          } else {
+            $employerName.removeClass('is-invalid');
+            $employerNameVal.addClass('d-none');
+          }
+
+        const $position = $(`#tabs-employment-${id} #position-${eid}`);
+        const $positionVal = $(`#tabs-employment-${id} #position-Val-${eid}`);
+          if (!$position.val().trim()) {
+            $position.addClass('is-invalid');
+            $positionVal.removeClass('d-none');
+            isValid = false;
+          } else {
+            $position.removeClass('is-invalid');
+            $positionVal.addClass('d-none');
+          }
+
+        const $salary = $(`#tabs-employment-${id} #salary-${eid}`);
+        const $salaryVal = $(`#tabs-employment-${id} #salary-Val-${eid}`);
+          if (!$salary.val().trim()) {
+            $salary.addClass('is-invalid');
+            $salaryVal.removeClass('d-none');
+            isValid = false;
+          } else {
+            $salary.removeClass('is-invalid');
+            $salaryVal.addClass('d-none');
+          }
+
+        const $joiningDate = $(`#tabs-employment-${id} #joiningDate-${id}-${eid}`);
+        const $joiningDateVal = $(`#tabs-employment-${id} #joiningDate-Val-${eid}`);
+          if (!$joiningDate.val().trim()) {
+            $joiningDate.addClass('is-invalid');
+            $joiningDateVal.removeClass('d-none');
+            document.querySelector(`#tabs-employment-${id} #joiningDate-Icon-${eid}`).classList.add('d-none');
+            isValid = false;
+          } else {
+            $joiningDate.removeClass('is-invalid');
+            $joiningDateVal.addClass('d-none');
+            document.querySelector(`#tabs-employment-${id} #joiningDate-Icon-${eid}`).classList.remove('d-none');
+          }
+
+          if (!isValid) {
+          return;
+        }
+
+        const data = {
+          citizenId: $(`#heading-${id}`).attr('data-citizenid'),
+          serviceType: $(`#tabs-employment-${id} #serviceType-${eid}`).val(),
+          employerName: $(`#tabs-employment-${id} #employerName-${eid}`).val(),
+          position: $(`#tabs-employment-${id} #position-${eid}`).val(),
+          salary: $(`#tabs-employment-${id} #salary-${eid}`).val(),
+          joiningDate: $(`#tabs-employment-${id} #joiningDate-${id}-${eid}`).val()
+        }
+
+        addNewEmploymentApi(data, eid, id);
+      }
+
+      // Function to call addNewCitizenScheme api
+      async function addNewCitizenSchemeApi(data, sid, id) {
+        try {
+          const response = await addData('addNewCitizenScheme', data);
+          if (response.code == 200 || response.code == 201) {
+            $(`#tabs-schemes-${id} #heading-${sid}`).attr('data-schemeid', response.data.citizen_scheme_id);
+            showToastMessage(response.message, 'success');
+          } else {
+            showToastMessage(response.message ? response.message : response.error, 'error');
+          }
+        } catch (error) {
+          console.error(error);
+          showToastMessage('Error adding scheme details!', 'error');
+        }
+      }
+
+      // Function to check Scheme validation and save
+      window.addNewCitizenScheme = function (sid, id) {
+        let isValid = true; 
+
+          const $schemeId = $(`#tabs-schemes-${id} #schemeId-${sid}`);
+          const $schemeIdVal = $(`#tabs-schemes-${id} #schemeId-Val-${sid}`);
+            if (!$schemeId.val().trim()) {
+              $schemeId.addClass('is-invalid');
+              $schemeIdVal.removeClass('d-none');
+              isValid = false;
+            } else {
+              $schemeId.removeClass('is-invalid');
+              $schemeIdVal.addClass('d-none');
+            }
+
+          const $status = $(`#tabs-schemes-${id} #status-${sid}`);
+          const $statusVal = $(`#tabs-schemes-${id} #status-Val-${sid}`);
+            if (!$status.val().trim()) {
+              $status.addClass('is-invalid');
+              $statusVal.removeClass('d-none');
+              isValid = false;
+            } else {
+              $status.removeClass('is-invalid');
+              $statusVal.addClass('d-none');
+            }
+
+          const $enrollmentDate = $(`#tabs-schemes-${id} #enrollmentDate-${sid}`);
+          const $enrollmentDateVal = $(`#tabs-schemes-${id} #enrollmentDate-Val-${sid}`);
+            if (!$enrollmentDate.val().trim()) {
+              $enrollmentDate.addClass('is-invalid');
+              $enrollmentDateVal.removeClass('d-none');
+              document.querySelector(`#tabs-schemes-${id} #enrollmentDate-Icon-${sid}`).classList.add('d-none');
+              isValid = false;
+            } else {
+              $enrollmentDate.removeClass('is-invalid');
+              $enrollmentDateVal.addClass('d-none');
+              document.querySelector(`#tabs-schemes-${id} #enrollmentDate-Icon-${sid}`).classList.remove('d-none');
+            }
+
+            if (!isValid) {
+            return;
+          }
+
+        const data = {
+          citizenId: $(`#heading-${id}`).attr('data-citizenid'),
+          schemeId: $(`#tabs-schemes-${id} #schemeId-${sid}`).val(),
+          enrollmentDate: $(`#tabs-schemes-${id} #enrollmentDate-${sid}`).val(),
+          status: $(`#tabs-schemes-${id} #status-${sid}`).val()
+        }
+
+        addNewCitizenSchemeApi(data, sid, id);
+      }
+
+      // Function to call addNewCitizenTax api
+      async function addNewCitizenTaxApi(data, tid, id) {
+        try {
+          const response = await addData('addNewCitizenTax', data);
+          if (response.code == 200 || response.code == 201) {
+            showToastMessage(response.message, 'success');
+            $(`#tabs-taxes-${id} #heading-${tid}`).attr('data-taxid', response.data.tax_id);
+          } else {
+            showToastMessage(response.message ? response.message : response.error, 'error');
+          }
+        } catch (error) {
+          console.error(error);
+          showToastMessage('Error adding tax details!', 'error');
+        }
+      }
+
+      // Function to check tax validation and save
+      window.addNewCitizenTax = function (tid, id) {
+        let isValid = true; 
+
+          const $type = $(`#tabs-taxes-${id} #type-${tid}`);
+          const $typeVal = $(`#tabs-taxes-${id} #type-Val-${tid}`);
+            if (!$type.val().trim()) {
+              $type.addClass('is-invalid');
+              $typeVal.removeClass('d-none');
+              isValid = false;
+            } else {
+              $type.removeClass('is-invalid');
+              $typeVal.addClass('d-none');
+            }
+
+          const $amount = $(`#tabs-taxes-${id} #amount-${tid}`);
+          const $amountVal = $(`#tabs-taxes-${id} #amount-Val-${tid}`);
+            if (!$amount.val().trim()) {
+              $amount.addClass('is-invalid');
+              $amountVal.removeClass('d-none');
+              isValid = false;
+            } else {
+              $amount.removeClass('is-invalid');
+              $amountVal.addClass('d-none');
+            }
+
+          const $paymentDate = $(`#tabs-taxes-${id} #paymentDate-${tid}`);
+          const $paymentDateVal = $(`#tabs-taxes-${id} #paymentDate-Val-${tid}`);
+            if (!$paymentDate.val().trim()) {
+              $paymentDate.addClass('is-invalid');
+              $paymentDateVal.removeClass('d-none');
+              document.querySelector(`#tabs-taxes-${id} #paymentDate-Icon-${tid}`).classList.add('d-none');
+              isValid = false;
+            } else {
+              $paymentDate.removeClass('is-invalid');
+              $paymentDateVal.addClass('d-none');
+              document.querySelector(`#tabs-taxes-${id} #paymentDate-Icon-${tid}`).classList.remove('d-none');
+            }
+
+            const $taxYear = $(`#tabs-taxes-${id} #taxYear-${tid}`);
+          const $taxYearVal = $(`#tabs-taxes-${id} #taxYear-Val-${tid}`);
+            if (!$taxYear.val().trim()) {
+              $taxYear.addClass('is-invalid');
+              $taxYearVal.removeClass('d-none');
+              isValid = false;
+            } else {
+              $taxYear.removeClass('is-invalid');
+              $taxYearVal.addClass('d-none');
+            }
+
+            if (!isValid) {
+            return;
+          }
+
+
+        const data = {
+          citizenId: $(`#heading-${id}`).attr('data-citizenid'),
+          type: $(`#tabs-taxes-${id} #type-${tid}`).val(),
+          amount: $(`#tabs-taxes-${id} #amount-${tid}`).val(),
+          paymentDate: $(`#tabs-taxes-${id} #paymentDate-${tid}`).val(),
+          receiptNumber: $(`#tabs-taxes-${id} #receiptNumber-${tid}`).val(),
+          taxYear: $(`#tabs-taxes-${id} #taxYear-${tid}`).val(),
+        }
+
+        addNewCitizenTaxApi(data, tid, id);
+      }
+
+      // Function to call addNewCitizenAsset api
+      async function addNewCitizenAssetApi(data, aid, id) {
+        try {
+          const response = await addData('addNewCitizenAsset', data);
+          if (response.code == 200 || response.code == 201) {
+            showToastMessage(response.message, 'success');
+            $(`#tabs-assets-${id} #heading-${aid}`).attr('data-assetid', response.data.citizen_assets_id);
+          } else {
+            showToastMessage(response.message ? response.message : response.error, 'error');
+          }
+        } catch (error) {
+          console.error(error);
+          showToastMessage('Error adding assets details!', 'error');
+        }
+      }
+
+
+      // Function to check asset validation and save
+      window.addNewCitizenAsset = function (aid, id) {
+        let isValid = true; 
+
+          const $assetId = $(`#tabs-assets-${id} #assetId-${aid}`);
+          const $assetIdVal = $(`#tabs-assets-${id} #assetId-Val-${aid}`);
+            if (!$assetId.val().trim()) {
+              $assetId.addClass('is-invalid');
+              $assetIdVal.removeClass('d-none');
+              isValid = false;
+            } else {
+              $assetId.removeClass('is-invalid');
+              $assetIdVal.addClass('d-none');
+            }
+
+            if (!isValid) {
+              return;
+            }
+
+        const data = {
+          citizenId: $(`#heading-${id}`).attr('data-citizenid'),
+          assetId: $(`#tabs-assets-${id} #assetId-${aid}`).val(),
+          location: $(`#tabs-assets-${id} #assetLocation-${aid}`).val(),
+        }
+
+        addNewCitizenAssetApi(data, aid, id);
+      }
+
+      // Function to call addNewDocuments api
+      async function addNewCitizenDocumentApi(data) {
+        try {
+          const response = await addData('addNewDocuments', data);
+          if (response.code == 200 || response.code == 201) {
+            showToastMessage(response.message, 'success');
+            return true;
+          } else {
+            showToastMessage(response.message ? response.message : response.error, 'error');
+            return false;
+          }
+        } catch (error) {
+          console.error(error);
+          showToastMessage('Error adding documents!', 'error');
+          return false;
+        }
+      }
+
+      // Function to check document validation and save
+      let docLength = 0;
+      window.addNewCitizenDocument = async function (id) {
+        const formData = new FormData();
+        formData.append('citizenId', $(`#heading-${id}`).attr('data-citizenid'));
+
+        const documentContainer = document.querySelector(`#tabs-documents-${id} #documentContainer-${id}`);
+        if (!documentContainer) {
+          console.error("Document container not found");
+          return;
+        }
+
+        const docRows = documentContainer.querySelectorAll('.doc-row');
+
+        let isValid = true; 
+          if(docRows.length > 0){
+            docRows.forEach((row, index) => {
+              const documentType = row.querySelector('#documentType');
+              const documentTypeVal = row.querySelector('#documentType-Val');
+              const documentFile = row.querySelector('#document');
+              const documentFileVal = row.querySelector('#document-Val');
+
+              if (!documentType.value.trim()) {
+                documentType.classList.add('is-invalid');
+                documentTypeVal.classList.remove('d-none');
+                isValid = false;
+              } else {
+                documentType.classList.remove('is-invalid');
+                documentTypeVal.classList.add('d-none');
+              }
+
+              if (!(documentFile.files && documentFile.files[0])) {
+                documentFile.classList.add('is-invalid');
+                documentFileVal.classList.remove('d-none');
+                isValid = false;
+              } else {
+                documentFile.classList.remove('is-invalid');
+                documentFileVal.classList.add('d-none');
+              }
+            });
+          }
+
+          if (!isValid) {
+            return;
+          }
+
+        docRows.forEach((row, index) => {
+          if (index < docLength) return;
+          const documentType = row.querySelector('#documentType');
+          const documentFile = row.querySelector('#document');
+
+          if (documentType && documentFile) {
+            formData.append(`documents[${index}][documentType]`, documentType.value);
+            Array.from(documentFile.files).forEach((file) => {
+              formData.append(`documents[${index}][documentFile]`, file);
+            });
+          } else {
+            console.warn(`Missing document type or file input in row ${index}`);
+          }
+        });
+        
+        const isDocSaved = await addNewCitizenDocumentApi(formData);
+        if(isDocSaved == true){
+        docLength = docRows.length;
+        }
+      }
+
+    });
+  </script>
+</body>
+
+</html>
